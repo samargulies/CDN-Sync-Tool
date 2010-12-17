@@ -1,21 +1,23 @@
 === CDN Sync Tool ===
 Contributors: Fubra
 Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme files,speed,faster,accelerator,Page Load,
-Tested up to: 3.0.2
-Stable tag: 0.1
+Tested up to: 3.1-beta2
+Stable tag: 0.2
 Requires At Least: 3.0
 
-Tool to speed up the page loading of your WordPress site.
+A tool to sync static files to a content delivery network (CDN) such as Amazon S3/CloudFront. Designed to be used with WP-Supercache or W3TotalCache.
 
 == Description ==
 
-Front end optimization plugin, uploads/syncs your static files to a Content Deilvery Network (CDN) such as Amazon S3/CloudFront from your media library, theme directory, WordPress's wp-include directory and plugin directories aswell as new media library uploads.
+Front end optimization plugin to be used with WP-Supercache or W3TotalCache.
+
+Uploads/syncs your static files to a Content Deilvery Network (CDN) such as Amazon S3/CloudFront from your media library, theme directory, WordPress's wp-include directory and plugin directories aswell as new media library uploads.
 
 Plugin runs images thought smushit.com to losslessy compress images, aswell as GD compression of images.
 
 There is also concatenation of all Javascript and CSS files in the header and footer to one file each to reduce HTTP requests. Also moves the javascript file to the footer so the browser doesn't hold up the page load doing it. Leverages Google's Closure Compiler to remove whitespace, do simple and advanced optimizations to reduce file size.
 
-This plugin requires WP Super Cache or W3 Total Cache to be installed.
+This plugin requires WP Super Cache or W3 Total Cache to be installed. These plugins will handle the rewriting of the inclusion of static files to ensure all static files will load from your CDN.
 
 =BETA RELEASE=
 
@@ -78,3 +80,21 @@ Because while it's in the head some browsers will stop the rendering of the page
 = Can I force the plugin to reupload files? =
 
 Yes you just select `Force upload` just before you hit the sync button. This will mean that all files it finds it will upload to your CDN no matter if the file has already been uploaded before. 
+
+== Installation ==
+
+1. Upload plugin contents to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Go CDN Sync Tool and configure
+
+== CHANGELOG ==
+
+= 0.2 =
+
+* Fixed typos
+
+== Upgrade Notice ==
+
+= 0.2 =
+
+* Small non important fixes

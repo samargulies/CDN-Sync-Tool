@@ -116,6 +116,9 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 												</td>
 											</tr>
 											<tr>
+												<td colspan="2">Combine all CSS files into a single CSS file and all JavaScript files into a single file. Reduces HTTP requests.</td>
+											</tr>
+											<tr>
 												<th scope="row">Remove Whitespace</th>
 												<td>
 													<input <?php echo $disabled; ?> type="radio" name="whitespace" value="yes" id="whitespace_yes" <?php if ((isset($files) && is_array($files) ) && (isset($files["whitespace"]) && $files["whitespace"] == "yes")){ ?>checked="checked"<?php } ?> /> <label for="whitespace_yes">Yes</label>
@@ -123,7 +126,7 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 												</td>
 											</tr>
 											<tr>
-												<td colspan="2">Combine all CSS files into a single CSS file and all JavaScript files into a single file. Reduces HTTP requests.</td>
+												<td colspan="2">Removes Whitespace from JavaScript files using Google''</td>
 											</tr>
 											<tr>
 												<th scope="row">Save Directory</th>
@@ -132,7 +135,7 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 												</td>
 											</tr>
 											<tr>
-												<td colspan="2">Combine all CSS files into a single CSS file and all JavaScript files into a single file. Reduces HTTP requests.</td>
+												<td colspan="2">The directory to save all the build files.</td>
 											</tr>
 											<tr class="even">
 												<th scope="row">Include external hosted files</th>
@@ -243,7 +246,7 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 										<span>CatN Hosting</span>
 									</h3>
 									<div class="inside">
-										Stuff here
+										Fast, clustered PHP hosting.
 									</div>
 								</div>
 								

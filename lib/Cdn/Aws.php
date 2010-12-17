@@ -50,7 +50,7 @@ class Cdn_Aws extends Cdn_Provider {
 		
 		$uploadDir = wp_upload_dir();
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
-		$headers = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 365 * 10)) . ' GMT');	
+		$headers = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 30)) . ' GMT');	
 		if ( $media == true){
 			$directory = ( (function_exists('is_multisite') && is_multisite()) && $blog_id != 1 ) ? 'files/' : 'wp-content/uploads/';
 			$uploadFile = $directory.$file;
