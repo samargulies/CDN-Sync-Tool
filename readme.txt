@@ -98,3 +98,8 @@ Yes you just select `Force upload` just before you hit the sync button. This wil
 = 0.2 =
 
 * Small non important fixes
+
+== Screenshots ==
+
+1. Options Page
+2. Files syncing
