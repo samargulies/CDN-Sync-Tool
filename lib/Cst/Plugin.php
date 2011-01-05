@@ -45,11 +45,11 @@ class Cst_Plugin {
 	public static function getActivePlugins(){
 		
 		global $wpdb;
+		$activePlugins = array_keys(get_site_option("active_sitewide_plugins"));
+		$activePlugins = array_merge( $activePlugins , get_option("active_plugins") );	
+		$activePlugins = array_merge( $activePlugins , array_keys(get_mu_plugins()));	
 		
-		$activePlugins = $wpdb->get_var("SELECT option_value FROM ".$wpdb->options." WHERE option_name = 'active_plugins'");
-	
-		return unserialize($activePlugins);
-	
+		return $activePlugins;
 	}
 	
 	public function __construct(){

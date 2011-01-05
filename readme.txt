@@ -1,8 +1,8 @@
 === CDN Sync Tool ===
 Contributors: Fubra
 Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme files,speed,faster,accelerator,Page Load,
-Tested up to: 3.1-beta2
-Stable tag: 0.2
+Tested up to: 3.1-RC2
+Stable tag: 0.3
 Requires At Least: 3.0
 
 A tool to sync static files to a content delivery network (CDN) such as Amazon S3/CloudFront. Designed to be used with WP-Supercache or W3TotalCache.
@@ -88,6 +88,12 @@ Yes you just select `Force upload` just before you hit the sync button. This wil
 3. Go CDN Sync Tool and configure
 
 == CHANGELOG ==
+
+= 0.3 = 
+
+* Allow usage of deprecated mime_content_type when Fileinfo isn't present.
+* Added network activated and must use plugins into list of activated.
+* Fixed typos/incorrect docs
 
 = 0.2 =
 

@@ -51,7 +51,7 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 												<td><input type="text" name="cdn_hostname" value="<?php if ((isset($cdn) && is_array($cdn) ) && isset($cdn["hostname"])){ echo $cdn["hostname"]; } ?>" <?php echo $disabled; ?> /></td>
 											</tr>
 											<tr class="even">
-												<td colspan="2">The URL of your cdn, so if your cdn files will be at http://cdn.catn.com/ you just put in cdn.catn.com.</td>
+												<td colspan="2">The URL of your cdn, so if your cdn files will be at cdn.catn.com you should put in "<em>http://cdn.catn.com/</em>"</td>
 											</tr>
 											<tr class="aws_details">
 												<th scope="row">AWS Access Key</th>
@@ -126,7 +126,7 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 												</td>
 											</tr>
 											<tr>
-												<td colspan="2">Removes Whitespace from JavaScript files using Google''</td>
+												<td colspan="2">Removes Whitespace from JavaScript files using Google's Closure Compiler</td>
 											</tr>
 											<tr>
 												<th scope="row">Save Directory</th>

@@ -49,7 +49,7 @@ class Cdn_Aws extends Cdn_Provider {
 		global $blog_id;
 		
 		$uploadDir = wp_upload_dir();
-		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		$finfo = function_exists('finfo_open') ? finfo_open(FILEINFO_MIME_TYPE) : false;
 		$headers = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 30)) . ' GMT');	
 		if ( $media == true){
 			$directory = ( (function_exists('is_multisite') && is_multisite()) && $blog_id != 1 ) ? 'files/' : 'wp-content/uploads/';
@@ -61,7 +61,7 @@ class Cdn_Aws extends Cdn_Provider {
 		}
 
 		if ( !preg_match("~\.(css|js)$~isU",$file,$match) ){	
-			$fileType = finfo_file($finfo,$fileLocation);
+			$fileType = ($finfo != false) ? finfo_file($finfo,$fileLocation) : mime_content_type($fileLocation);
 		} else {
 			
 			if (strtolower($match[1]) == "css"){
