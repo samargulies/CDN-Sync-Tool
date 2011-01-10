@@ -45,7 +45,7 @@ class Cst_Plugin {
 	public static function getActivePlugins(){
 		
 		global $wpdb;
-		$activePlugins = array_keys(get_site_option("active_sitewide_plugins"));
+		$activePlugins = (is_array(get_site_option("active_sitewide_plugins")) === true) ? array_keys(get_site_option("active_sitewide_plugins")) : array();
 		$activePlugins = array_merge( $activePlugins , get_option("active_plugins") );	
 		$activePlugins = array_merge( $activePlugins , array_keys(get_mu_plugins()));	
 		

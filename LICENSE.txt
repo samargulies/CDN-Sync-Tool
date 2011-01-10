@@ -1,6 +1,7 @@
 CDN Sync Tool is released under GPL v2. (Below)
 AWS PHP Sdk is released under Apache License. (lib/awssdk/LICENSE.md)
 php-smushit is released under MIT License (lib/smushit.php)
+php-cloudfiles is released under MIT License (lib/cloudfiles/COPYING)
 
                     GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991

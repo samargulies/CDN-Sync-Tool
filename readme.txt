@@ -89,6 +89,11 @@ Yes you just select `Force upload` just before you hit the sync button. This wil
 
 == CHANGELOG ==
 
+= 0.4 =
+
+* Added Rackspace Cloudfiles support
+* Fixed get_mu_plugins() not defined error.
+
 = 0.3 = 
 
 * Allow usage of deprecated mime_content_type when Fileinfo isn't present.

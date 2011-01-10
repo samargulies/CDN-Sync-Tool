@@ -28,7 +28,7 @@ class Cst_Plugin_Admin {
 		
 		return add_action("admin_menu", array($this, "menu") ) &&
 			   add_action("switch_theme", array($this, "switchTheme") ) &&
-			   add_action("init", array($this, "syncFiles")) && 
+			   add_action("admin_init", array($this, "syncFiles")) && 
 			   add_filter("wp_generate_attachment_metadata", array($this, "uploadMedia" )) && 
 			   add_action("admin_head",array($this, "head" ) ) &&
 			   $extraActions;
@@ -48,7 +48,7 @@ class Cst_Plugin_Admin {
 			!isset($_GET["page"]) || $_GET["page"] != CST_PAGE_MAIN ||
 			!isset($_GET["sync"]) || $_GET["sync"] != "yes"
 		   ){
-		   	// Not the sync'ing request so never mind.
+		   	// Not the sync'ing request so never mind. 
 			return;
 		}
 		ini_set("display_errors",1);

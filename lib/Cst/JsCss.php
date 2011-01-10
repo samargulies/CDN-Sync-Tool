@@ -71,15 +71,26 @@ class Cst_JsCss {
 		if ( !is_readable($newFile) ){
 			
 			if ( $fileType == "js" && 
-				isset($filesConfig["whitespace"]) &&
-				$filesConfig["whitespace"] == "yes" ){
-				$closureCompiler = new ClosureCompiler();
-				$closureCompiler->fetchCode($filesContent, 
-										array( "output_format" => ClosureCompiler::FORMAT_TEXT,
-											   "output_info" => ClosureCompiler::INFO_CODE ) );				
-										
-	
-				$filesContent = $closureCompiler->compiledCode;
+				isset($filesConfig["minify_engine"]) &&
+				$filesConfig["minify_engine"] == "google" ){
+					
+					if ( !isset($filesConfig["minify_level"]) 
+					  || $filesConfig["minify_level"] == "whitespace" )	{
+						$level = ClosureCompiler::LEVEL_WHITESPACE;
+					} elseif ( $filesConfig["minify_level"] == "simple" ){
+						$level = ClosureCompiler::LEVEL_SIMPLE;
+					} elseif ( $filesConfig["minify_level"] == "advance" ){
+						$level = ClosureCompiler::LEVEL_ADVANCED;
+					}
+					
+					$closureCompiler = new ClosureCompiler();
+					$closureCompiler->fetchCode($filesContent, 
+											array( "output_format" => ClosureCompiler::FORMAT_TEXT,
+												   "output_info" => ClosureCompiler::INFO_CODE,
+												   "compilation_level" => $level ) );				
+											
+		
+					$filesContent = $closureCompiler->compiledCode;
 				
 			}
 			

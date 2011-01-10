@@ -57,5 +57,5 @@ function cst_install(){
 }
 
 	register_activation_hook( __FILE__, "cst_install" );
-$objCstbrbPlugin = new Cst_Plugin();
+$objCstPlugin = new Cst_Plugin();
 

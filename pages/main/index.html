@@ -1,5 +1,5 @@
 <?php
-$disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
+$disabled = "";
 ?>
 
 <div class="wrap">
@@ -40,6 +40,7 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 													<select name="cdn_provider" id="cdn" <?php echo $disabled; ?>>
 														<option value="" <?php if ( (!isset($cdn) || !is_array($cdn) ) || (!isset($cdn["provider"]) || empty($cdn["provider"]) ) ){ ?> selected="selected"<?php } ?>>N/A</option>
 														<option value="aws" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws")){ ?> selected="selected"<?php } ?>>Amazon S3/CloudFront</option>
+														<option value="cf" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "cf")){ ?> selected="selected"<?php } ?>>Cloudfiles</option>
 													</select>
 												</td>
 											</tr>
@@ -92,6 +93,27 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 													<input type="checkbox" name="create_bucket" value="" <?php echo $disabled; ?> /> Create a new bucket.
 												</td>
 											</tr>
+											<tr class="cf_details">
+												<th scope="row">Username</th>
+												<td><input type="text" name="cf_username" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "cf") && isset($cdn["username"])){ echo $cdn["username"]; } ?>" /></td>
+											</tr>
+											<tr class="cf_details">
+												<td colspan="2">Username for your CloudFiles account.</td>
+											</tr>
+											<tr class="cf_details even">
+												<th scope="row">API Key</th>
+												<td><input type="text" name="cf_apikey" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "cf") && isset($cdn["apikey"])){ echo $cdn["apikey"]; } ?>" /></td>
+											</tr>
+											<tr class="cf_details even">
+												<td colspan="2">API key for your CloudFiles account.</td>
+											</tr>	
+											<tr class="cf_details">
+												<th scope="row">Container</th>
+												<td><input type="text" name="cf_container" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "cf") && isset($cdn["container"])){ echo $cdn["container"]; } ?>" /></td>
+											</tr>
+											<tr class="cf_details">
+												<td colspan="2">Username for your CloudFiles account.</td>
+											</tr>
 										</table>
 										<a href="#" class="button-secondary" id="check-details">Check Details</a>
 										<input type="submit" class="button-primary" value="Save" <?php echo $disabled; ?> />
@@ -118,15 +140,27 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 											<tr>
 												<td colspan="2">Combine all CSS files into a single CSS file and all JavaScript files into a single file. Reduces HTTP requests.</td>
 											</tr>
-											<tr>
-												<th scope="row">Remove Whitespace</th>
+											<tr class="even">
+												<th scope="row">Minify Engine</th>
 												<td>
-													<input <?php echo $disabled; ?> type="radio" name="whitespace" value="yes" id="whitespace_yes" <?php if ((isset($files) && is_array($files) ) && (isset($files["whitespace"]) && $files["whitespace"] == "yes")){ ?>checked="checked"<?php } ?> /> <label for="whitespace_yes">Yes</label>
-													<input <?php echo $disabled; ?> type="radio" name="whitespace" value="no" id="whitespace_no" <?php if ((!isset($files) || !is_array($files) ) || (!isset($files["whitespace"]) || $files["whitespace"] == "no")){ ?>checked="checked"<?php } ?> /> <label for="whitespace_no">No</label>
+													<select name="minify_engine" id="minify">
+														<option value="none">None</option>
+														<option value="google">Google Closure Compiler</option>
+														<opiton value="php-minify">PHP-Minify</option>
+													</select>
 												</td>
 											</tr>
-											<tr>
-												<td colspan="2">Removes Whitespace from JavaScript files using Google's Closure Compiler</td>
+											<tr class="even google_minify">
+												<th scope="row">Level</th>
+												<td>
+													<select name="google_level">
+														<option value="whitespace">Whitespace Only</option>
+														<option value="simple">Simple Code Optimization</option>
+														<option value="advance">Advance Code Optimization</option>
+													</select>
+											</tr>
+											<tr class="even">
+												<td colspan="2">The minify engine to be used. If none is selected there will be no minifcation attempt done. <b>Note : Use of Google Closure Compiler will increase build time and has API limits but is more advanced.</b></td>
 											</tr>
 											<tr>
 												<th scope="row">Save Directory</th>
@@ -246,7 +280,8 @@ $disabled = (!Cst_Plugin::checkDependices()) ? ' disabled="yes"' : "";
 										<span>CatN Hosting</span>
 									</h3>
 									<div class="inside">
-										Fast, clustered PHP hosting.
+										<p>Develop Host and Optimise your PHP applications with the CatN vCluster.</p>
+										<p>Scalable, high performance PHP hosting, perfect for Wordpress. <a href="http://catn.com/?ref=cst" target="_blank">Click here</a> for more information.</p>
 									</div>
 								</div>
 								

@@ -11,6 +11,17 @@ jQuery(document).ready( function(){
 		jQuery('.'+cdnProvider+'_details').show();
 		
 	});
+	 $('#minify').change( function(){ 
+		
+		currentEngine = $('#minify option:selected').val();
+		$("#minify option").each(function(i){
+            var engine =  $(this).val();
+    		jQuery('.'+engine+'_minify').hide();
+		});
+
+		jQuery('.'+currentEngine+'_minify').show();
+		
+	});
 	
 	$('#check-details').click( function(){
 		var ajaxUrl = '/wp-admin/admin.php?page=cst-main&subpage=js&js=options';
@@ -40,6 +51,10 @@ jQuery(document).ready( function(){
         	$('.'+value+'_details').hide();
         }
       });
-	
-	  
+	var minifySelected = $('#minify option:selected').val();
+	$.each(['google'], function(index,value){
+		if ( minifySelected != value) {
+			$('.'+value+'_minify').hide();
+		}
+	}); 
 }); })(jQuery);	

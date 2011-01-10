@@ -23,7 +23,10 @@ class Cst_Page_Main extends Cst_Page {
 		if ( !empty($_POST) ){
 			$errorArray = array();
 					
-			if ( $_POST['cdn_provider'] == "s3" ){		
+			if ( $_POST['cdn_provider'] == "aws" ){		
+				//*********************************
+				// AWS Data for S3/CloudFront
+				//*********************************
 				if ( !isset($_POST["aws_access"]) || empty($_POST["aws_access"]) ) {
 					$errorArray[] = "AWS access key is required";
 				}
@@ -35,17 +38,38 @@ class Cst_Page_Main extends Cst_Page {
 				if ( !isset($_POST["aws_bucket"]) || empty($_POST["aws_bucket"]) ){
 					$errorArray[] = "S3 Bucket name is required";
 				}
+			} elseif ( $_POST['cdn_provider'] == "cf" ){
+				//***********************************
+				// Cloudfiles Data
+				//***********************************
+				
+				if ( !isset($_POST["cf_username"]) || empty($_POST["cf_username"]) ){
+					$errorArray[] = "CloudFiles Username required";
+				}
+				
+				if ( !isset($_POST["cf_apikey"]) || empty($_POST["cf_apikey"]) ){
+					$errorArray[] = "CloudFiles API key";
+				}
+				
+				if ( !isset($_POST["cf_container"]) || empty($_POST["cf_container"]) ){
+					$errorArray[] = "CloudFiles Container";
+				}
+				
 			}
+			
+			
 		
 			if ( !isset($_POST["combine"]) || empty($_POST["combine"]) ){
 				$errorArray[] = "Combine JS/CSS is required";	
 			} elseif ( $_POST["combine"] != 'yes' && $_POST["combine"] != 'no' ){
 				$errorArray[] = "Combine JS/CSS isn't a valid reponse";
 			}
-			if ( !isset($_POST["whitespace"]) || empty($_POST["whitespace"]) ){
-				$errorArray[] = "Whitespace Removal is required";	
-			} elseif ( $_POST["whitespace"] != 'yes' && $_POST["whitespace"] != 'no' ){
-				$errorArray[] = "Whitespace Removal isn't a valid reponse";
+			if ( !isset($_POST["minify_engine"]) || empty($_POST["minify_engine"]) ){
+				$errorArray[] = "Minify is required";	
+			} else {
+				
+				
+				
 			}
 			
 			if ( !isset($_POST["smush"]) || empty($_POST["smush"]) ){
@@ -65,7 +89,12 @@ class Cst_Page_Main extends Cst_Page {
 					$cdn["access"] = $_POST['aws_access'];
 					$cdn["secret"] = $_POST["aws_secret"];
 					$cdn["bucket"] = $_POST["aws_bucket"];
+				} elseif ( $cdn["provider"] == "cf" ){
+					$cdn["username"]  = $_POST["cf_username"];
+					$cdn["apikey"]    = $_POST["cf_apikey"];
+					$cdn["container"] = $_POST["cf_container"];	
 				}
+				
 			}
 				
 			$files = array();
@@ -74,7 +103,10 @@ class Cst_Page_Main extends Cst_Page {
 			$files["external"] = $_POST["external"];
 			$files["exclude_js"] = $_POST["exclude_js"];
 			$files["exclude_css"] = $_POST["exclude_css"];
-			$files["whitespace"] = $_POST["whitespace"];
+			$files["minify_engine"] = $_POST["minify_engine"];
+			if ( $_POST["minify_engine"] == "google" ){
+				$files["minify_level"] = $_POST["google_level"];		
+			}
 			$images = array();
 			$images["smush"] = $_POST["smush"];
 			$images["compress"] = $_POST["compress"];
