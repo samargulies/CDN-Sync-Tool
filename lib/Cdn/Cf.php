@@ -87,7 +87,7 @@ class Cdn_Cf extends Cdn_Provider {
 			
 		}
 		
-		var_dump($object->load_from_filename($fileLocation));
+		$object->load_from_filename($fileLocation);
 		
 	}
 	
