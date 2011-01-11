@@ -3,7 +3,7 @@
 /**
  * Static test suite.
  */
-class pluginTest extends PHPUnit_Framework_TestSuite {
+class WpPluginTestSuite extends PHPUnit_Framework_TestSuite {
 	
 	/**
 	 * Constructs the test suite handler.
@@ -11,6 +11,20 @@ class pluginTest extends PHPUnit_Framework_TestSuite {
 	public function __construct() {
 		$this->setName ( 'testsSuite' );
 	
+	}
+	
+	/**
+	 * Sets up WordPress.
+	 */
+	public function setUp() {
+		parent::setUp();
+		
+		
+		
+		
+		
+		require_once($wpLoad);
+		
 	}
 	
 	/**

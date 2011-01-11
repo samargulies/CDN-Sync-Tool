@@ -2,7 +2,7 @@
 Contributors: Fubra
 Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme files,speed,faster,accelerator,Page Load,
 Tested up to: 3.1-RC2
-Stable tag: 0.4
+Stable tag: 0.5
 Requires At Least: 3.0
 
 Syncs static files to a content delivery network (CDN) such as Amazon S3/CloudFront and CloudFiles. To be used with WP-Supercache or W3TotalCache.
@@ -38,7 +38,7 @@ The reason for the increased time when uploading files is caused by using smushi
 Yes, the plugin gzips javascript and css files and adds a gzip content-type header to the files before uploading to S3 as S3 doesn't add these values to plain text files by default.
 
 = Why do you upload static plugin files? =
-
+ IF NOT EXISTS 
 Because some plugins also have images and static files that need to be displayed on your site, we also want the plugin to work even if you decide not to use the concatenation functionality of the plugin.
 
 = Why do you concatenation Javascript and CSS files when there are others plugins that do it? =
@@ -100,6 +100,9 @@ This will be because of the records that have been cached once they are rebuilt 
 3. Go CDN Sync Tool and configure
 
 == CHANGELOG ==
+
+= 0.5 =
+* Added IF NOT EXISTS to table creation
 
 = 0.4 =
 
