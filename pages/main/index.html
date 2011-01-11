@@ -52,66 +52,72 @@ $disabled = "";
 												<td><input type="text" name="cdn_hostname" value="<?php if ((isset($cdn) && is_array($cdn) ) && isset($cdn["hostname"])){ echo $cdn["hostname"]; } ?>" <?php echo $disabled; ?> /></td>
 											</tr>
 											<tr class="even">
-												<td colspan="2">The URL of your cdn, so if your cdn files will be at cdn.catn.com you should put in "<em>http://cdn.catn.com/</em>"</td>
+												<td colspan="2">The URL of your cdn, so if your cdn files will be at cdn.catn.com you should put in "<em>http://cdn.catn.com</em>"</td>
 											</tr>
-											<tr class="aws_details">
+											<tr>
+												<th scope="row">Anti-Hotlinking</th>
+												<td>
+													<input type="radio" name="cdn_hotlinking" value="no" id="hotlinking_no" <?php if ((!isset($cdn) || !is_array($cdn)) || (!isset($cdn["hotlinking"]) || $cdn["hotlinking"] == "no")){ ?> checked="checked" <?php } ?> />
+													<label for="hotlinking_no">No</label>
+													<input type="radio" name="cdn_hotlinking" value="yes" id="hotlinking_yes" <?php if ((isset($cdn) && is_array($cdn)) && (isset($cdn["hotlinking"]) && $cdn["hotlinking"] == "yes")){ ?> checked="checked" <?php } ?>  />
+													<label for="hotlinking_yes">Yes</label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">This creates it so images can only by browsers giving the site url as referrer or directly. There can be multiple reasons why there is no referrer such as SSL usage. <b>This currently does not work with CloudFront. <font color="#FF0000">This will result in files not working in CloudFront</font></b></td>
+											</tr>
+											<tr class="aws_details even">
 												<th scope="row">AWS Access Key</th>
 												<td>	
 													<input type="text" name="aws_access" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "aws") && isset($cdn["access"])){ echo $cdn["access"]; } ?>" <?php echo $disabled; ?> />
 												</td>
 											</tr>
-											<tr class="aws_details">
+											<tr class="aws_details even">
 												<td colspan="2">The Access key for your AWS account. Can be found <a href="https://aws-portal.amazon.com/gp/aws/developer/account/index.html?ie=UTF8&action=access-key" target="_blank">here</a>.</td>
 											</tr>
-											<tr class="aws_details even">
+											<tr class="aws_details">
 												<th scope="row">AWS Secret Key</th>
 												<td>
 													<input type="text" name="aws_secret" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "aws") && isset($cdn["secret"])){ echo $cdn["secret"]; } ?>" <?php echo $disabled; ?> />
 												</td>
 											</tr>
-											<tr class="aws_details even">
+											<tr class="aws_details">
 												<td colspan="2">The Secret key for your AWS account. Can be found <a href="https://aws-portal.amazon.com/gp/aws/developer/account/index.html?ie=UTF8&action=access-key" target="_blank">here</a>.</td>
 											</tr>
 											<tr class="aws_details even">
-												<td colspan="2"></td>
-											</tr>
-											<tr class="aws_details">
 												<th scope="row">AWS Bucket</th>
 												<td>
 													<input type="text" name="aws_bucket" value="<?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws") && isset($cdn["bucket"])){ echo $cdn["bucket"]; } ?>" <?php echo $disabled; ?> />
 												</td>
 											</tr>
-											<tr class="aws_details">
+											<tr class="aws_details even">
 												<td colspan="2">This is where you want the files uploaded to. You can create/edit buckets <a href="http://console.amazon.com" target="_blank">here</a>.</td>
 											</tr>
 											<tr class="aws_details">
-												<td colspan="2"></td>
-											</tr>
-											<tr class="aws_details even">
 												<th scope="row">Create Bucket</th>
 												<td>
 													<input type="checkbox" name="create_bucket" value="" <?php echo $disabled; ?> /> Create a new bucket.
 												</td>
 											</tr>
-											<tr class="cf_details">
+											<tr class="cf_details even">
 												<th scope="row">Username</th>
 												<td><input type="text" name="cf_username" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "cf") && isset($cdn["username"])){ echo $cdn["username"]; } ?>" /></td>
 											</tr>
-											<tr class="cf_details">
+											<tr class="cf_details even">
 												<td colspan="2">Username for your CloudFiles account.</td>
 											</tr>
-											<tr class="cf_details even">
+											<tr class="cf_details">
 												<th scope="row">API Key</th>
 												<td><input type="text" name="cf_apikey" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "cf") && isset($cdn["apikey"])){ echo $cdn["apikey"]; } ?>" /></td>
 											</tr>
-											<tr class="cf_details even">
+											<tr class="cf_details">
 												<td colspan="2">API key for your CloudFiles account.</td>
 											</tr>	
-											<tr class="cf_details">
+											<tr class="cf_details even">
 												<th scope="row">Container</th>
 												<td><input type="text" name="cf_container" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "cf") && isset($cdn["container"])){ echo $cdn["container"]; } ?>" /></td>
 											</tr>
-											<tr class="cf_details">
+											<tr class="cf_details even">
 												<td colspan="2">Username for your CloudFiles account.</td>
 											</tr>
 										</table>

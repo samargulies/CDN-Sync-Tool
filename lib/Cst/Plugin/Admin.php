@@ -51,7 +51,7 @@ class Cst_Plugin_Admin {
 		   	// Not the sync'ing request so never mind. 
 			return;
 		}
-		ini_set("display_errors",1);
+		set_time_limit(0);
 		$fileArrays = Cst_Sync::getFiles();
 		$i = 0;
 		// Find out the number of items in the sub arrays
@@ -67,7 +67,7 @@ class Cst_Plugin_Admin {
 								$wpdb->prepare("SELECT * FROM ".CST_TABLE_FILES." WHERE filename = %s AND transferred = 'yes'", 
 											array($file))						
 								);
-					
+								
 				print "Syncing [".++$i."/".$total."] ".$file;		
 				ob_flush();
 				flush();				

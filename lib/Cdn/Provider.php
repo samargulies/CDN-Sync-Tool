@@ -5,7 +5,7 @@ define('LIB_DIR', dirname(dirname(__FILE__)));
 	 * CDN super class with factory method for creating objects.
 	 * 
 	 * @author Iain Cambridge
-	 * @since 1.0
+	 * @since 0.1
 	 */
 
 abstract class Cdn_Provider {
@@ -17,23 +17,50 @@ abstract class Cdn_Provider {
 	protected $credentials;
 	
 	/**
+	 * Provider object.
+	 * @var Cst_Provider
+	 */
+	private static $provider;
+	
+	/**
 	 * Gets the provider object. 
 	 *  
 	 * @param string $providerName
 	 * @throws Exception
 	 * @return Cdn_Provider
-	 * @since 1.0
+	 * @since 0.1
 	 */
 	public static function getProvider($providerName){
 		
-		if ( is_readable( LIB_DIR.'/Cdn/'.ucfirst($providerName).'.php' ) ){
-			require_once ( LIB_DIR.'/Cdn/'.ucfirst($providerName).'.php' );
-			$className = "Cdn_".ucfirst($providerName);
-			return new $className();			
-		} else {
-			throw new Exception("Invalid provider");
-		}			
+		if ( empty(self::$provider) ){
+			if ( is_readable( LIB_DIR.'/Cdn/'.ucfirst($providerName).'.php' ) ){
+				require_once ( LIB_DIR.'/Cdn/'.ucfirst($providerName).'.php' );
+				$className = "Cdn_".ucfirst($providerName);
+				self::$provider = new $className();			
+			} else {
+				throw new Exception("Invalid provider");
+			}			
+		} 
+
+		return self::$provider;
+	}
+	
+	/**
+	 * Checks to see if current credentials are the 
+	 * same as the old ones.
+	 * @param string $field
+	 * @since 0.4
+	 */
+	
+	protected function checkSame($field){
+	
+		$oldCdn = get_option("cst_cdn");
 		
+		if ( $oldCdn[$field] == $this->credentials[$field] ){
+			return true;	
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -43,7 +70,7 @@ abstract class Cdn_Provider {
 	 * @TODO think about better solution.
 	 * 
 	 * @return boolean True if successful, false if failed.
-	 * @since 1.0
+	 * @since 0.1
 	 */	
 	abstract public function setAccessCredentials( $details );
 	
@@ -51,7 +78,7 @@ abstract class Cdn_Provider {
 	 * Does the the access credentials checking.
 	 * 
 	 * @return boolean|string Returns true if successful or error message if failed.
-	 * @since 1.0
+	 * @since 0.1
 	 */
 	
 	abstract public function login();
@@ -62,8 +89,17 @@ abstract class Cdn_Provider {
 	 * @param string $file The location of the file to be uploaded.
 	 * @param boolean $media If the file is from the media library
 	 * @return boolean|string Returns true if successfule otherwise error message.
-	 * @since 1.0
+	 * @since 0.1
 	 */
 	abstract public function uploadFile( $file , $media = true );
+	
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @since 0.4
+	 */
+	abstract public function antiHotlinking();
+	
 	
 }

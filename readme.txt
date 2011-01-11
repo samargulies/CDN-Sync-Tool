@@ -2,16 +2,16 @@
 Contributors: Fubra
 Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme files,speed,faster,accelerator,Page Load,
 Tested up to: 3.1-RC2
-Stable tag: 0.3
+Stable tag: 0.4
 Requires At Least: 3.0
 
-A tool to sync static files to a content delivery network (CDN) such as Amazon S3/CloudFront. Designed to be used with WP-Supercache or W3TotalCache.
+Syncs static files to a content delivery network (CDN) such as Amazon S3/CloudFront and CloudFiles. To be used with WP-Supercache or W3TotalCache.
 
 == Description ==
 
 Front end optimization plugin to be used with WP-Supercache or W3TotalCache.
 
-Uploads/syncs your static files to a Content Deilvery Network (CDN) such as Amazon S3/CloudFront from your media library, theme directory, WordPress's wp-include directory and plugin directories aswell as new media library uploads.
+Uploads/syncs your static files to a Content Deilvery Network (CDN) such as Amazon S3/CloudFront and CloudFiles from your media library, theme directory, WordPress's wp-include directory and plugin directories aswell as new media library uploads.
 
 Plugin runs images thought smushit.com to losslessy compress images, aswell as GD compression of images.
 
@@ -65,6 +65,10 @@ The page load improvements of a Content Deilvery Network (CDN) can vary however 
 
 No with the plugin enabled and the Content Deilvery Network (CDN) assigned as Amazon S3/Cloudfront the uploads will happen automatically aswell as other optimizations such compression.
 
+= Is there anything special I need to do to have my new uploads sync to my CloudFiles Container? =
+
+No with the plugin enabled and the Content Deilvery Network (CDN) assigned as CloudFiles the uploads will happen automatically aswell as other optimizations such compression.
+
 = How long can the sync'ing process take? =
 
 The syncing processing time can vary depending on how mabye media files you have and if you are using SmushIt, for example if you have 100 or so files you can expect it to last a few minutes or so or for 1000+ files you can expect it to last 60+ mins.
@@ -81,6 +85,14 @@ Because while it's in the head some browsers will stop the rendering of the page
 
 Yes you just select `Force upload` just before you hit the sync button. This will mean that all files it finds it will upload to your CDN no matter if the file has already been uploaded before. 
 
+= Why doesn't the anti-hotlinking work on CloudFront =
+
+This is because CloudFront isn't currently able to do referrer checks and allow depending the result. When Amazon add this ability it will be added to the plugin.
+
+= Anti-hotlinking isn't working on CloudFiles =
+
+This will be because of the records that have been cached once they are rebuilt anti-hotlinking will work.
+
 == Installation ==
 
 1. Upload plugin contents to the `/wp-content/plugins/` directory
@@ -91,8 +103,9 @@ Yes you just select `Force upload` just before you hit the sync button. This wil
 
 = 0.4 =
 
-* Added Rackspace Cloudfiles support
+* Added Rackspace Cloudfiles support.
 * Fixed get_mu_plugins() not defined error.
+* Added anti-hotlinking functionality.
 
 = 0.3 = 
 

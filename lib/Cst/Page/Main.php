@@ -82,8 +82,9 @@ class Cst_Page_Main extends Cst_Page {
 				
 			if ( isset($_POST["cdn_provider"]) && !empty($_POST["cdn_provider"]) ){	
 						
-				$cdn["provider"] = $_POST["cdn_provider"];
-				$cdn["hostname"] = $_POST["cdn_hostname"];
+				$cdn["provider"]   = $_POST["cdn_provider"];
+				$cdn["hostname"]   = $_POST["cdn_hostname"];
+				$cdn["hotlinking"] = $_POST["cdn_hotlinking"];
 				
 				if ( $cdn["provider"] == "aws"){
 					$cdn["access"] = $_POST['aws_access'];
@@ -94,8 +95,20 @@ class Cst_Page_Main extends Cst_Page {
 					$cdn["apikey"]    = $_POST["cf_apikey"];
 					$cdn["container"] = $_POST["cf_container"];	
 				}
-				
+				// 
+				try {
+					require_once CST_DIR.'/lib/Cdn/Provider.php';
+					
+					$objCdn = Cdn_Provider::getProvider($cdn["provider"]);
+					$objCdn->setAccessCredentials($cdn);
+					$objCdn->login();	
+					$objCdn->antiHotlinking();
+				} catch(Exception $e){
+					$errorArray[] = $e->getMessage();
+				}
 			}
+			
+			
 				
 			$files = array();
 			$files["directory"] = $_POST["directory"];

@@ -4,7 +4,7 @@
  * The class to handle interfacing with Rackspace's cloudfiles API.
  * 
  * @author Iain Cambridge
- * @since 1.0
+ * @since 0.4
  */
 
 class Cdn_Cf extends Cdn_Provider {
@@ -20,6 +20,20 @@ class Cdn_Cf extends Cdn_Provider {
      * @var CF_Container
 	 */
 	protected $container;
+	
+	public function antiHotlinking(){
+		
+		if ( $this->checkSame("hotlinking") ){
+			return true;	
+		}
+		 
+	    $url = ( $this->credentials["hotlinking"] == "yes" ) ? get_bloginfo("url") : '';
+		var_dump($url);
+	    $this->container->acl_referrer( $url );
+		print $this->container;
+		return true;
+		
+	}
 	
 	public function login() {
 		
@@ -37,8 +51,6 @@ class Cdn_Cf extends Cdn_Provider {
 				$this->cloudfiles = new CF_Connection($auth);
 				$this->container = $this->cloudfiles->get_container($this->credentials["container"]);
 			} else {
-				var_dump($this->credentials);
-				die("Auth failed!!!");
 				return false;
 			}												
 	

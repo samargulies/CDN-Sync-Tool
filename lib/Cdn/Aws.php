@@ -6,7 +6,7 @@ require_once CST_DIR.'/lib/awssdk/sdk.class.php';
  * The AWS class to
  * 
  * @author Iain Cambridge
- * @since 1.0
+ * @since 0.1
  */
 
 class Cdn_Aws extends Cdn_Provider {
@@ -16,6 +16,45 @@ class Cdn_Aws extends Cdn_Provider {
 	 * @var AmazonS3
 	 */
 	protected $s3;
+	
+	
+	public function antiHotlinking(){
+		
+		if ( $this->checkSame("hotlinking") ){
+			return true;	
+		}
+		
+		// TODO write bucket policy
+		if ( $this->credentials["hotlinking"] == "yes" ){
+			$site = get_bloginfo("url");
+			$policy = '{
+						"Version":"2008-10-17",
+						"Id":"http referer policy example",
+						"Statement":[{
+								"Sid":"hotlink",
+								"Effect":"Allow",
+								"Principal":"*",
+								"Action":"s3:GetObject",
+								"Resource":"arn:aws:s3:::'.$this->credentials["bucket"].'/*",
+								"Condition":{
+									"StringLike":{
+										"aws:Referer":["'.$site.'",
+											"'.$site.'/*"
+										]
+									}
+								}
+							}
+						]
+					}';
+			$objPolicy = new CFPolicy($this->s3, $policy);
+			$this->s3->set_bucket_policy($this->credentials["bucket"], $objPolicy);
+		} else {
+			$this->s3->delete_bucket_policy($this->credentials["bucket"]);
+		}
+		
+		return true;
+		
+	}
 	
 	/**
 	 * (non-PHPdoc)
@@ -79,11 +118,11 @@ class Cdn_Aws extends Cdn_Provider {
 			$headers['Content-Encoding'] = 'gzip';
 			
 		}
-		
+		$acl =  ( $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
 		$uploadFile= trim($uploadFile, "/");
 		$fileOptions = array(
 					'fileUpload' => $fileLocation,
-					'acl' => AmazonS3::ACL_PUBLIC,
+					'acl' => $acl,
 					'contentType' => $fileType,
 					'headers' => $headers
 					);

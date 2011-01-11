@@ -18,7 +18,7 @@ class Cst_JsCss {
 			preg_match_all('~<script.*(type="["\']text/javascript["\'].*)?src=["\'](.*)["\'].*(type=["\']text/javascript["\'].*)?></script>~iU',$content,$matches);
 			$files = $matches[2];
 		} else {
-			preg_match_all('~<link.*rel=["\']stylesheet["\'].*href=["\'](.*)["\'].*type=["\']text/css["\'].*/>~iU',$content,$matches);
+			preg_match_all('~<link.*rel=["\']stylesheet["\'].*href=["\'](.*)["\'].*/>~iU',$content,$matches);
 			$files = $matches[1];
 		}
 			
