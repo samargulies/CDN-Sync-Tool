@@ -4,7 +4,7 @@ Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files
 Tested up to: 3.1-RC2
 Stable tag: 0.6
 Requires At Least: 3.0
-pharma hack
+
 Syncs static files to a content delivery network (CDN) such as Amazon S3/CloudFront and CloudFiles. To be used with WP-Supercache.
 
 == Description ==
