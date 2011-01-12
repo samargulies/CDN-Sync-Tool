@@ -49,7 +49,7 @@ $disabled = "";
 											</tr>
 											<tr class="even">
 												<th scope="row">Hostname</th>
-												<td><input type="text" name="cdn_hostname" value="<?php if ((isset($cdn) && is_array($cdn) ) && isset($cdn["hostname"])){ echo $cdn["hostname"]; } ?>" <?php echo $disabled; ?> /></td>
+												<td><input type="text" name="cdn_hostname" value="<?php if ( isset($cdnUrl) && !empty($cdnUrl)  ){ echo $cdnUrl; } ?>" <?php echo $disabled; ?> /></td>
 											</tr>
 											<tr class="even">
 												<td colspan="2">The URL of your cdn, so if your cdn files will be at cdn.catn.com you should put in "<em>http://cdn.catn.com</em>"</td>

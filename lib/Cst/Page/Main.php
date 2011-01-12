@@ -147,6 +147,7 @@ class Cst_Page_Main extends Cst_Page {
 			$images = get_option("cst_images");
 			$cdn    = get_option("cst_cdn");
 			$general = get_option("cst_general");
+			$cdnUrl = get_option("ossdl_off_cdn_url");
 			
 		}
 		

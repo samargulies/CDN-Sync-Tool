@@ -103,6 +103,7 @@ This will be because of the records that have been cached once they are rebuilt 
 
 = 0.6 =
 * Added cst_upgrade function which was called in the activation function
+* Changed CDN hostname in options to solely work with "ossdl_off_cdn_url" option
 
 = 0.5 =
 * Added IF NOT EXISTS to table creation

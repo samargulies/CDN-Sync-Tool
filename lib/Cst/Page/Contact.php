@@ -37,6 +37,7 @@ class Cst_Page_Contact extends Cst_Page {
 			
    			$headers = 'From: CST Contact Form <'.$fromEmail.'>' . "\r\n";
    			$headers .= 'Reply-To: '.trim($_POST['name']).' <'.$_POST['email'].'>\r\n';
+   			
    			$message = 'From: '.trim($_POST['name']).' <'.$fromEmail.'>'.PHP_EOL;
    			$message .= 'CST Version: '.CST_VERSION.PHP_EOL;
    			$message .= 'PHP Version: '.PHP_VERSION.PHP_EOL;
