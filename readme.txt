@@ -106,6 +106,7 @@ This will be because of the records that have been cached once they are rebuilt 
 = 0.7 =
 * Fixed CSS for errors
 * Fixed Anti-Hotlinking call being made when not all the valid information has been given.
+* Removed debug info from when Rackspace Cloud's anti-hotlinking attempts is done.
 
 = 0.6 =
 * Added cst_upgrade function which was called in the activation function

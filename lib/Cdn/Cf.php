@@ -30,7 +30,6 @@ class Cdn_Cf extends Cdn_Provider {
 	    $url = ( $this->credentials["hotlinking"] == "yes" ) ? get_bloginfo("url") : '';
 		var_dump($url);
 	    $this->container->acl_referrer( $url );
-		print $this->container;
 		return true;
 		
 	}
