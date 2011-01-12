@@ -18,6 +18,7 @@ class Cst_Page_Main extends Cst_Page {
 				$getVars .= "&".$var."=".$_POST[$var];
 			}
 		}
+		
 		require_once CST_DIR.'/pages/main/sync.html';
 	}
 	
@@ -70,21 +71,16 @@ class Cst_Page_Main extends Cst_Page {
 				}
 				
 			}
-			
-			
-		
+					
 			if ( !isset($_POST["combine"]) || empty($_POST["combine"]) ){
 				$errorArray[] = "Combine JS/CSS is required";	
 			} elseif ( $_POST["combine"] != 'yes' && $_POST["combine"] != 'no' ){
 				$errorArray[] = "Combine JS/CSS isn't a valid reponse";
 			}
+			
 			if ( !isset($_POST["minify_engine"]) || empty($_POST["minify_engine"]) ){
 				$errorArray[] = "Minify is required";	
-			} else {
-				
-				
-				
-			}
+			} 
 			
 			if ( !isset($_POST["smush"]) || empty($_POST["smush"]) ){
 				$errorArray[] = "Smush files is required";	
@@ -118,12 +114,12 @@ class Cst_Page_Main extends Cst_Page {
 						$objCdn->setAccessCredentials($cdn);
 						$objCdn->login();	
 						$objCdn->antiHotlinking();
+						
 					} catch(Exception $e){
 						$errorArray[] = $e->getMessage();
 					}
 				}
 			}
-			
 			
 				
 			$files = array();
@@ -140,16 +136,11 @@ class Cst_Page_Main extends Cst_Page {
 			$images["smush"] = $_POST["smush"];
 			$images["compress"] = $_POST["compress"];
 			$general = array();
-			$general["powered_by"] =  $_POST["powered_by"];
-			
+			$general["powered_by"] =  $_POST["powered_by"];			
 			
 			if ( empty($errorArray) ){
 				
-				// Updates WP Super Cache's CDN url value
-				if ( defined("WP_CACHE") && WP_CACHE === true ){
-					update_option("ossdl_off_cdn_url",$cdn["hostname"]);
-				} 
-							
+				update_option("ossdl_off_cdn_url",$cdn["hostname"]);							
 				update_option("cst_files",$files);
 				update_option("cst_images",$images);
 				update_option("cst_cdn",$cdn);

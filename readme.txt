@@ -107,6 +107,7 @@ This will be because of the records that have been cached once they are rebuilt 
 * Fixed CSS for errors
 * Fixed Anti-Hotlinking call being made when not all the valid information has been given.
 * Removed debug info from when Rackspace Cloud's anti-hotlinking attempts is done.
+* Removed WP Super Cache check before saving to ossdl_off_cdn_url.
 
 = 0.6 =
 * Added cst_upgrade function which was called in the activation function
