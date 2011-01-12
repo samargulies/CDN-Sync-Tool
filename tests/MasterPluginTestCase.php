@@ -1,15 +1,16 @@
 <?php
 
 	/**
-	 * Master class for WordPress plugin 
-	 * development unit tests.
+	 * Master class for PHPUnit tests relating to 
+	 * WordPress plugins. Not to be confused with
+	 * Offical WordPress PHPUnit tests.
 	 * 
 	 * @author Iain Cambridge
-	 * @copyright Fubra Limited 2011 (c) all rights reserved.
-	 * @license GNU GPL v2
+	 * @copyright Fubra Limited 2011 (C) all rights reserved.
+	 * @license GNU GPLv2
 	 */
 
-class MasterPluginTestCase extends PHPUnit_Framework_TestCase {
+class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * Tells us if some request params have been set before 
@@ -19,36 +20,42 @@ class MasterPluginTestCase extends PHPUnit_Framework_TestCase {
 	 * @var boolean 
 	 */
 	protected $requestParamSet = false;
+	/**
+	 * The html output of WordPress.
+	 * 
+	 * @var string
+	 */
+	protected $wpOutput;
 	
 	/**
-	 * Includes the wp-load.php to be done after the request params 
-	 * have been set. Checks that request params have been set before 
-	 * including wp-load.php.
-	 * 
-	 * If wp-load.php can't be found or request params haven't been 
-	 * set before this is called the function calls the exit function.
 	 * 
 	 * @return boolean true if successful.
 	 */
 	
 	public function setup(){
 		
-		if ( $this->requestParamSet === false ){
-			print "Child test must set request params first.".PHP_EOL;
-			exit;
-		}
+		define("WP_INSTALLING", 1);
 		
-		$wpLoad = realpath('../../../../wp-load.php');
-		//TODO find neater solution!
-		if ( !file_exists( $wpLoad ) ){
-			print "Unable to load the wp-load.php file. Test ending.".PHP_EOL;
-			exit;
-		}
-		
-		require_once($wpLoad);
 		
 		return true;
 	}
+	
+	/**
+	 * Clears the Database of *ALL* Tables. Then populates the database
+	 * with WordPress install data. To replica a new WordPress install.
+	 * 
+	 * @return boolean true if successful.
+	 */
+	protected function freshInstall(){
+		
+		drop_tables();
+		define('WP_BLOG_TITLE', rand_str());
+		define('WP_USER_NAME', rand_str());
+		define('WP_USER_EMAIL', rand_str().'@example.com');
+		wp_install(WP_BLOG_TITLE, WP_USER_NAME, WP_USER_EMAIL, true);
+	
+	}
+	
 
 	/**
 	 * Sets request variables for both the super global for the single
@@ -64,11 +71,24 @@ class MasterPluginTestCase extends PHPUnit_Framework_TestCase {
 	 * 
 	 * @param string $type Ethier COOKIE,POST,GET
 	 * @param string $name stored as a string, as PHP treats all request variable names as strings
-	 * @param string $value Stored as a string, as PHP treats all request variables as strings
+	 * @param string $value Stored as a string, as PHP treats all request variables as strings.
 	 * 
 	 * @return 
 	 */
 	public function setRequestParam($type,$name,$value){
+		
+		$type = strtoupper($type);
+		
+		if ( $type != "COOKIE" && $type != "POST" && $type != "GET" ){
+			return false;	
+		}
+				
+		${'_'.$type}[$name] = (string) $value;
+		$_REQUEST[$name] = (string) $value;
+		// So self::setUp() can successfully run.
+		$this->requestParamSet = true;
+		
+		return true;
 		
 	}
 	

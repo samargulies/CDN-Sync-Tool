@@ -101,6 +101,9 @@ This will be because of the records that have been cached once they are rebuilt 
 
 == CHANGELOG ==
 
+= 0.6 =
+* Added cst_upgrade function which was called in the activation function
+
 = 0.5 =
 * Added IF NOT EXISTS to table creation
 
@@ -121,6 +124,10 @@ This will be because of the records that have been cached once they are rebuilt 
 * Fixed typos
 
 == Upgrade Notice ==
+
+= 0.6 =
+
+* Activation fix
 
 = 0.2 =
 

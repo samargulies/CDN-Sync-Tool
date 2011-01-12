@@ -56,6 +56,11 @@ function cst_install(){
 		update_option("cst_theme",true);
 }
 
+function cst_upgrade(){
+	
+	return true;
+}
+
 	register_activation_hook( __FILE__, "cst_install" );
 $objCstPlugin = new Cst_Plugin();
 
