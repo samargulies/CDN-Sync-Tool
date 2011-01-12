@@ -24,19 +24,24 @@ jQuery(document).ready( function(){
 	});
 	
 	$('#check-details').click( function(){
-		var ajaxUrl = '/wp-admin/admin.php?page=cst-main&subpage=js&js=options';
+		var ajaxUrl = '/wp-admin/admin.php?page=cst-main&subpage=js&type=';
 		var typeData = $('#cdn option:selected').val();
 		ajaxUrl += typeData;
-		if (typeData == "aws"){
+		if ( typeData == "aws" ){
 			var accessCode = $('input[name="aws_access"]').val(); 
 			var secretCode = $('input[name="aws_secret"]').val();
 			var bucket = $('input[name="aws_bucket"]').val();
 			ajaxUrl += '&access='+accessCode+'&secret='+secretCode+'&bucket='+bucket;
+		} else if ( typeData == "cf" ){			
+			var username = $('input[name="cf_username"]').val(); 
+			var apiKey = $('input[name="cf_apikey"]').val();
+			var container = $('input[name="cf_container"]').val();
+			ajaxUrl += '&username='+username+'&apikey='+apiKey+'&container='+container;
 		}
 		
 		$.get(ajaxUrl, function(data) {
 
-		  if (data.response == true){
+		  if (data.valid == true){
 		  	alert("Details are valid");
 		  } else {
 		  	alert("Details aren't valid");

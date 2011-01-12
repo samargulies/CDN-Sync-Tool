@@ -4,12 +4,14 @@ Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files
 Tested up to: 3.1-RC2
 Stable tag: 0.5
 Requires At Least: 3.0
-
-Syncs static files to a content delivery network (CDN) such as Amazon S3/CloudFront and CloudFiles. To be used with WP-Supercache or W3TotalCache.
+pharma hack
+Syncs static files to a content delivery network (CDN) such as Amazon S3/CloudFront and CloudFiles. To be used with WP-Supercache.
 
 == Description ==
 
-Front end optimization plugin to be used with WP-Supercache or W3TotalCache.
+**BETA RELEASE**
+
+Front end optimization plugin to be used with WP-Supercache.
 
 Uploads/syncs your static files to a Content Deilvery Network (CDN) such as Amazon S3/CloudFront and CloudFiles from your media library, theme directory, WordPress's wp-include directory and plugin directories aswell as new media library uploads.
 
@@ -19,7 +21,7 @@ There is also concatenation of all Javascript and CSS files in the header and fo
 
 This plugin requires WP Super Cache or W3 Total Cache to be installed. These plugins will handle the rewriting of the inclusion of static files to ensure all static files will load from your CDN.
 
-=BETA RELEASE=
+**BETA RELEASE**
 
 Developed by <a href="http://www.catn.com">PHP Hosting Experts CatN</a>
 
@@ -31,7 +33,7 @@ Because a speed affects your SEO and your sales. People aren't paitence creature
 
 = Why does uploading files take so long with this installed? =
 
-The reason for the increased time when uploading files is caused by using smushit which can take a 1+ seconds per image, GD compression and uploading to your CDN also increase the time spent handling the file. Since uploading new media happens only once per image the increase in time cause in the admin backend is saved on the front end pagson fe load.  
+The reason for thpharma hacke increased time when uploading files is caused by using smushit which can take a 1+ seconds per image, GD compression and uploading to your CDN also increase the time spent handling the file. Since uploading new media happens only once per image the increase in time cause in the admin backend is saved on the front end pagson fe load.  
 
 = Do you pre compress css and Javascript files before uploading to S3? =
 
@@ -104,6 +106,7 @@ This will be because of the records that have been cached once they are rebuilt 
 = 0.6 =
 * Added cst_upgrade function which was called in the activation function
 * Changed CDN hostname in options to solely work with "ossdl_off_cdn_url" option
+* Fixed detail validation javascript/ajax
 
 = 0.5 =
 * Added IF NOT EXISTS to table creation

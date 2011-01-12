@@ -95,11 +95,12 @@ abstract class Cdn_Provider {
 	
 	
 	/**
+	 * Enables the anti hotlinking ability. Only really 
+	 * works with S3. 
 	 * 
-	 * Enter description here ...
 	 * @since 0.4
 	 */
 	abstract public function antiHotlinking();
-	
+
 	
 }

@@ -29,9 +29,37 @@ class Cst_Plugin_Admin {
 		return add_action("admin_menu", array($this, "menu") ) &&
 			   add_action("switch_theme", array($this, "switchTheme") ) &&
 			   add_action("admin_init", array($this, "syncFiles")) && 
+			   add_action("admin_init", array($this, "doAuthCheck")) && 
 			   add_filter("wp_generate_attachment_metadata", array($this, "uploadMedia" )) && 
 			   add_action("admin_head",array($this, "head" ) ) &&
 			   $extraActions;
+	}
+	
+	public function doAuthCheck(){
+		
+		if ( (!isset($_GET["page"]) || $_GET["page"] != "cst-main")
+		  || (!isset($_GET["subpage"]) || $_GET["subpage"] != "js" ) ){
+		  	return;
+		  }
+		
+		$response = array();	
+	
+		try {
+			if ( isset($_GET["type"]) ){
+				require_once CST_DIR."/lib/Cdn/Provider.php";
+				$provider = Cdn_Provider::getProvider($_GET["type"]);
+				$provider->setAccessCredentials($_GET);
+				$response["valid"] = $provider->login();
+				
+			} else {
+				$response["valid"] = false;
+			}
+		}
+		catch ( Exception $e ){
+			$response["valid"] = false;
+		}
+		print json_encode($response);
+		exit;
 	}
 		
 	/**

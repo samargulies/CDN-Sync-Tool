@@ -1,5 +1,13 @@
 <?php
 
+	/**
+	 * 
+	 * Enter description here ...
+	 * @author Iain Cambridge
+	 * @copyright Fubra Limited 2011
+	 * @license GNU GPLv2 
+	 */
+
 class Cst_Page_Main extends Cst_Page {
 
 	protected function _showSync(){
@@ -13,13 +21,41 @@ class Cst_Page_Main extends Cst_Page {
 		require_once CST_DIR.'/pages/main/sync.html';
 	}
 	
+	protected function doAuthCheck(){
+		
+		$response = array();	
+	
+		try {
+			if ( isset($_GET["type"]) ){
+				
+				$provider = Cdn_Provider::getProvider($_GET["type"]);
+				$provider->setAccessCredentials($_GET);
+				$response["valid"] = $provider->login();
+				
+			} else {
+				$response["valid"] = false;
+			}
+		}
+		catch ( Exception $e ){
+			$response["valid"] = false;
+		}
+		print json_encode($response);
+		exit;
+	}
+	
 	public function display(){
 		
 		if ( isset($_POST["showsync"]) && $_POST["showsync"] == "yes" ){
 			$this->_showSync();
 			return;
 		}
+
+		if ( isset($_GET["subpage"]) && $_POST["subpage"] == "js" ){
+			$this->_doAuthCheck();
 			
+			return;
+		}
+		
 		if ( !empty($_POST) ){
 			$errorArray = array();
 					

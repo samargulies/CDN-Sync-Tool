@@ -50,12 +50,14 @@ class Cdn_Cf extends Cdn_Provider {
 			if ( $auth->authenticate() ) {
 				$this->cloudfiles = new CF_Connection($auth);
 				$this->container = $this->cloudfiles->get_container($this->credentials["container"]);
+				return true;
 			} else {
 				return false;
 			}												
 	
 		} catch ( Exception $e ){
-			return $e->getMessage();
+			//TODO log these.
+			return false;
 		}
 		
 	}	

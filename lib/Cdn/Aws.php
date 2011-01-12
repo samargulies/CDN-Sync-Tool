@@ -74,7 +74,7 @@ class Cdn_Aws extends Cdn_Provider {
 					// permissions to it, we'll get a positive result.							
 			return $this->s3->if_bucket_exists( (string)$this->credentials["bucket"]);
 		} catch ( Exception $e ){
-			return $e->getMessage();
+			return false;
 		}
 		
 	}	
@@ -132,12 +132,11 @@ class Cdn_Aws extends Cdn_Provider {
 						$uploadFile,
 						$fileOptions);
 		
-	}
+	}$details
 	
 	/**
 	 * (non-PHPdoc)
 	 * @see Cdn_Provider::setAccessCredentials()
-	 * @todo move 
 	 */
 	
 	public function setAccessCredentials( $details ){
@@ -157,5 +156,6 @@ class Cdn_Aws extends Cdn_Provider {
 		$this->credentials = $details;
 		
 	}
+	
 	
 }
