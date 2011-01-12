@@ -10,11 +10,13 @@ $disabled = "";
 	</h2>
 	
 	<?php if ( isset($errorArray) && !empty($errorArray) ) { ?>
-		<ul class="error">
+	<div class="error">
+		<ol class="error">
 			<?php foreach($errorArray as $error ){ ?>
 				<li><?php echo $error; ?></li>
 			<?php } ?>
-		</ul>
+		</ol>
+	</div>
 	<?php } ?>
 	
 	<div id="dashboard-widgets-wrap">

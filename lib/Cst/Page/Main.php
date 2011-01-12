@@ -21,28 +21,6 @@ class Cst_Page_Main extends Cst_Page {
 		require_once CST_DIR.'/pages/main/sync.html';
 	}
 	
-	protected function doAuthCheck(){
-		
-		$response = array();	
-	
-		try {
-			if ( isset($_GET["type"]) ){
-				
-				$provider = Cdn_Provider::getProvider($_GET["type"]);
-				$provider->setAccessCredentials($_GET);
-				$response["valid"] = $provider->login();
-				
-			} else {
-				$response["valid"] = false;
-			}
-		}
-		catch ( Exception $e ){
-			$response["valid"] = false;
-		}
-		print json_encode($response);
-		exit;
-	}
-	
 	public function display(){
 		
 		if ( isset($_POST["showsync"]) && $_POST["showsync"] == "yes" ){
@@ -80,15 +58,15 @@ class Cst_Page_Main extends Cst_Page {
 				//***********************************
 				
 				if ( !isset($_POST["cf_username"]) || empty($_POST["cf_username"]) ){
-					$errorArray[] = "CloudFiles Username required";
+					$errorArray[] = "CloudFiles Username is required";
 				}
 				
 				if ( !isset($_POST["cf_apikey"]) || empty($_POST["cf_apikey"]) ){
-					$errorArray[] = "CloudFiles API key";
+					$errorArray[] = "CloudFiles API key is required";
 				}
 				
 				if ( !isset($_POST["cf_container"]) || empty($_POST["cf_container"]) ){
-					$errorArray[] = "CloudFiles Container";
+					$errorArray[] = "CloudFiles Container is required";
 				}
 				
 			}
@@ -132,15 +110,17 @@ class Cst_Page_Main extends Cst_Page {
 					$cdn["container"] = $_POST["cf_container"];	
 				}
 				// 
-				try {
-					require_once CST_DIR.'/lib/Cdn/Provider.php';
-					
-					$objCdn = Cdn_Provider::getProvider($cdn["provider"]);
-					$objCdn->setAccessCredentials($cdn);
-					$objCdn->login();	
-					$objCdn->antiHotlinking();
-				} catch(Exception $e){
-					$errorArray[] = $e->getMessage();
+				if ( $cdn["hotlinking"] == "yes" && empty($errorArray) ){
+					try {
+						require_once CST_DIR.'/lib/Cdn/Provider.php';
+						
+						$objCdn = Cdn_Provider::getProvider($cdn["provider"]);
+						$objCdn->setAccessCredentials($cdn);
+						$objCdn->login();	
+						$objCdn->antiHotlinking();
+					} catch(Exception $e){
+						$errorArray[] = $e->getMessage();
+					}
 				}
 			}
 			
