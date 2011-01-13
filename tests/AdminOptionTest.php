@@ -1,6 +1,6 @@
 <?php
 
-require_once 'WpMasterTestCase.php';
+require_once 'MasterPluginTestCase.php';
 
   /**
    * CDN Sync Tool Admin Options page.
@@ -21,12 +21,22 @@ class AdminOptionTest extends WpMasterTestCase {
 	public function setUp() {
 		parent::setUp ();
 
-		$objCsPlugin = new Cst_Plugin();
 		
 	}
 	
-	public function testRandom(){
-		$this->assertEquals(true,true);
+	
+	public function testHooksAreHookedProperly(){
+		
+		global $wp_actions,$wp_filters,$merged_filters;
+		
+		$wp_actions     = array();
+		$wp_filters     = array();
+		$merged_filters = array();
+		
+		$objCsPlugin = new Cst_Plugin();
+		
+		$this->assertContains("admin_init", array_keys($wp_filters) );
+	
 	}
 	
 }

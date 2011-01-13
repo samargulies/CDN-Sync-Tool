@@ -27,18 +27,21 @@ class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 	public function setup(){
 		
 		define("WP_INSTALLING", 1);
-		define('DB_NAME', 'putyourdbnamehere');    // The name of the database
-		define('DB_USER', 'usernamehere');     // Your MySQL username
-		define('DB_PASSWORD', 'yourpasswordhere'); // ...and password
+		define('DB_NAME', '');    // The name of the database
+		define('DB_USER', '');     // Your MySQL username
+		define('DB_PASSWORD', '); // ...and password
 		define('DB_HOST', 'localhost');    // 99% chance you won't need to change this value
 		define('DB_CHARSET', 'utf8');
 		define('DB_COLLATE', '');
+		define('WP_BLOG_TITLE', rand_str());
+		define('WP_USER_NAME', rand_str());
+		define('WP_USER_EMAIL', rand_str().'@example.com');
 		// TODO check if remains right later
-		define('ABSPATH', realpath(DIR_WP).'/');
+		define('ABSPATH', realpath('../../../..').'/');
 		
 		require_once ABSPATH.'wp-settings.php';
 		
-		$this->freshInstall();
+		wp_install(WP_BLOG_TITLE, WP_USER_NAME, WP_USER_EMAIL, true);
 		
 		return true;
 	}
@@ -52,10 +55,6 @@ class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 	protected function freshInstall(){
 		
 		drop_tables();
-		define('WP_BLOG_TITLE', rand_str());
-		define('WP_USER_NAME', rand_str());
-		define('WP_USER_EMAIL', rand_str().'@example.com');
-		wp_install(WP_BLOG_TITLE, WP_USER_NAME, WP_USER_EMAIL, true);
 	
 	}
 	
