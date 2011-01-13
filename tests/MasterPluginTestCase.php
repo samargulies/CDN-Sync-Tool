@@ -29,7 +29,7 @@ class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 		define("WP_INSTALLING", 1);
 		define('DB_NAME', '');    // The name of the database
 		define('DB_USER', '');     // Your MySQL username
-		define('DB_PASSWORD', '); // ...and password
+		define('DB_PASSWORD', ''); // ...and password
 		define('DB_HOST', 'localhost');    // 99% chance you won't need to change this value
 		define('DB_CHARSET', 'utf8');
 		define('DB_COLLATE', '');
@@ -54,8 +54,16 @@ class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 	 */
 	protected function freshInstall(){
 		
-		drop_tables();
+		$this->drop_tables();
 	
+		wp_install(WP_BLOG_TITLE, WP_USER_NAME, WP_USER_EMAIL, true);
+	}
+	
+	public function  drop_tables() {
+		global $wpdb;
+		$tables = $wpdb->get_col('SHOW TABLES;');
+		foreach ($tables as $table)
+			$wpdb->query("DROP TABLE IF EXISTS ".$table);
 	}
 	
 }

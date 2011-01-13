@@ -21,21 +21,13 @@ class Cst_Plugin {
 		foreach( $activePlugins as $plugin ){
 			// First check is for WP Super Cache
 			if ( preg_match("~wp\-cache\.php$~isU",$plugin) ){
-				
+				Cst_Debug::addLog("WP Super Cache install found");
 				if ( defined("WP_CACHE") && WP_CACHE == true ){
 					$status = true;
 				} 
 				break;
 							
 			}
-			
-			if ( preg_match("~w3\-total\-cache\.php$~isU",$plugin) ){
-				// Just make sure
-				// by checking for a valid constant
-				if ( defined("W3TC_VERSION") ){
-					$status = true;
-				}			
-			}	
 		}
 		
 		return $status;

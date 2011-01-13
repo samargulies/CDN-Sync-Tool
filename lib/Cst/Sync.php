@@ -148,13 +148,11 @@ class Cst_Sync {
 		if ( $media === true ){
 			$uploadDir = wp_upload_dir();
 			$fileLocation = $uploadDir["basedir"]."/".$file;
-		} else {
-		
+		} else {		
 			$fileLocation = ABSPATH.$file;
 		}
 	
-		try {
-				
+		try {				
 			
 			if ( $compressImages ){
 				$gdCompression = "yes";
@@ -173,7 +171,11 @@ class Cst_Sync {
 				$objCdn->uploadFile($file,$media);
 				$synced = "yes";
 			}
-			Cst_Debug::addLog("File Sync : ".$file.", Image Smushed : ".$smushedImage.", GD Compression : ".$gdCompression);
+			// Debug Info
+			Cst_Debug::addLog("File Sync : ".$file.", Image Smushed : ".$smushedImage.
+							  ", GD Compression : ".$gdCompression.", File Size".filesize($file).
+							  ", Timestamp : ".time() );
+			
 			$wpdb->query("UPDATE ".CST_TABLE_FILES." SET `smushed` = '".$smushedImage."',
 						 `transferred` = '".$synced."' WHERE filename = '".$file."'");
 			
