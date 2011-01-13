@@ -29,13 +29,21 @@ class Cst_Plugin_Admin {
 		return add_action("admin_menu", array($this, "menu") ) &&
 			   add_action("switch_theme", array($this, "switchTheme") ) &&
 			   add_action("admin_init", array($this, "syncFiles")) && 
-			   add_action("admin_init", array($this, "doAuthCheck")) && 
+			   add_action("admin_init", array($this, "preAdminHead")) && 
 			   add_filter("wp_generate_attachment_metadata", array($this, "uploadMedia" )) && 
 			   add_action("admin_head",array($this, "head" ) ) &&
 			   $extraActions;
 	}
 	
-	public function doAuthCheck(){
+	public function preAdminHead(){
+	
+		if ( isset($_GET['removetheme']) && $_GET["removetheme"] == "yes"){
+			update_option("cst_theme",false);
+		}
+		
+		if ( isset($_GET['removedependency']) && $_GET["removedependency"] == "yes"){
+			update_option("cst_dependency",false);
+		}
 		
 		if ( (!isset($_GET["page"]) || $_GET["page"] != "cst-main")
 		  || (!isset($_GET["subpage"]) || $_GET["subpage"] != "js" ) ){
@@ -55,7 +63,7 @@ class Cst_Plugin_Admin {
 				$response["valid"] = false;
 			}
 		}
-		catch ( Exception $e ){
+		catch ( Exception $eadmin_head ){
 			$response["valid"] = false;
 		}
 		print json_encode($response);
@@ -111,8 +119,7 @@ class Cst_Plugin_Admin {
 										(filename,smushed,transferred) 
 										VALUES 
 										(%s,'no','no')", 
-										array($file))
-					);
+										array($file)));
 					
 				Cst_Sync::process($file,$media);
 				print " done".PHP_EOL."<br />";
@@ -209,11 +216,11 @@ class Cst_Plugin_Admin {
 	public function head(){
 			
 		if ( get_option("cst_theme") ){
-			echo '<div class="error">Looks like you don\'t have your theme files sync\'d. <a href="admin.php?page='.CST_PAGE_MAIN.'">Click here to Sync them</a>.</div>';
+			echo '<div class="error">Looks like you don\'t have your theme files sync\'d. <a href="admin.php?page='.CST_PAGE_MAIN.'">Click here to Sync them</a>. Or <a href="admin.php?page='.CST_PAGE_MAIN.'&removetheme=yes">click here</a> to remove this message.</div>';
 		}
 		
-		if ( !Cst_Plugin::checkDependices() ){
-			echo '<div class="error">Plugin Dependices haven\'t been met, <a href="http://wordpress.org/extend/plugins/wp-super-cache/" target="_blank">WP Super Cache</a> or <a href="http://wordpress.org/extend/plugins/w3-total-cache/" target="_blank">W3 Total Cache</a> are required.</div>';
+		if ( !Cst_Plugin::checkDependices() && !get_option("cst_dependency")){
+			echo '<div class="error">Plugin Dependices haven\'t been met, <a href="http://wordpress.org/extend/plugins/wp-super-cache/" target="_blank">WP Super Cache</a> is required. Or <a href="admin.php?page='.CST_PAGE_MAIN.'&removedependency=yes">click here</a> to remove this message.</div>';
 		}
 		
 		true;

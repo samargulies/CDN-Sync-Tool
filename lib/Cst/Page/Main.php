@@ -23,6 +23,7 @@ class Cst_Page_Main extends Cst_Page {
 	}
 	
 	public function display(){
+	
 		
 		if ( isset($_POST["showsync"]) && $_POST["showsync"] == "yes" ){
 			$this->_showSync();
