@@ -6,7 +6,7 @@ Plugin URI: http://catn.com/
 Description: Syncs static files to a CDN
 Author: Fubra Limited
 Author URI: http://www.catn.com
-Version: 0.6
+Version: 0.7b
 */
 
 /*
@@ -29,6 +29,7 @@ Version: 0.6
 
 
 require_once 'etc/constants.php';
+require_once CST_DIR.'/lib/Cst/Debug.php';
 require_once CST_DIR.'/lib/Cst/Plugin.php';
 
 function cst_install(){

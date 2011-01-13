@@ -114,6 +114,7 @@ It currently doesn't have this functionality via the API however it is getting l
 * Removed debug info from when Rackspace Cloud's anti-hotlinking attempts is done.
 * Removed WP Super Cache check before saving to ossdl_off_cdn_url.
 * Removed W3 Total Cache as a dependicy.
+* Added option to sync JavaScript and CSS builds
 
 = 0.6 =
 * Added cst_upgrade function which was called in the activation function

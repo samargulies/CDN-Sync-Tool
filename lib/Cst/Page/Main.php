@@ -13,7 +13,7 @@ class Cst_Page_Main extends Cst_Page {
 	protected function _showSync(){
 		
 		$getVars = "";
-		foreach ( array("directory","theme","media","wpinclude","wpplugin","force") as $var	 ){
+		foreach ( array("directory","theme","media","wpinclude","wpplugin","force","cstcssjs") as $var	 ){
 			if ( isset($_POST[$var]) ){
 				$getVars .= "&".$var."=".$_POST[$var];
 			}

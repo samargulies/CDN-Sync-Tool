@@ -13,7 +13,7 @@ class Cst_Sync {
 	protected static $_files = array();
 	
 	public static function getFiles(){
-
+		
 		if ( isset($_GET["theme"]) && $_GET["theme"] = "yes" ) {
 			self::$_files[0] = self::getDirectoryFiles( array(get_template_directory()),true ) 	;
 		}
@@ -40,6 +40,10 @@ class Cst_Sync {
 			self::$_files[4] = self::getDirectoryFiles($activePlugins);
 		}
 		
+		if ( isset($_GET['cstcssjs']) && $_GET['cstcssjs'] == "yes" ){			
+			$files  = get_option("cst_files");
+			self::$_files[5] = array_merge( glob(ABSPATH.$files['directory'] .'/*.js'), glob(ABSPATH.$files['directory'] . '/*.css') );
+		}
 		return self::$_files;
 	}
 	

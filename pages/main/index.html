@@ -305,15 +305,17 @@ $disabled = "";
 										<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>" class="thickbox">
 											<p>Syncs the Media Library and Theme files with the CDN.</p>
 											<p>
-												<input <?php echo $disabled; ?> type="checkbox" name="theme" value="yes" checked="yes" id="theme_files" />
+												<input type="checkbox" name="theme" value="yes" checked="yes" id="theme_files" />
 												<label for="theme_files">Theme files</label> 
-												<input <?php echo $disabled; ?> type="checkbox" name="media" value="yes" checked="yes" id="media_files" />
+												<input type="checkbox" name="media" value="yes" checked="yes" id="media_files" />
 												<label for="media_files">Media Library</label>
 												<br />
 												<input <?php echo $disabled; ?> type="checkbox" name="wpinclude" value="yes" checked="yes" id="wpinclude" />
 												<label for="wpinclude">WP Files</label>
-												<input <?php echo $disabled; ?> type="checkbox" name="wpplugin" value="yes" checked="yes" id="wpplugin" />
+												<input type="checkbox" name="wpplugin" value="yes" checked="yes" id="wpplugin" />
 												<label for="wpplugin">Plugin Files</label>
+												<input type="checkbox" name="cstcssjs" value="yes" checked="yes" id="cssjs_files" />
+												<label for="cssjs_files">CSS/JS Files</label>
 											</p>
 											<input type="checkbox" name="force" value="yes" id="force" />
 											<label for="override">Don't skip already sync'd</label>
@@ -351,6 +353,15 @@ $disabled = "";
 										</form>
 										
 									</div>
+								</div>
+								
+								<div id="dashboard_empty" class="postbox">
+									<div class="handlediv" title="Click to toggle">
+										<br />
+									</div>
+									<h3 class="hndle">
+										<span>Empty JS/CSS Cache</span>
+									</h3>
 								</div>
 							</div>
 						</div>
