@@ -99,7 +99,6 @@ This is because CloudFiles ACL Referrer doesn't work as expected. So CloudFiles 
 
 It currently doesn't have this functionality via the API however it is getting launched soon, once it's launched it will be added to the plugin.
 
-
 == Installation ==
 
 1. Upload plugin contents to the `/wp-content/plugins/` directory

@@ -102,7 +102,7 @@ class Cst_Plugin_Admin {
 		Cst_Debug::addLog("Files have been retrived, total count is ".$total);
 		
 		$forceOverwrite = ( isset($_GET["force"]) && $_GET["force"] == "yes") ? true : false;
-		
+		Cst_Debug::addLog("The force mode for this sync is ".var_export($forceOverwrite,true));
 		foreach ( $fileArrays as $key => $files ) {
 			$media = ($key === 1) ? true : false; 
 			foreach ( $files as $file ){
@@ -118,6 +118,7 @@ class Cst_Plugin_Admin {
 				flush();				
 				if ( $count && !$forceOverwrite  ){
 					print " skipped, already synced".PHP_EOL."<br />";
+					Cst_Debug::addLog("File '".$file."' has already been synced so has been skipped");
 					ob_flush();
 					flush();
 					continue;
@@ -131,13 +132,14 @@ class Cst_Plugin_Admin {
 										array($file)));
 					
 				Cst_Sync::process($file,$media);
+				Cst_Debug::addLog("File '".$file."' has been synced.");
 				print " done".PHP_EOL."<br />";
 				ob_flush();
 				flush();
 			}
 		}
-		update_option("cst_theme",false);
-		
+		Cst_Debug::addLog("File sync complete.");
+		update_option("cst_theme",false);		
 		
 		// This is to popup and show in an overlay iframe. 
 		// So we don't want the rest of the dashboard to load. 
@@ -153,6 +155,8 @@ class Cst_Plugin_Admin {
 	 */
 	
 	public function menu(){
+		
+		Cst_Debug::addLog("Adding CST Admin Menus");
 		
 		return add_menu_page('CDN Sync Tool', 'CDN Sync Tool', 'manage_options', CST_PAGE_MAIN, array($this->showPage("Main"), "display" ) ) &&
 		   	   add_submenu_page( CST_PAGE_MAIN , 'Contact' , 'Contact' ,'manage_options' , CST_PAGE_CONTACT , array($this->showPage("Contact"), "display" ) ) && 
@@ -170,7 +174,8 @@ class Cst_Plugin_Admin {
 	 */
 	
 	public function addCssAndJs(){
-		
+		Cst_Debug::addLog("Enqueuing the CSS and JS for the admin section.");
+		// TODO remove da
 		   // CSS files
 		   wp_enqueue_style("dashboard");
 		   wp_enqueue_style("thickbox");
@@ -195,6 +200,7 @@ class Cst_Plugin_Admin {
 	 */
 	
 	public function showPage( $pageName ){
+		// TODO Finish writing log entries.
 		require_once CST_DIR.'/lib/Cst/Page.php';
 		if ( empty($pageName) ){
 			return false;
