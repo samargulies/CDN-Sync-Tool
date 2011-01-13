@@ -93,7 +93,12 @@ This is because CloudFront isn't currently able to do referrer checks and allow 
 
 = Anti-hotlinking isn't working on CloudFiles =
 
-This will be because of the records that have been cached once they are rebuilt anti-hotlinking will work.
+This is because CloudFiles ACL Referrer doesn't work as expected. So CloudFiles at this time is unable to do anti-hotlinking at this time.
+
+= Why can't I invalidate files on CloudFiles? =
+
+It currently doesn't have this functionality via the API however it is getting launched soon, once it's launched it will be added to the plugin.
+
 
 == Installation ==
 

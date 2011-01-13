@@ -141,6 +141,7 @@ class Cst_Sync {
 		
 		$synced = "no";
 		$smushedImage = "no";
+		$gdCompression = "no";
 	
 		require_once CST_DIR."/lib/Cdn/Provider.php";
 	
@@ -156,6 +157,7 @@ class Cst_Sync {
 				
 			
 			if ( $compressImages ){
+				$gdCompression = "yes";
 				Cst_Image::gdCompression($fileLocation);
 			}
 			
@@ -171,7 +173,7 @@ class Cst_Sync {
 				$objCdn->uploadFile($file,$media);
 				$synced = "yes";
 			}
-			
+			Cst_Debug::addLog("File Sync : ".$file.", Image Smushed : ".$smushedImage.", GD Compression : ".$gdCompression);
 			$wpdb->query("UPDATE ".CST_TABLE_FILES." SET `smushed` = '".$smushedImage."',
 						 `transferred` = '".$synced."' WHERE filename = '".$file."'");
 			

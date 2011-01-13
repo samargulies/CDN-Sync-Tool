@@ -35,7 +35,14 @@ class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 	public function setup(){
 		
 		define("WP_INSTALLING", 1);
-		
+		define('DB_NAME', 'putyourdbnamehere');    // The name of the database
+		define('DB_USER', 'usernamehere');     // Your MySQL username
+		define('DB_PASSWORD', 'yourpasswordhere'); // ...and password
+		define('DB_HOST', 'localhost');    // 99% chance you won't need to change this value
+		define('DB_CHARSET', 'utf8');
+		define('DB_COLLATE', '');
+		// TODO check if remains right later
+		define('ABSPATH', realpath(DIR_WP).'/');
 		
 		return true;
 	}
