@@ -13,14 +13,6 @@
 class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 	
 	/**
-	 * Tells us if some request params have been set before 
-	 * the setup is called. This is to ensure that request 
-	 * params have been set before including the wp-load.php
-	 * 
-	 * @var boolean 
-	 */
-	protected $requestParamSet = false;
-	/**
 	 * The html output of WordPress.
 	 * 
 	 * @var string
@@ -44,6 +36,10 @@ class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 		// TODO check if remains right later
 		define('ABSPATH', realpath(DIR_WP).'/');
 		
+		require_once ABSPATH.'wp-settings.php';
+		
+		$this->freshInstall();
+		
 		return true;
 	}
 	
@@ -61,42 +57,6 @@ class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 		define('WP_USER_EMAIL', rand_str().'@example.com');
 		wp_install(WP_BLOG_TITLE, WP_USER_NAME, WP_USER_EMAIL, true);
 	
-	}
-	
-
-	/**
-	 * Sets request variables for both the super global for the single
-	 * variable type and in the request variable.
-	 * 
-	 * for example
-	 * <code>
-	 * $this->setRequestParam("post","submit","true");
-	 * // will result in
-	 * $_REQUEST["submit"] = "true";
-	 * $_POST["submit"] = "true";
-	 * </code>
-	 * 
-	 * @param string $type Ethier COOKIE,POST,GET
-	 * @param string $name stored as a string, as PHP treats all request variable names as strings
-	 * @param string $value Stored as a string, as PHP treats all request variables as strings.
-	 * 
-	 * @return 
-	 */
-	public function setRequestParam($type,$name,$value){
-		
-		$type = strtoupper($type);
-		
-		if ( $type != "COOKIE" && $type != "POST" && $type != "GET" ){
-			return false;	
-		}
-				
-		${'_'.$type}[$name] = (string) $value;
-		$_REQUEST[$name] = (string) $value;
-		// So self::setUp() can successfully run.
-		$this->requestParamSet = true;
-		
-		return true;
-		
 	}
 	
 }
