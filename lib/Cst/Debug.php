@@ -30,7 +30,7 @@ class Cst_Debug {
 	 */
 	public static function addMessage($message){
 		if ( defined("WP_DEBUG") ){
-			self::$messages[] = $message;
+			self::$messages[] = time()." ".$message;
 		}
 		return true;
 	}
@@ -43,7 +43,7 @@ class Cst_Debug {
 	 */
 	public static function addLog($log){
 		if ( defined("WP_DEBUG") ){
-			self::$debugLog[] = $log;
+			self::$debugLog[] = time()." ".$log;
 		}
 		return true;
 	}

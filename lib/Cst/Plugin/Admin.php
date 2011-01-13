@@ -26,6 +26,8 @@ class Cst_Plugin_Admin {
 			$extraActions =	add_action("init", array($this, "addCssAndJs") );
 		}
 		
+		Cst_Debug::addLog("Admin hooks attached");
+		
 		return add_action("admin_menu", array($this, "menu") ) &&
 			   add_action("switch_theme", array($this, "switchTheme") ) &&
 			   add_action("admin_init", array($this, "syncFiles")) && 
@@ -38,10 +40,12 @@ class Cst_Plugin_Admin {
 	public function preAdminHead(){
 	
 		if ( isset($_GET['removetheme']) && $_GET["removetheme"] == "yes"){
+			Cst_Debug::addLog("Removed theme header message");
 			update_option("cst_theme",false);
 		}
 		
 		if ( isset($_GET['removedependency']) && $_GET["removedependency"] == "yes"){
+			Cst_Debug::addLog("Removed dependency header message");
 			update_option("cst_dependency",false);
 		}
 		
@@ -58,12 +62,14 @@ class Cst_Plugin_Admin {
 				$provider = Cdn_Provider::getProvider($_GET["type"]);
 				$provider->setAccessCredentials($_GET);
 				$response["valid"] = $provider->login();
-				
+				Cst_Debug::addLog( "CDN Login Credentials check successful result was ".var_export($response["valid"],true) );
 			} else {
-				$response["valid"] = false;
+				$response["valid"] = false;				
+				Cst_Debug::addLog("CDN Login failed due to no type given");
 			}
 		}
-		catch ( Exception $eadmin_head ){
+		catch ( Exception $e ){
+			Cst_Debug::addLog("CDN Login check failed due with '".$e->getMessage()."' message given.");
 			$response["valid"] = false;
 		}
 		print json_encode($response);
@@ -88,10 +94,13 @@ class Cst_Plugin_Admin {
 			return;
 		}
 		set_time_limit(0);
+		Cst_Debug::addLog("Start of syncing, time limit set to 0");
 		$fileArrays = Cst_Sync::getFiles();
 		$i = 0;
 		// Find out the number of items in the sub arrays
 		$total = sizeof($fileArrays, COUNT_RECURSIVE) - sizeof($fileArrays);
+		Cst_Debug::addLog("Files have been retrived, total count is ".$total);
+		
 		$forceOverwrite = ( isset($_GET["force"]) && $_GET["force"] == "yes") ? true : false;
 		
 		foreach ( $fileArrays as $key => $files ) {
@@ -99,7 +108,7 @@ class Cst_Plugin_Admin {
 			foreach ( $files as $file ){
 		
 				$file = str_replace(ABSPATH,"",$file);	
-				$count = $wpdb->query(
+				$count = $wpdb->get_var(
 								$wpdb->prepare("SELECT * FROM ".CST_TABLE_FILES." WHERE filename = %s AND transferred = 'yes'", 
 											array($file))						
 								);

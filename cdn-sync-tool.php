@@ -44,6 +44,7 @@ function cst_install(){
 			if ( $oldVersion != CST_VERSION ){
 				cst_upgrade();	
 			} 
+			Cst_Debug::addLog("CST upgraded successfully");
 		}	
 		
 		$wpdb->query("CREATE TABLE IF NOT EXISTS ".CST_TABLE_FILES." (
@@ -55,6 +56,7 @@ function cst_install(){
 						) ENGINE = MYISAM ;");
 		
 		update_option("cst_theme",true);
+		Cst_Debug::addLog("CST installed successfully");
 }
 
 function cst_upgrade(){

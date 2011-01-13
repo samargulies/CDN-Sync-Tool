@@ -111,6 +111,7 @@ It currently doesn't have this functionality via the API however it is getting l
 = 0.7 =
 * Fixed CSS for errors
 * Fixed Anti-Hotlinking call being made when not all the valid information has been given.
+* Fixed constantly saying everything has been synced before.
 * Removed debug info from when Rackspace Cloud's anti-hotlinking attempts is done.
 * Removed WP Super Cache check before saving to ossdl_off_cdn_url.
 * Removed W3 Total Cache as a dependency.
