@@ -2,7 +2,7 @@
 Contributors: Fubra
 Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme files,speed,faster,accelerator,Page Load,
 Tested up to: 3.1-RC2
-Stable tag: 0.6
+Stable tag: 0.7
 Requires At Least: 3.0
 
 Syncs static files to a content delivery network (CDN) such as Amazon S3/CloudFront and CloudFiles. To be used with WP-Supercache.
@@ -111,6 +111,7 @@ It currently doesn't have this functionality via the API however it is getting l
 * Fixed CSS for errors
 * Fixed Anti-Hotlinking call being made when not all the valid information has been given.
 * Fixed constantly saying everything has been synced before.
+* Fixed Scroll wheel fail that caused S3 syncing not to work. (DOH!)
 * Removed debug info from when Rackspace Cloud's anti-hotlinking attempts is done.
 * Removed WP Super Cache check before saving to ossdl_off_cdn_url.
 * Removed W3 Total Cache as a dependency.

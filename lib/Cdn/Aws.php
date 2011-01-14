@@ -132,7 +132,7 @@ class Cdn_Aws extends Cdn_Provider {
 						$uploadFile,
 						$fileOptions);
 		
-	}$details
+	}
 	
 	/**
 	 * (non-PHPdoc)

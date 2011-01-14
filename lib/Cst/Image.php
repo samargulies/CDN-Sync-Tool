@@ -11,6 +11,7 @@ class Cst_Image {
 	
 	public static function gdCompression( $filename ){
 		if ( !preg_match("~\.(jpe?g|png)$~isU",$filename) || !is_writable($filename) ){
+			Cst_Debug::addLog("Invalid filetype sent to GD Compression '".$filename."'");
 			return;
 		}
 			
@@ -28,6 +29,7 @@ class Cst_Image {
 		require_once CST_DIR."/lib/smushit.php";
 		
 		if ( !preg_match("~\.(jpe?g|png)$~isU",$file) || !is_writable($file) ){
+			Cst_Debug::addLog("Invalid filetype sent to Smush.IT Compression '".$filename."'");
 			return;
 		}
 		
@@ -45,6 +47,7 @@ class Cst_Image {
 		curl_close($ch);
 		
 		if ( is_readable($tempFile) && filesize($tempFile) == $smushit->compressedSize){
+				Cst_Debug::addLog("File smushed successfully '".$filename."'");
 				copy($tempFile,$file);
 		}
 		
