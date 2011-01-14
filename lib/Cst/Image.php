@@ -22,6 +22,9 @@ class Cst_Image {
 			$imageRes = imagecreatefrompng($filename);
 			imagepng($imageRes,$filename,7);
 		}
+		
+		Cst_Debug::addLog("GD Compression successfully done on '".$filename."'");
+		return true;
 	}
 	
 	public static function smushIt( $file ){
@@ -53,6 +56,8 @@ class Cst_Image {
 		
 		unlink($tempFile);
 		fclose($fp);
+		
+		return true;
 	
 	}
 }

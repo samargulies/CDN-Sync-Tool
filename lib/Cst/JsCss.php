@@ -14,6 +14,8 @@ class Cst_JsCss {
 
 	public static function doCombine( $content , $fileType ){
 		
+		Cst_Debug::addLog("Starting consolidation");
+		
 		if ( $fileType == "js" ){
 			preg_match_all('~<script.*(type="["\']text/javascript["\'].*)?src=["\'](.*)["\'].*(type=["\']text/javascript["\'].*)?></script>~iU',$content,$matches);
 			$files = $matches[2];
@@ -28,6 +30,7 @@ class Cst_JsCss {
 		$filesConfig = get_option("cst_files");	
 		$cdn = get_option("cst_cdn");
 		
+		Cst_Debug::addLog("Files found are : ".print_r($files,true));
 		foreach ( $files as $i => $file ){
 			
 			$urlRegex = "~^".get_bloginfo("url")."/(.*)(\?ver=.*)?$~isU";
@@ -40,6 +43,7 @@ class Cst_JsCss {
 			} else {
 				$fileLocation = ABSPATH.str_ireplace(get_bloginfo("url"), '', $match[1]);
 				if ( !is_readable($fileLocation) ){
+					Cst_Debug::addLog("File '".$fileLocation."' doesn't exist");
 					// Ignore this non existant file.
 					// - May cause issues later on.
 					continue;
@@ -66,6 +70,7 @@ class Cst_JsCss {
 			$content = str_replace($matches[0][$i], "" , $content);
 		}
 		
+		Cst_Debug::addLog("consolidated content collected");
 		$filesHashes .= hash("md5",$filesContent);
 		$newFile = trim($filesConfig["directory"],"/")."/".hash("md5",$filesHashes).".".$fileType;
 		if ( !is_readable($newFile) ){
@@ -73,6 +78,8 @@ class Cst_JsCss {
 			if ( $fileType == "js" && 
 				isset($filesConfig["minify_engine"]) &&
 				$filesConfig["minify_engine"] == "google" ){
+					
+					Cst_Debug::addLog("Minifaction using Google Closure Compiler");
 					
 					if ( !isset($filesConfig["minify_level"]) 
 					  || $filesConfig["minify_level"] == "whitespace" )	{
@@ -87,8 +94,7 @@ class Cst_JsCss {
 					$closureCompiler->fetchCode($filesContent, 
 											array( "output_format" => ClosureCompiler::FORMAT_TEXT,
 												   "output_info" => ClosureCompiler::INFO_CODE,
-												   "compilation_level" => $level ) );				
-											
+												   "compilation_level" => $level ) );											
 		
 					$filesContent = $closureCompiler->compiledCode;
 				
@@ -99,6 +105,7 @@ class Cst_JsCss {
 			fclose($fp);
 			if ( is_array($cdn) && isset($cdn["provider"]) && !empty($cdn["provider"]) ){
 				
+				Cst_Debug::addLog("Uploading consolidated file");
 				require_once CST_DIR.'/lib/Cst/Sync.php';
 				Cst_Sync::process($newFile, false);	
 			}
