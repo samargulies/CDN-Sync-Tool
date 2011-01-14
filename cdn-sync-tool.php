@@ -51,6 +51,7 @@ function cst_install(){
 						`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 						`filename` INT NOT NULL ,
 						`smushed` INT NOT NULL ,
+						`hash` VARCHAR( 32 ) NULL,
 						`transferred` INT NOT NULL ,
 					 	`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 						) ENGINE = MYISAM ;");
@@ -60,6 +61,10 @@ function cst_install(){
 }
 
 function cst_upgrade(){
+	
+	if ( $oldVersion <= "0.8" ){
+		$wpdb->query("ALTER TABLE `wp_cst_files` ADD `hash` VARCHAR( 32 ) NULL");
+	}
 	
 	return true;
 }

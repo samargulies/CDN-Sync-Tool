@@ -175,13 +175,14 @@ class Cst_Sync {
 				$objCdn->uploadFile($file,$media);
 				$synced = "yes";
 			}
+			
 			// Debug Info
 			Cst_Debug::addLog("File Sync : ".$file.", Image Smushed : ".$smushedImage.
-							  ", GD Compression : ".$gdCompression.", File Size".filesize($file).
+							  ", GD Compression : ".$gdCompression.", File Size".filesize($fileLocation).
 							  ", Timestamp : ".time() );
 			
 			$wpdb->query("UPDATE ".CST_TABLE_FILES." SET `smushed` = '".$smushedImage."',
-						 `transferred` = '".$synced."' WHERE filename = '".$file."'");
+						 `transferred` = '".$synced."',hash='".hash_file("md5", $fileLocation)."' WHERE filename = '".$file."'");
 			
 		} catch ( Exception $e ){
 			print $e->getMessage();				
