@@ -11,7 +11,6 @@
 class Cst_Page_Main extends Cst_Page {
 
 	protected function _showSync(){
-		
 		$getVars = "";
 		foreach ( array("directory","theme","media","wpinclude","wpplugin","force","cstcssjs") as $var	 ){
 			if ( isset($_POST[$var]) ){
@@ -19,6 +18,7 @@ class Cst_Page_Main extends Cst_Page {
 			}
 		}
 		
+		Cst_Debug::addLog("Show sync page with vars '".$getVars."'");
 		require_once CST_DIR.'/pages/main/sync.html';
 	}
 	
@@ -146,7 +146,10 @@ class Cst_Page_Main extends Cst_Page {
 				update_option("cst_images",$images);
 				update_option("cst_cdn",$cdn);
 				update_option("cst_general",$general);	
+				Cst_Debug::addLog("Form submission sucessful with values saved");
 				
+			} else {
+				Cst_Debug::addLog("Form submission failed with ".print_r($errorArray,true));
 			}
 			
 		} else {

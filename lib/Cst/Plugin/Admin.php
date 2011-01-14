@@ -175,7 +175,7 @@ class Cst_Plugin_Admin {
 	
 	public function addCssAndJs(){
 		Cst_Debug::addLog("Enqueuing the CSS and JS for the admin section.");
-		// TODO remove da
+		// TODO remove pointless ones.
 		   // CSS files
 		   wp_enqueue_style("dashboard");
 		   wp_enqueue_style("thickbox");
@@ -200,25 +200,29 @@ class Cst_Plugin_Admin {
 	 */
 	
 	public function showPage( $pageName ){
-		// TODO Finish writing log entries.
+		
+		Cst_Debug::addLog("Starting page load for '".$pageName."'");
 		require_once CST_DIR.'/lib/Cst/Page.php';
 		if ( empty($pageName) ){
 			return false;
 		}
 		
 		if ( !is_readable(CST_DIR."/lib/Cst/Page/".$pageName.".php") ){
+			Cst_Debug::addLog("Missing the Cst_Page class file for '".$pageName."'");
 			return false;
 		}
 		
 		require_once CST_DIR."/lib/Cst/Page/".$pageName.".php";
 		
 		$className = "Cst_Page_".$pageName;
-		if ( !class_exists($className) ){
+		if ( !class_exists($className) ){			
+			Cst_Debug::addLog("Missing the Cst_Page class code for '".$pageName."'");
 			return false;
 		}
 		
 		$pageObject = new $className();
 		
+		Cst_Debug::addLog("Successful page load for '".$pageName."'");
 		return $pageObject;
 	}
 	
@@ -231,10 +235,12 @@ class Cst_Plugin_Admin {
 	public function head(){
 			
 		if ( get_option("cst_theme") ){
+			Cst_Debug::addLog("System says we don't have the theme files sync'd.");
 			echo '<div class="error">Looks like you don\'t have your theme files sync\'d. <a href="admin.php?page='.CST_PAGE_MAIN.'">Click here to Sync them</a>. Or <a href="admin.php?page='.CST_PAGE_MAIN.'&removetheme=yes">click here</a> to remove this message.</div>';
 		}
 		
 		if ( !Cst_Plugin::checkDependices() && !get_option("cst_dependency")){
+			Cst_Debug::addLog("System says we don't have WP Super Cache installed");
 			echo '<div class="error">Plugin Dependices haven\'t been met, <a href="http://wordpress.org/extend/plugins/wp-super-cache/" target="_blank">WP Super Cache</a> is required. Or <a href="admin.php?page='.CST_PAGE_MAIN.'&removedependency=yes">click here</a> to remove this message.</div>';
 		}
 		
@@ -251,6 +257,7 @@ class Cst_Plugin_Admin {
 	 */
 	public function switchTheme(){
 		
+		Cst_Debug::addLog("New upload's thumb file '".$size["file"]."' to be sync'd");
 		return update_option("cst_theme",true);
 		
 	}
@@ -263,6 +270,8 @@ class Cst_Plugin_Admin {
 	 */
 	public function uploadMedia($meta){
 		
+		Cst_Debug::addLog("New upload file '".$meta["file"]."' to be sync'd");
+		
 		Cst_Sync::process($meta["file"],true);
 		
 		if ( isset($meta["sizes"]) && is_array($meta["sizes"])
@@ -270,6 +279,8 @@ class Cst_Plugin_Admin {
 				foreach ( $meta["sizes"] as $size ){
 					
 					$dirName = dirname($meta["file"])."/";
+		
+					Cst_Debug::addLog("New upload's thumb file '".$size["file"]."' to be sync'd");
 					Cst_Sync::process($dirName.$size["file"],true);
 				
 				}	

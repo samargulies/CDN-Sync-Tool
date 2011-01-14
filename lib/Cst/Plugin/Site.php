@@ -19,6 +19,8 @@ class Cst_Plugin_Site {
 	
 	public function addHooks(){
 		
+		Cst_Debug::addLog("Action hooked for main site actions");
+		
 		return add_action("wp_loaded", array($this, "startObCache") ,9999) &&
 			   add_action("wp_footer", array($this, "stopObCache") ,9999) &&
 			   add_action('wp_footer', array($this, "showFooter"));
@@ -33,6 +35,7 @@ class Cst_Plugin_Site {
 	
 	public function startObCache(){
 		
+		 Cst_Debug::addLog("Starting output buffering cache");
 		 ob_start( array($this, "callbackObCache") );
 		
 	}
@@ -65,7 +68,7 @@ class Cst_Plugin_Site {
 	public function stopObCache(){
 		
 		ob_end_flush();
-		
+		Cst_Debug::addLog("Output buffering stopped");
 		return true;
 	}
 	
@@ -75,6 +78,8 @@ class Cst_Plugin_Site {
 	 * @since 0.1
 	 */
 	public function showFooter(){
+		
+		Cst_Debug::addLog("Adding footer details");
 		echo "<!--- CDN Sync Tool ".CST_VERSION." Developed by iain.cambridge at fubra.com --->";
 	
 		$general = get_option('cst_general');
