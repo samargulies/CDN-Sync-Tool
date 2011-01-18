@@ -25,6 +25,7 @@ class AdminOptionTest extends WpMasterTestCase {
 	}
 	
 	
+	
 	public function testHooksAreHookedProperly(){
 		
 		global $wp_actions,$wp_filters,$merged_filters;

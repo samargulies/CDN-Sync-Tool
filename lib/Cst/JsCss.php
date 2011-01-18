@@ -41,15 +41,34 @@ class Cst_JsCss {
 	public static function doCombine( $content , $fileType ){
 		
 		global $wpdb;
-		
+				
 		Cst_Debug::addLog("Starting consolidation");
 		
 		if ( $fileType == "js" ){
 			preg_match_all('~<script.*(type="["\']text/javascript["\'].*)?src=["\'](.*)["\'].*(type=["\']text/javascript["\'].*)?></script>~iU',$content,$matches);
 			$files = $matches[2];
 		} else {
-			preg_match_all('~<link(.*rel=["\']stylesheet["\'])?.*href=["\'](.*)["\'](.*rel=["\']stylesheet["\'])?.*/>~iU',$content,$matches);
-			$files = $matches[2];
+			preg_match_all('~<link.*href=["\'](.*)["\'].*rel=["\']stylesheet["\'].*/>~iUs',$content,$matchesOne);
+			preg_match_all('~<link.*rel=["\']stylesheet["\'].*href=["\'](.*)["\'].*/>~iUs',$content,$matchesTwo);
+			$files = array();
+			$matches = array(0 => array());
+			if ( isset($matchesOne[1]) ){
+				foreach( $matchesOnes[1] as $key => $match ){
+					Cst_Debug::addLog($key.':'.$match);
+				}				
+				$matches[0] = array_merge($matches[0],$matchesOne[0]);
+				$files = array_merge($files,$matchesOne[1]);
+			}
+			
+			if ( isset($matchesTwo[1]) ){
+				foreach( $matchesTwo[1] as $key => $match ){
+					Cst_Debug::addLog($key.':'.$match);
+				}
+				$matches[0] = array_merge($matches[0],$matchesTwo[0]);
+				$files = array_merge($files,$matchesTwo[1]);
+			}
+			
+			
 		}
 			
 	
@@ -61,7 +80,7 @@ class Cst_JsCss {
 	//	Cst_Debug::addLog("Files found are : ".var_export($files,true));
 		foreach ( $files as $i => $file ){
 			
-			$urlRegex = "~^".get_bloginfo("url")."/(.*)(\?ver=.*)?$~isU";
+			$urlRegex = "~^".get_option("ossdl_off_cdn_url")."/(.*\.(css|js))(\?ver=.*)?$~isU";
 			
 			if ( !preg_match($urlRegex, $file,$match) && $filesConfig["external"] == "yes" ){
 				
@@ -69,8 +88,9 @@ class Cst_JsCss {
 				$filesContent .= file_get_contents($file);
 				
 			} else {
-				
-				$fileLocation = ABSPATH.str_ireplace(get_bloginfo("url"), '', $match[1]);
+				Cst_Debug::addLog("Match file is : ".$match[1]);
+				$fileLocation = ABSPATH.str_ireplace(get_option("ossdl_off_cdn_url").'/', '', $match[1]);
+				Cst_Debug::addLog("File location : ". $fileLocation );
 				if ( !is_readable($fileLocation) ){
 					Cst_Debug::addLog("File '".$fileLocation."' doesn't exist");
 					// Ignore this non existant file.

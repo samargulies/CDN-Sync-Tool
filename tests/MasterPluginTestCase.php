@@ -33,9 +33,9 @@ class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 		define('DB_HOST', 'localhost');    // 99% chance you won't need to change this value
 		define('DB_CHARSET', 'utf8');
 		define('DB_COLLATE', '');
-		define('WP_BLOG_TITLE', rand_str());
-		define('WP_USER_NAME', rand_str());
-		define('WP_USER_EMAIL', rand_str().'@example.com');
+		define('WP_BLOG_TITLE', 'asdf');
+		define('WP_USER_NAME', 'asdf');
+		define('WP_USER_EMAIL', 'asdf@example.com');
 		// TODO check if remains right later
 		define('ABSPATH', realpath('../../../..').'/');
 		
@@ -65,5 +65,6 @@ class WpMasterTestCase extends PHPUnit_Framework_TestCase {
 		foreach ($tables as $table)
 			$wpdb->query("DROP TABLE IF EXISTS ".$table);
 	}
+	
 	
 }

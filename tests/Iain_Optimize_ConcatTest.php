@@ -1,5 +1,5 @@
 <?php
-require_once '../../library/Iain/Optimize/Concat.php';
+require_once '../lib/Iain/Optimize/Concat.php';
 
 /**
  * Iain_Optimize_Concat test case.

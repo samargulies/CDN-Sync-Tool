@@ -21,55 +21,9 @@ class Cst_Plugin_Site {
 		
 		Cst_Debug::addLog("Action hooked for main site actions");
 		
-		return add_action("wp_loaded", array($this, "startObCache") ,9999) &&
-			   add_action("wp_footer", array($this, "stopObCache") ,9999) &&
+		return add_filter('wpsupercache_buffer', array($this, 'handleBuffer') ) &&
 			   add_action('wp_footer', array($this, "showFooter"));
 		
-	}
-	
-	/**
-	 * Start output buffering
-	 * 
-	 * @since 0.1
-	 */
-	
-	public function startObCache(){
-		
-		 Cst_Debug::addLog("Starting output buffering cache");
-		 ob_start( array($this, "callbackObCache") );
-		
-	}
-	
-	/**
-	 * Handles the combining of the Javascript 
-	 * and CSS files.
-	 * 
-	 * @param string $buffer
-	 * @since 0.1
-	 */
-	public function callbackObCache($buffer){
-		
-		$files = get_option("cst_files");
-		
-		if ( isset($files["combine"]) && $files["combine"] == "yes" ){
-			require_once CST_DIR.'/lib/Cst/JsCss.php';
-			$buffer = Cst_JsCss::doCombine($buffer,"js");
-			$buffer = Cst_JsCss::doCombine($buffer,"css");
-		}	
-		return $buffer;
-	}
-	
-	/**
-	 * Stops the caching and flushes 
-	 * the content.
-	 * 
-	 * @since 0.1
-	 */
-	public function stopObCache(){
-		
-		ob_end_flush();
-		Cst_Debug::addLog("Output buffering stopped");
-		return true;
 	}
 	
 	/**
@@ -88,6 +42,19 @@ class Cst_Plugin_Site {
 			echo '<p style="text-align: center;">Powered by CDN Sync Tools developed by <a href="http://catn.com/">PHP Hosting Experts CatN</a></p>';
 		}
 	
+	}
+	
+	/**
+	 * 
+	 * Enter description here ...
+	 */
+	public function handleBuffer($buffer){
+		
+			require_once CST_DIR.'/lib/Cst/JsCss.php';
+			$buffer = Cst_JsCss::doCombine($buffer,"js");
+			$buffer = Cst_JsCss::doCombine($buffer,"css");
+			
+			return $buffer;
 	}
 	
 }

@@ -107,6 +107,10 @@ It currently doesn't have this functionality via the API however it is getting l
 
 == CHANGELOG ==
 
+= 0.9 =
+
+* Removed custom output buffering and started using wpsupercache_buffer filter.
+
 = 0.8 = 
 
 * Fixed create bucket
