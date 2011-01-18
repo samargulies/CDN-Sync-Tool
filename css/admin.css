@@ -1,0 +1,8 @@
+tr.even {
+	background-color: #f6f6f6;
+}
+
+div.inside td {
+	padding: 5px 0 0 0;
+	margin: 5px 0 0 0;
+}

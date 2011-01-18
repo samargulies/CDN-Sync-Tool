@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page cloudfiles.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/cloudfiles.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-classes">Classes</a>
+			|							<a href="#sec-includes">Includes</a>
+			|							<a href="#sec-constants">Constants</a>
+										</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is the PHP Cloud Files API.</p>
+<p class="description"><p><div class="src-code"><ol><li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;Authenticate&nbsp;to&nbsp;Cloud&nbsp;Files.&nbsp;&nbsp;The&nbsp;default&nbsp;is&nbsp;to&nbsp;automatically&nbsp;try</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;to&nbsp;re-authenticate&nbsp;if&nbsp;an&nbsp;authentication&nbsp;token&nbsp;expires.</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;NOTE:&nbsp;Some&nbsp;versions&nbsp;of&nbsp;cURL&nbsp;include&nbsp;an&nbsp;outdated&nbsp;certificate&nbsp;authority&nbsp;(CA)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.&nbsp;&nbsp;This&nbsp;API&nbsp;ships&nbsp;with&nbsp;a&nbsp;newer&nbsp;version&nbsp;obtained&nbsp;directly&nbsp;from</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cURL's&nbsp;web&nbsp;site&nbsp;(http://curl.haxx.se).&nbsp;&nbsp;To&nbsp;use&nbsp;the&nbsp;newer&nbsp;CA&nbsp;bundle,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;the&nbsp;CF_Authentication&nbsp;instance's&nbsp;'ssl_use_cabundle()'&nbsp;method.</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$auth&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$username</span><span class="src-sym">,&nbsp;</span><span class="src-var">$api_key</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;$auth-&gt;ssl_use_cabundle();&nbsp;&nbsp;#&nbsp;bypass&nbsp;cURL's&nbsp;old&nbsp;CA&nbsp;bundle</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$auth</span><span class="src-sym">-&gt;</span><span class="src-id">authenticate</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;Establish&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;storage&nbsp;system</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;NOTE:&nbsp;Some&nbsp;versions&nbsp;of&nbsp;cURL&nbsp;include&nbsp;an&nbsp;outdated&nbsp;certificate&nbsp;authority&nbsp;(CA)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.&nbsp;&nbsp;This&nbsp;API&nbsp;ships&nbsp;with&nbsp;a&nbsp;newer&nbsp;version&nbsp;obtained&nbsp;directly&nbsp;from</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cURL's&nbsp;web&nbsp;site&nbsp;(http://curl.haxx.se).&nbsp;&nbsp;To&nbsp;use&nbsp;the&nbsp;newer&nbsp;CA&nbsp;bundle,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;the&nbsp;CF_Connection&nbsp;instance's&nbsp;'ssl_use_cabundle()'&nbsp;method.</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Connection.html">CF_Connection</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;$conn-&gt;ssl_use_cabundle();&nbsp;&nbsp;#&nbsp;bypass&nbsp;cURL's&nbsp;old&nbsp;CA&nbsp;bundle</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;Create&nbsp;a&nbsp;remote&nbsp;Container&nbsp;and&nbsp;storage&nbsp;Object</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$images&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">create_container</span><span class="src-sym">(</span><span class="src-str">&quot;photos&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$bday&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><span class="src-id">create_object</span><span class="src-sym">(</span><span class="src-str">&quot;first_birthday.jpg&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;Upload&nbsp;content&nbsp;from&nbsp;a&nbsp;local&nbsp;file&nbsp;by&nbsp;streaming&nbsp;it.&nbsp;&nbsp;Note&nbsp;that&nbsp;we&nbsp;use</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;a&nbsp;&quot;float&quot;&nbsp;for&nbsp;the&nbsp;file&nbsp;size&nbsp;to&nbsp;overcome&nbsp;PHP's&nbsp;32-bit&nbsp;integer&nbsp;limit&nbsp;for</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;very&nbsp;large&nbsp;files.</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$fname&nbsp;</span>=&nbsp;<span class="src-str">&quot;/home/user/photos/birthdays/birthday1.jpg&quot;</span><span class="src-sym">;&nbsp;&nbsp;</span><span class="src-comm">#&nbsp;filename&nbsp;to&nbsp;upload</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$size&nbsp;</span>=&nbsp;(float)&nbsp;<a href="http://www.php.net/sprintf">sprintf</a><span class="src-sym">(</span><span class="src-str">&quot;%u&quot;</span><span class="src-sym">,&nbsp;</span><a href="http://www.php.net/filesize">filesize</a><span class="src-sym">(</span><span class="src-var">$fname</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$fp&nbsp;</span>=&nbsp;<span class="src-id">open</span><span class="src-sym">(</span><span class="src-var">$fname</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;r&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$bday</span><span class="src-sym">-&gt;</span><span class="src-id">write</span><span class="src-sym">(</span><span class="src-var">$fp</span><span class="src-sym">,&nbsp;</span><span class="src-var">$size</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;Or...&nbsp;use&nbsp;a&nbsp;convenience&nbsp;function&nbsp;instead</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$bday</span><span class="src-sym">-&gt;</span><span class="src-id">load_from_filename</span><span class="src-sym">(</span><span class="src-str">&quot;/home/user/photos/birthdays/birthday1.jpg&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;Now,&nbsp;publish&nbsp;the&nbsp;&quot;photos&quot;&nbsp;container&nbsp;to&nbsp;serve&nbsp;the&nbsp;images&nbsp;by&nbsp;CDN.</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;Use&nbsp;the&nbsp;&quot;$uri&quot;&nbsp;value&nbsp;to&nbsp;put&nbsp;in&nbsp;your&nbsp;web&nbsp;pages&nbsp;or&nbsp;send&nbsp;the&nbsp;link&nbsp;in&nbsp;an</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;email&nbsp;message,&nbsp;etc.</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$uri&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><span class="src-id">make_public</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;Or...&nbsp;print&nbsp;out&nbsp;the&nbsp;Object's&nbsp;public&nbsp;URI</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-var">$bday</span><span class="src-sym">-&gt;</span><span class="src-id">public_uri</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>See the included tests directory for additional sample code.</p><p>Requres PHP 5.x (for Exceptions and OO syntax) and PHP's cURL module.</p><p>It uses the supporting &quot;cloudfiles_http.php&quot; module for HTTP(s) support and  allows for connection re-use and streaming of content into/out of Cloud Files  via PHP's cURL module.</p><p>See COPYING for license information.</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Eric &quot;EJ&quot; Johnson &lt;<a href="mailto:ej@racklabs.com">ej@racklabs.com</a>&gt;</li>
+				<li><span class="field">copyright:</span> Copyright (c) 2008, Rackspace US, Inc.</li>
+			</ul>
+		
+			</div>
+</div>
+		
+	<a name="sec-classes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Classes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Classes</span>
+			|							<a href="#sec-includes">Includes</a>
+				|										<a href="#sec-constants">Constants</a>
+															</div>
+		<div class="info-box-body">	
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a>
+					</td>
+					<td>
+											Class for handling Cloud Files Authentication, call it's authenticate()  method to obtain authorized service urls and an authentication token.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../php-cloudfiles/CF_Connection.html">CF_Connection</a>
+					</td>
+					<td>
+											Class for establishing connections to the Cloud Files storage system.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../php-cloudfiles/CF_Container.html">CF_Container</a>
+					</td>
+					<td>
+											Container operations
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../php-cloudfiles/CF_Object.html">CF_Object</a>
+					</td>
+					<td>
+											Object operations
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+	<a name="sec-includes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Includes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-classes">Classes</a>
+				|						<span class="disabled">Includes</span>
+			|							<a href="#sec-constants">Constants</a>
+															</div>
+		<div class="info-box-body">	
+			<a name="_cloudfiles_http_php"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">require</span>
+			(<span class="include-name">"cloudfiles_http.php"</span>)
+			(line <span class="line-number">75</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+</div>
+<a name="_cloudfiles_exceptions_php"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">require_once</span>
+			(<span class="include-name">"cloudfiles_exceptions.php"</span>)
+			(line <span class="line-number">74</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+</div>
+		</div>
+	</div>
+	
+	<a name="sec-constants"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-classes">Classes</a>
+				|										<a href="#sec-includes">Includes</a>
+				|						<span class="disabled">Constants</span>
+											</div>
+		<div class="info-box-body">	
+			<a name="defineDEFAULT_CF_API_VERSION"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">DEFAULT_CF_API_VERSION</span> = 1
+			(line <span class="line-number">76</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+<a name="defineMAX_CONTAINER_NAME_LEN"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">MAX_CONTAINER_NAME_LEN</span> = 256
+			(line <span class="line-number">77</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+<a name="defineMAX_OBJECT_NAME_LEN"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">MAX_OBJECT_NAME_LEN</span> = 1024
+			(line <span class="line-number">78</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+<a name="defineMAX_OBJECT_SIZE"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">MAX_OBJECT_SIZE</span> = 5*1024*1024*1024+1
+			(line <span class="line-number">79</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+<a name="defineUK_AUTHURL"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">UK_AUTHURL</span> = &quot;https://lon.auth.api.rackspacecloud.com&quot;
+			(line <span class="line-number">81</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+<a name="defineUS_AUTHURL"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">US_AUTHURL</span> = &quot;https://auth.api.rackspacecloud.com&quot;
+			(line <span class="line-number">80</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+		</div>
+	</div>
+	
+	
+	
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 14 Dec 2010 05:19:53 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

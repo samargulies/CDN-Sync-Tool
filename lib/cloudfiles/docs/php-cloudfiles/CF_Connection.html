@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class CF_Connection</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class CF_Connection</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Class for establishing connections to the Cloud Files storage system.</p>
+<p class="description"><p>Connection instances are used to communicate with the storage system at  the account level; listing and deleting Containers and returning Container  instances.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Create&nbsp;the&nbsp;authentication&nbsp;instance</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$auth&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-str">&quot;username&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;api_key&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Perform&nbsp;authentication&nbsp;request</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$auth</span><span class="src-sym">-&gt;</span><span class="src-id">authenticate</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Create&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;storage/cdn&nbsp;system(s)&nbsp;and&nbsp;pass&nbsp;in&nbsp;the</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;validated&nbsp;CF_Authentication&nbsp;instance.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Connection.html">CF_Connection</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;NOTE:&nbsp;Some&nbsp;versions&nbsp;of&nbsp;cURL&nbsp;include&nbsp;an&nbsp;outdated&nbsp;certificate&nbsp;authority&nbsp;(CA)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.&nbsp;&nbsp;This&nbsp;API&nbsp;ships&nbsp;with&nbsp;a&nbsp;newer&nbsp;version&nbsp;obtained&nbsp;directly&nbsp;from</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cURL's&nbsp;web&nbsp;site&nbsp;(http://curl.haxx.se).&nbsp;&nbsp;To&nbsp;use&nbsp;the&nbsp;newer&nbsp;CA&nbsp;bundle,</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;the&nbsp;CF_Authentication&nbsp;instance's&nbsp;'ssl_use_cabundle()'&nbsp;method.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;$conn-&gt;ssl_use_cabundle();&nbsp;#&nbsp;bypass&nbsp;cURL's&nbsp;old&nbsp;CA&nbsp;bundle</span></div></li>
+</ol></div></p></p>
+		<p class="notes">
+			Located in <a class="field" href="_cloudfiles.php.html">/cloudfiles.php</a> (line <span class="field">341</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cfs_auth" title="details" class="var-name">$cfs_auth</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cfs_http" title="details" class="var-name">$cfs_http</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$dbug" title="details" class="var-name">$dbug</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">CF_Connection</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">obj</span>&nbsp;<span class="var-name">$cfs_auth</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$servicenet</span> = <span class="var-default">False</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#close" title="details" class="method-name">close</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../php-cloudfiles/CF_Container.html">CF_Container</a></span>
+										<a href="#create_container" title="details" class="method-name">create_container</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$container_name</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#delete_container" title="details" class="method-name">delete_container</a>
+											([<span class="var-type">string|obj</span>&nbsp;<span class="var-name">$container</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">container</span>
+										<a href="#get_container" title="details" class="method-name">get_container</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$container_name</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#get_containers" title="details" class="method-name">get_containers</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#get_info" title="details" class="method-name">get_info</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#list_containers" title="details" class="method-name">list_containers</a>
+											([<span class="var-type">integer</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#list_containers_info" title="details" class="method-name">list_containers_info</a>
+											([<span class="var-type">integer</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#list_public_containers" title="details" class="method-name">list_public_containers</a>
+											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$enabled_only</span> = <span class="var-default">False</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setDebug" title="details" class="method-name">setDebug</a>
+											(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_read_progress_function" title="details" class="method-name">set_read_progress_function</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$func_name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#set_write_progress_function" title="details" class="method-name">set_write_progress_function</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$func_name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#ssl_use_cabundle" title="details" class="method-name">ssl_use_cabundle</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">NULL</span>])
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$cfs_auth" id="$cfs_auth"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cfs_auth</span>
+						(line <span class="line-number">345</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cfs_http" id="$cfs_http"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cfs_http</span>
+						(line <span class="line-number">344</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$dbug" id="$dbug"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$dbug</span>
+						(line <span class="line-number">343</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">380</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Pass in a previously authenticated CF_Authentication instance.</p>
+<p class="description"><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Create&nbsp;the&nbsp;authentication&nbsp;instance</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$auth&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-str">&quot;username&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;api_key&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Perform&nbsp;authentication&nbsp;request</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$auth</span><span class="src-sym">-&gt;</span><span class="src-id">authenticate</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Create&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;storage/cdn&nbsp;system(s)&nbsp;and&nbsp;pass&nbsp;in&nbsp;the</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;validated&nbsp;CF_Authentication&nbsp;instance.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Connection.html">CF_Connection</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;If&nbsp;you&nbsp;are&nbsp;connecting&nbsp;via&nbsp;Rackspace&nbsp;servers&nbsp;and&nbsp;have&nbsp;access</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;to&nbsp;the&nbsp;servicenet&nbsp;network&nbsp;you&nbsp;can&nbsp;set&nbsp;the&nbsp;$servicenet&nbsp;to&nbsp;True</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;like&nbsp;this.</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Connection.html">CF_Connection</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">,&nbsp;</span><span class="src-var">$servicenet</span>=<span class="src-id">True</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>If the environement variable RACKSPACE_SERVICENET is defined it will  force to connect via the servicenet.</p></p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> AuthenticationException not authenticated</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">CF_Connection</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">obj</span>&nbsp;<span class="var-name">$cfs_auth</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$servicenet</span> = <span class="var-default">False</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">obj</span>
+				<span class="var-name">$cfs_auth</span><span class="var-description">: previously authenticated CF_Authentication instance</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$servicenet</span><span class="var-description">: enable/disable access via Rackspace servicenet.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclose" id="close"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">close</span> (line <span class="line-number">419</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a connection</p>
+<p class="description"><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodclose">close</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p><p>Will close all current cUrl active connections.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			close
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodcreate_container" id="create_container"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">create_container</span> (line <span class="line-number">478</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a Container</p>
+<p class="description"><p>Given a Container name, return a Container instance, creating a new  remote Container if it does not exit.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$images&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodcreate_container">create_container</a><span class="src-sym">(</span><span class="src-str">&quot;my&nbsp;photos&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> SyntaxException invalid name</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../php-cloudfiles/CF_Container.html">CF_Container</a></span>
+		<span class="method-name">
+			create_container
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$container_name</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$container_name</span><span class="var-description">: container name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddelete_container" id="delete_container"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">delete_container</span> (line <span class="line-number">535</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete a Container</p>
+<p class="description"><p>Given either a Container instance or name, remove the remote Container.  The Container must be empty prior to removing it.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methoddelete_container">delete_container</a><span class="src-sym">(</span><span class="src-str">&quot;my&nbsp;photos&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> <kbd>True</kbd> if successfully deleted</li>
+				<li><span class="field">throws:</span> SyntaxException missing proper argument</li>
+				<li><span class="field">throws:</span> InvalidResponseException invalid response</li>
+				<li><span class="field">throws:</span> NonEmptyContainerException container not empty</li>
+				<li><span class="field">throws:</span> NoSuchContainerException remote container does not exist</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			delete_container
+		</span>
+					([<span class="var-type">string|obj</span>&nbsp;<span class="var-name">$container</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string|obj</span>
+				<span class="var-name">$container</span><span class="var-description">: container name or instance</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_container" id="get_container"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_container</span> (line <span class="line-number">597</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a Container instance</p>
+<p class="description"><p>For the given name, return a Container instance if the remote Container  exists, otherwise throw a Not Found exception.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$images&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodget_container">get_container</a><span class="src-sym">(</span><span class="src-str">&quot;my&nbsp;photos&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;print&nbsp;<span class="src-str">&quot;Number&nbsp;of&nbsp;Objects:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="http://www.php.net/count">count</a>&nbsp;.&nbsp;<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;print&nbsp;<span class="src-str">&quot;Bytes&nbsp;stored&nbsp;in&nbsp;container:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><span class="src-id">bytes&nbsp;</span>.&nbsp;<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> CF_Container instance</li>
+				<li><span class="field">throws:</span> NoSuchContainerException thrown if no remote Container</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">container</span>
+		<span class="method-name">
+			get_container
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$container_name</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$container_name</span><span class="var-description">: name of the remote Container</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_containers" id="get_containers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_containers</span> (line <span class="line-number">639</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return array of Container instances</p>
+<p class="description"><p>Return an array of CF_Container instances on the account.  The instances  will be fully populated with Container attributes (bytes stored and  Object count)</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$clist&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodget_containers">get_containers</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">foreach&nbsp;</span><span class="src-sym">(</span><span class="src-var">$clist&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$cont</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;Container&nbsp;name:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$cont</span><span class="src-sym">-&gt;</span><span class="src-id">name&nbsp;</span>.&nbsp;<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;Number&nbsp;of&nbsp;Objects:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$cont</span><span class="src-sym">-&gt;</span><a href="http://www.php.net/count">count</a>&nbsp;.&nbsp;<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;Bytes&nbsp;stored&nbsp;in&nbsp;container:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$cont</span><span class="src-sym">-&gt;</span><span class="src-id">bytes&nbsp;</span>.&nbsp;<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">}</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> An array of CF_Container instances</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			get_containers
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$limit</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$marker</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_info" id="get_info"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_info</span> (line <span class="line-number">444</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Cloud Files account information</p>
+<p class="description"><p>Return an array of two floats (since PHP only supports 32-bit integers);  number of containers on the account and total bytes used for the account.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;list<span class="src-sym">(</span><span class="src-var">$quantity</span><span class="src-sym">,&nbsp;</span><span class="src-var">$bytes</span><span class="src-sym">)&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodget_info">get_info</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;print&nbsp;<span class="src-str">&quot;Number&nbsp;of&nbsp;containers:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$quantity&nbsp;</span>.&nbsp;<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;print&nbsp;<span class="src-str">&quot;Bytes&nbsp;stored&nbsp;in&nbsp;container:&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$bytes&nbsp;</span>.&nbsp;<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> (number of containers, total bytes stored)</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			get_info
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodlist_containers" id="list_containers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">list_containers</span> (line <span class="line-number">683</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return list of remote Containers</p>
+<p class="description"><p>Return an array of strings containing the names of all remote Containers.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$container_list&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodlist_containers">list_containers</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$container_list</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">Array</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-num">0</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;my&nbsp;photos&quot;</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-num">1</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;my&nbsp;docs&quot;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> list of remote Containers</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			list_containers
+		</span>
+					([<span class="var-type">integer</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$limit</span><span class="var-description">: restrict results to $limit Containers</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$marker</span><span class="var-description">: return results greater than $marker</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlist_containers_info" id="list_containers_info"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">list_containers_info</span> (line <span class="line-number">731</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return array of information about remote Containers</p>
+<p class="description"><p>Return a nested array structure of Container info.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$container_info&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodlist_containers_info">list_containers_info</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$container_info</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">Array</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-str">&quot;my&nbsp;photos&quot;</span><span class="src-sym">]&nbsp;</span>=&gt;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">Array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-str">&quot;bytes&quot;</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-num">78</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-str">&quot;count&quot;</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-num">2</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-str">&quot;docs&quot;</span><span class="src-sym">]&nbsp;</span>=&gt;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">Array</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-str">&quot;bytes&quot;</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-num">37323</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-str">&quot;count&quot;</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-num">12</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> nested array structure of Container info</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			list_containers_info
+		</span>
+					([<span class="var-type">integer</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$limit</span><span class="var-description">: restrict results to $limit Containers</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$marker</span><span class="var-description">: return results greater than $marker</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlist_public_containers" id="list_public_containers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">list_public_containers</span> (line <span class="line-number">773</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return list of Containers that have been published to the CDN.</p>
+<p class="description"><p>Return an array of strings containing the names of published Containers.  Note that this function returns the list of any Container that has  ever been CDN-enabled regardless of it's existence in the storage  system.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_containers&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodlist_public_containers">list_public_containers</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$public_containers</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">Array</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-num">0</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;images&quot;</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-num">1</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;css&quot;</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-num">2</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;javascript&quot;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> list of published Container names</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			list_public_containers
+		</span>
+					([<span class="var-type">bool</span>&nbsp;<span class="var-name">$enabled_only</span> = <span class="var-default">False</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$enabled_only</span><span class="var-description">: Will list all containers ever CDN enabled if     * set to false or only currently enabled CDN containers if set to true.      * Defaults to false.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetDebug" id="setDebug"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setDebug</span> (line <span class="line-number">400</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Toggle debugging of instance and back-end HTTP module</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setDebug
+		</span>
+					(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bool</span><span class="var-description">: enable/disable cURL debugging</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_read_progress_function" id="set_read_progress_function"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_read_progress_function</span> (line <span class="line-number">823</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set a user-supplied callback function to report download progress</p>
+<p class="description"><p>The callback function is used to report incremental progress of a data  download functions (e.g. $container-&gt;list_objects(), $obj-&gt;read(), etc).  The specified function will be periodically called with the number of  bytes transferred until the entire download is complete.  This callback  function can be useful for implementing &quot;progress bars&quot; for large  downloads.</p><p>The specified callback function should take a single integer parameter.</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">read_callback</span><span class="src-sym">(</span><span class="src-var">$bytes_transferred</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&gt;&gt;&nbsp;downloaded&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$bytes_transferred&nbsp;</span>.&nbsp;<span class="src-str">&quot;&nbsp;bytes.\n&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;...&nbsp;do&nbsp;other&nbsp;things&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Connection.html">CF_Connection</a></span><span class="src-sym">(</span><span class="src-var">$auth_obj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodset_read_progress_function">set_read_progress_function</a><span class="src-sym">(</span><span class="src-str">&quot;read_callback&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<a href="http://www.php.net/print_r">print_r</a><span class="src-sym">(</span><span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodlist_containers">list_containers</a><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;output&nbsp;would&nbsp;look&nbsp;like&nbsp;this:</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;&gt;&gt;&nbsp;<span class="src-id">downloaded&nbsp;</span><span class="src-num">10&nbsp;</span><span class="src-id">bytes</span>.</div></li>
+<li><div class="src-line">&nbsp;&gt;&gt;&nbsp;<span class="src-id">downloaded&nbsp;</span><span class="src-num">11&nbsp;</span><span class="src-id">bytes</span>.</div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">Array</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-num">0</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-id">fuzzy</span>.<span class="src-id">txt</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">[</span><span class="src-num">1</span><span class="src-sym">]&nbsp;</span>=&gt;&nbsp;<span class="src-id">space&nbsp;name</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">)</span></div></li>
+</ol></div></p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_read_progress_function
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$func_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$func_name</span><span class="var-description">: the name of the user callback function</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_write_progress_function" id="set_write_progress_function"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">set_write_progress_function</span> (line <span class="line-number">859</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set a user-supplied callback function to report upload progress</p>
+<p class="description"><p>The callback function is used to report incremental progress of a data  upload functions (e.g. $obj-&gt;write() call).  The specified function will  be periodically called with the number of bytes transferred until the  entire upload is complete.  This callback function can be useful  for implementing &quot;progress bars&quot; for large uploads/downloads.</p><p>The specified callback function should take a single integer parameter.</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">write_callback</span><span class="src-sym">(</span><span class="src-var">$bytes_transferred</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&gt;&gt;&nbsp;uploaded&nbsp;&quot;&nbsp;</span>.&nbsp;<span class="src-var">$bytes_transferred&nbsp;</span>.&nbsp;<span class="src-str">&quot;&nbsp;bytes.\n&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">#&nbsp;...&nbsp;do&nbsp;other&nbsp;things&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Connection.html">CF_Connection</a></span><span class="src-sym">(</span><span class="src-var">$auth_obj</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodset_write_progress_function">set_write_progress_function</a><span class="src-sym">(</span><span class="src-str">&quot;write_callback&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$container&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Connection.html#methodcreate_container">create_container</a><span class="src-sym">(</span><span class="src-str">&quot;stuff&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$obj&nbsp;</span>=&nbsp;<span class="src-var">$container</span><span class="src-sym">-&gt;</span><span class="src-id">create_object</span><span class="src-sym">(</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$obj</span><span class="src-sym">-&gt;</span><span class="src-id">write</span><span class="src-sym">(</span><span class="src-str">&quot;The&nbsp;callback&nbsp;function&nbsp;will&nbsp;be&nbsp;called&nbsp;during&nbsp;upload.&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;output&nbsp;would&nbsp;look&nbsp;like&nbsp;this:</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;&gt;&gt;&nbsp;uploaded&nbsp;51&nbsp;bytes.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+</ol></div></p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_write_progress_function
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$func_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$func_name</span><span class="var-description">: the name of the user callback function</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodssl_use_cabundle" id="ssl_use_cabundle"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">ssl_use_cabundle</span> (line <span class="line-number">885</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Use the Certificate Authority bundle included with this API</p>
+<p class="description"><p>Most versions of PHP with cURL support include an outdated Certificate  Authority (CA) bundle (the file that lists all valid certificate  signing authorities).  The SSL certificates used by the Cloud Files  storage system are perfectly valid but have been created/signed by  a CA not listed in these outdated cURL distributions.</p><p>As a work-around, we've included an updated CA bundle obtained  directly from cURL's web site (http://curl.haxx.se).  You can direct  the API to use this CA bundle by calling this method prior to making  any remote calls.  The best place to use this method is right after  the CF_Authentication instance has been instantiated.</p><p>You can specify your own CA bundle by passing in the full pathname  to the bundle.  You can use the included CA bundle by leaving the  argument blank.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			ssl_use_cabundle
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Specify path to CA bundle (default to included)</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 14 Dec 2010 05:19:54 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

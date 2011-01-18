@@ -1,0 +1,1054 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class CF_Container</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class CF_Container</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Container operations</p>
+<p class="description"><p>Containers are storage compartments where you put your data (objects).  A container is similar to a directory or folder on a conventional filesystem  with the exception that they exist in a flat namespace, you can not create  containers inside of containers.</p><p>You also have the option of marking a Container as &quot;public&quot; so that the  Objects stored in the Container are publicly available via the CDN.</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_cloudfiles.php.html">/cloudfiles.php</a> (line <span class="field">917</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$bytes_used" title="details" class="var-name">$bytes_used</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cdn_acl_referrer" title="details" class="var-name">$cdn_acl_referrer</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cdn_acl_user_agent" title="details" class="var-name">$cdn_acl_user_agent</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cdn_enabled" title="details" class="var-name">$cdn_enabled</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cdn_log_retention" title="details" class="var-name">$cdn_log_retention</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cdn_ttl" title="details" class="var-name">$cdn_ttl</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cdn_uri" title="details" class="var-name">$cdn_uri</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cfs_auth" title="details" class="var-name">$cfs_auth</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cfs_http" title="details" class="var-name">$cfs_http</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$name" title="details" class="var-name">$name</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$object_count" title="details" class="var-name">$object_count</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">CF_Container</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$cfs_auth</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$cfs_http</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$count</span> = <span class="var-default">0</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$bytes</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$docdn</span> = <span class="var-default">True</span>], <span class="var-type">obj</span>&nbsp;<span class="var-name">$cfs_auth</span>, <span class="var-type">obj</span>&nbsp;<span class="var-name">$cfs_http</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#acl_referrer" title="details" class="method-name">acl_referrer</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$cdn_acl_referrer</span> = <span class="var-default">&quot;&quot;</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#acl_user_agent" title="details" class="method-name">acl_user_agent</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$cdn_acl_user_agent</span> = <span class="var-default">&quot;&quot;</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">obj</span>
+										<a href="#create_object" title="details" class="method-name">create_object</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$obj_name</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#create_paths" title="details" class="method-name">create_paths</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$path_name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#delete_object" title="details" class="method-name">delete_object</a>
+											(<span class="var-type">obj</span>&nbsp;<span class="var-name">$obj</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">obj</span>
+										<a href="#get_object" title="details" class="method-name">get_object</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$obj_name</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#get_objects" title="details" class="method-name">get_objects</a>
+											([<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#is_public" title="details" class="method-name">is_public</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#list_objects" title="details" class="method-name">list_objects</a>
+											([<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#log_retention" title="details" class="method-name">log_retention</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$cdn_log_retention</span> = <span class="var-default">False</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#make_private" title="details" class="method-name">make_private</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#make_public" title="details" class="method-name">make_public</a>
+											([<span class="var-type">int</span>&nbsp;<span class="var-name">$ttl</span> = <span class="var-default">86400</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#__toString" title="details" class="method-name">__toString</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$bytes_used" id="$bytes_used"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$bytes_used</span>
+						(line <span class="line-number">923</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cdn_acl_referrer" id="$cdn_acl_referrer"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cdn_acl_referrer</span>
+						(line <span class="line-number">930</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cdn_acl_user_agent" id="$cdn_acl_user_agent"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cdn_acl_user_agent</span>
+						(line <span class="line-number">929</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cdn_enabled" id="$cdn_enabled"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cdn_enabled</span>
+						(line <span class="line-number">925</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cdn_log_retention" id="$cdn_log_retention"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cdn_log_retention</span>
+						(line <span class="line-number">928</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cdn_ttl" id="$cdn_ttl"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cdn_ttl</span>
+						(line <span class="line-number">927</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cdn_uri" id="$cdn_uri"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cdn_uri</span>
+						(line <span class="line-number">926</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cfs_auth" id="$cfs_auth"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cfs_auth</span>
+						(line <span class="line-number">919</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cfs_http" id="$cfs_http"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cfs_http</span>
+						(line <span class="line-number">920</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$name" id="$name"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$name</span>
+						(line <span class="line-number">921</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$object_count" id="$object_count"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$object_count</span>
+						(line <span class="line-number">922</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">944</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Class constructor</p>
+<p class="description"><p>Constructor for Container</p></p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> SyntaxException invalid Container name</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">CF_Container</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$cfs_auth</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$cfs_http</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">int</span>&nbsp;<span class="var-name">$count</span> = <span class="var-default">0</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$bytes</span> = <span class="var-default">0</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$docdn</span> = <span class="var-default">True</span>], <span class="var-type">obj</span>&nbsp;<span class="var-name">$cfs_auth</span>, <span class="var-type">obj</span>&nbsp;<span class="var-name">$cfs_http</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">obj</span>
+				<span class="var-name">$cfs_auth</span><span class="var-description">: CF_Authentication instance</span>			</li>
+					<li>
+				<span class="var-type">obj</span>
+				<span class="var-name">$cfs_http</span><span class="var-description">: HTTP connection manager</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: name of Container</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$count</span><span class="var-description">: number of Objects stored in this Container</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$bytes</span><span class="var-description">: number of bytes stored in this Container</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$cfs_auth</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$cfs_http</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$docdn</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodacl_referrer" id="acl_referrer"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">acl_referrer</span> (line <span class="line-number">1132</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Enable ACL restriction by referer for this container.</p>
+<p class="description"><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;public&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Enable&nbsp;Referrer</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodacl_referrer">acl_referrer</a><span class="src-sym">(</span><span class="src-str">&quot;http://www.example.com/gallery.php&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if successful</li>
+				<li><span class="field">throws:</span> CDNNotEnabledException CDN functionality not returned during auth</li>
+				<li><span class="field">throws:</span> AuthenticationException if auth token is not valid/expired</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			acl_referrer
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$cdn_acl_referrer</span> = <span class="var-default">&quot;&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$cdn_acl_referrer</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodacl_user_agent" id="acl_user_agent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">acl_user_agent</span> (line <span class="line-number">1092</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Enable ACL restriction by User Agent for this container.</p>
+<p class="description"><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;public&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Enable&nbsp;ACL&nbsp;by&nbsp;Referrer</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodacl_referrer">acl_referrer</a><span class="src-sym">(</span><span class="src-str">&quot;Mozilla&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if successful</li>
+				<li><span class="field">throws:</span> CDNNotEnabledException CDN functionality not returned during auth</li>
+				<li><span class="field">throws:</span> AuthenticationException if auth token is not valid/expired</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			acl_user_agent
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$cdn_acl_user_agent</span> = <span class="var-default">&quot;&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$cdn_acl_user_agent</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcreate_object" id="create_object"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">create_object</span> (line <span class="line-number">1300</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create a new remote storage Object</p>
+<p class="description"><p>Return a new Object instance.  If the remote storage Object exists,  the instance's attributes are populated.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;public&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;This&nbsp;creates&nbsp;a&nbsp;local&nbsp;instance&nbsp;of&nbsp;a&nbsp;storage&nbsp;object&nbsp;but&nbsp;only&nbsp;creates</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;it&nbsp;in&nbsp;the&nbsp;storage&nbsp;system&nbsp;when&nbsp;the&nbsp;object's&nbsp;write()&nbsp;method&nbsp;is&nbsp;called.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$pic&nbsp;</span>=&nbsp;<span class="src-var">$public_container</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodcreate_object">create_object</a><span class="src-sym">(</span><span class="src-str">&quot;baby.jpg&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> CF_Object instance</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">obj</span>
+		<span class="method-name">
+			create_object
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$obj_name</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$obj_name</span><span class="var-description">: name of storage Object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcreate_paths" id="create_paths"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">create_paths</span> (line <span class="line-number">1526</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Helper function to create &quot;path&quot; elements for a given Object name</p>
+<p class="description"><p>Given an Object whos name contains '/' path separators, this function  will create the &quot;directory marker&quot; Objects of one byte with the  Content-Type of &quot;application/folder&quot;.</p><p>It assumes the last element of the full path is the &quot;real&quot; Object  and does NOT create a remote storage Object for that last element.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			create_paths
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$path_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$path_name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddelete_object" id="delete_object"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">delete_object</span> (line <span class="line-number">1486</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete a remote storage Object</p>
+<p class="description"><p>Given an Object instance or name, permanently remove the remote Object  and all associated metadata.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$images&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;my&nbsp;photos&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Delete&nbsp;specific&nbsp;object</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methoddelete_object">delete_object</a><span class="src-sym">(</span><span class="src-str">&quot;disco_dancing.jpg&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> <kbd>True</kbd> if successfully removed</li>
+				<li><span class="field">throws:</span> SyntaxException invalid Object name</li>
+				<li><span class="field">throws:</span> NoSuchObjectException remote Object does not exist</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			delete_object
+		</span>
+					(<span class="var-type">obj</span>&nbsp;<span class="var-name">$obj</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">obj</span>
+				<span class="var-name">$obj</span><span class="var-description">: name or instance of Object to delete</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_object" id="get_object"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_object</span> (line <span class="line-number">1329</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an Object instance for the remote storage Object</p>
+<p class="description"><p>Given a name, return a Object instance representing the  remote storage object.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;public&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;This&nbsp;call&nbsp;only&nbsp;fetches&nbsp;header&nbsp;information&nbsp;and&nbsp;not&nbsp;the&nbsp;content&nbsp;of</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;the&nbsp;storage&nbsp;object.&nbsp;&nbsp;Use&nbsp;the&nbsp;Object's&nbsp;read()&nbsp;or&nbsp;stream()&nbsp;methods</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;to&nbsp;obtain&nbsp;the&nbsp;object's&nbsp;data.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$pic&nbsp;</span>=&nbsp;<span class="src-var">$public_container</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodget_object">get_object</a><span class="src-sym">(</span><span class="src-str">&quot;baby.jpg&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> CF_Object instance</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">obj</span>
+		<span class="method-name">
+			get_object
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$obj_name</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$obj_name</span><span class="var-description">: name of storage Object</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_objects" id="get_objects"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">get_objects</span> (line <span class="line-number">1437</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an array of Objects</p>
+<p class="description"><p>Return an array of Object instances in this Container.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$images&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;my&nbsp;photos&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Grab&nbsp;the&nbsp;list&nbsp;of&nbsp;all&nbsp;storage&nbsp;objects</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$all_objects&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodget_objects">get_objects</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Grab&nbsp;subsets&nbsp;of&nbsp;all&nbsp;storage&nbsp;objects</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$first_ten&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodget_objects">get_objects</a><span class="src-sym">(</span><span class="src-num">10</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Note&nbsp;the&nbsp;use&nbsp;of&nbsp;the&nbsp;previous&nbsp;result's&nbsp;last&nbsp;object&nbsp;name&nbsp;being</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;used&nbsp;as&nbsp;the&nbsp;'marker'&nbsp;parameter&nbsp;to&nbsp;fetch&nbsp;the&nbsp;next&nbsp;10&nbsp;objects</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$next_ten&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodlist_objects">list_objects</a><span class="src-sym">(</span><span class="src-num">10</span><span class="src-sym">,&nbsp;</span><span class="src-var">$first_ten</span><span class="src-sym">[</span><a href="http://www.php.net/count">count</a><span class="src-sym">(</span><span class="src-var">$first_ten</span><span class="src-sym">)</span>-<span class="src-num">1</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Grab&nbsp;images&nbsp;starting&nbsp;with&nbsp;&quot;birthday_party&quot;&nbsp;and&nbsp;default&nbsp;limit/marker</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;to&nbsp;match&nbsp;all&nbsp;photos&nbsp;with&nbsp;that&nbsp;prefix</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$prefixed&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodget_objects">get_objects</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-id">NULL</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;birthday&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Assuming&nbsp;you&nbsp;have&nbsp;created&nbsp;the&nbsp;appropriate&nbsp;directory&nbsp;marker&nbsp;Objects,</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;you&nbsp;can&nbsp;traverse&nbsp;your&nbsp;pseudo-hierarchical&nbsp;containers</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;with&nbsp;the&nbsp;&quot;path&quot;&nbsp;argument.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$animals&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodget_objects">get_objects</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-id">NULL</span><span class="src-sym">,</span><span class="src-id">NULL</span><span class="src-sym">,</span><span class="src-str">&quot;pictures/animals&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$dogs&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodget_objects">get_objects</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-id">NULL</span><span class="src-sym">,</span><span class="src-id">NULL</span><span class="src-sym">,</span><span class="src-str">&quot;pictures/animals/dogs&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> array of strings</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			get_objects
+		</span>
+					([<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: <em>optional</em> only return $limit names</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$marker</span><span class="var-description">: <em>optional</em> subset of names starting at $marker</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span><span class="var-description">: <em>optional</em> Objects whose names begin with $prefix</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: <em>optional</em> only return results under &quot;pathname&quot;</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodis_public" id="is_public"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">is_public</span> (line <span class="line-number">1272</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check if this Container is being publicly served via CDN</p>
+<p class="description"><p>Use this method to determine if the Container's content is currently  available through the CDN.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;public&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Display&nbsp;CDN&nbsp;accessability</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodis_public">is_public</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>?&nbsp;print&nbsp;<span class="src-str">&quot;Yes&quot;&nbsp;</span>:&nbsp;print&nbsp;<span class="src-str">&quot;No&quot;</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if enabled, False otherwise</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			is_public
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodlist_objects" id="list_objects"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">list_objects</span> (line <span class="line-number">1378</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a list of Objects</p>
+<p class="description"><p>Return an array of strings listing the Object names in this Container.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$images&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;my&nbsp;photos&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Grab&nbsp;the&nbsp;list&nbsp;of&nbsp;all&nbsp;storage&nbsp;objects</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$all_objects&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodlist_objects">list_objects</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Grab&nbsp;subsets&nbsp;of&nbsp;all&nbsp;storage&nbsp;objects</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$first_ten&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodlist_objects">list_objects</a><span class="src-sym">(</span><span class="src-num">10</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Note&nbsp;the&nbsp;use&nbsp;of&nbsp;the&nbsp;previous&nbsp;result's&nbsp;last&nbsp;object&nbsp;name&nbsp;being</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;used&nbsp;as&nbsp;the&nbsp;'marker'&nbsp;parameter&nbsp;to&nbsp;fetch&nbsp;the&nbsp;next&nbsp;10&nbsp;objects</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$next_ten&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodlist_objects">list_objects</a><span class="src-sym">(</span><span class="src-num">10</span><span class="src-sym">,&nbsp;</span><span class="src-var">$first_ten</span><span class="src-sym">[</span><a href="http://www.php.net/count">count</a><span class="src-sym">(</span><span class="src-var">$first_ten</span><span class="src-sym">)</span>-<span class="src-num">1</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Grab&nbsp;images&nbsp;starting&nbsp;with&nbsp;&quot;birthday_party&quot;&nbsp;and&nbsp;default&nbsp;limit/marker</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;to&nbsp;match&nbsp;all&nbsp;photos&nbsp;with&nbsp;that&nbsp;prefix</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$prefixed&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodlist_objects">list_objects</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-id">NULL</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;birthday&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Assuming&nbsp;you&nbsp;have&nbsp;created&nbsp;the&nbsp;appropriate&nbsp;directory&nbsp;marker&nbsp;Objects,</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;you&nbsp;can&nbsp;traverse&nbsp;your&nbsp;pseudo-hierarchical&nbsp;containers</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;with&nbsp;the&nbsp;&quot;path&quot;&nbsp;argument.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$animals&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodlist_objects">list_objects</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-id">NULL</span><span class="src-sym">,</span><span class="src-id">NULL</span><span class="src-sym">,</span><span class="src-str">&quot;pictures/animals&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$dogs&nbsp;</span>=&nbsp;<span class="src-var">$images</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodlist_objects">list_objects</a><span class="src-sym">(</span><span class="src-num">0</span><span class="src-sym">,</span><span class="src-id">NULL</span><span class="src-sym">,</span><span class="src-id">NULL</span><span class="src-sym">,</span><span class="src-str">&quot;pictures/animals/dogs&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> array of strings</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			list_objects
+		</span>
+					([<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">0</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$marker</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$prefix</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: <em>optional</em> only return $limit names</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$marker</span><span class="var-description">: <em>optional</em> subset of names starting at $marker</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$prefix</span><span class="var-description">: <em>optional</em> Objects whose names begin with $prefix</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: <em>optional</em> only return results under &quot;pathname&quot;</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlog_retention" id="log_retention"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">log_retention</span> (line <span class="line-number">1178</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Enable log retention for this CDN container.</p>
+<p class="description"><p>Enable CDN log retention on the container. If enabled logs will  be periodically (at unpredictable intervals) compressed and  uploaded to a &quot;.CDN_ACCESS_LOGS&quot; container in the form of  &quot;container_name.YYYYMMDDHH-XXXX.gz&quot;. Requires CDN be enabled on  the account.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;public&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Enable&nbsp;logs&nbsp;retention.</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodlog_retention">log_retention</a><span class="src-sym">(</span><span class="src-id">True</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if successful</li>
+				<li><span class="field">throws:</span> CDNNotEnabledException CDN functionality not returned during auth</li>
+				<li><span class="field">throws:</span> AuthenticationException if auth token is not valid/expired</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			log_retention
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$cdn_log_retention</span> = <span class="var-default">False</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$cdn_log_retention</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodmake_private" id="make_private"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">make_private</span> (line <span class="line-number">1228</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Disable the CDN sharing for this container</p>
+<p class="description"><p>Use this method to disallow distribution into the CDN of this Container's  content.</p><p>NOTE: Any content already cached in the CDN will continue to be served        from its cache until the TTL expiration transpires.  The default        TTL is typically one day, so &quot;privatizing&quot; the Container will take        up to 24 hours before the content is purged from the CDN cache.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">get_container</span><span class="src-sym">(</span><span class="src-str">&quot;public&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;Disable&nbsp;CDN&nbsp;accessability</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;still&nbsp;cached&nbsp;up&nbsp;to&nbsp;a&nbsp;month&nbsp;based&nbsp;on&nbsp;previous&nbsp;example</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodmake_private">make_private</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if successful</li>
+				<li><span class="field">throws:</span> CDNNotEnabledException CDN functionality not returned during auth</li>
+				<li><span class="field">throws:</span> AuthenticationException if auth token is not valid/expired</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			make_private
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodmake_public" id="make_public"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">make_public</span> (line <span class="line-number">1028</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Enable Container content to be served via CDN or modify CDN attributes</p>
+<p class="description"><p>Either enable this Container's content to be served via CDN or  adjust its CDN attributes.  This Container will always return the  same CDN-enabled URI each time it is toggled public/private/public.</p><p>Example:  <div class="src-code"><ol><li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;...&nbsp;authentication&nbsp;code&nbsp;excluded&nbsp;(see&nbsp;previous&nbsp;examples)&nbsp;...</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$conn&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../php-cloudfiles/CF_Authentication.html">CF_Authentication</a></span><span class="src-sym">(</span><span class="src-var">$auth</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container&nbsp;</span>=&nbsp;<span class="src-var">$conn</span><span class="src-sym">-&gt;</span><span class="src-id">create_container</span><span class="src-sym">(</span><span class="src-str">&quot;public&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#&nbsp;CDN-enable&nbsp;the&nbsp;container&nbsp;and&nbsp;set&nbsp;it's&nbsp;TTL&nbsp;for&nbsp;a&nbsp;month</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">#</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$public_container</span><span class="src-sym">-&gt;</span><a href="../php-cloudfiles/CF_Container.html#methodmake_public">make_public</a><span class="src-sym">(</span><span class="src-num">86400</span>/<span class="src-num">2</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">#&nbsp;12&nbsp;hours&nbsp;(86400&nbsp;seconds/day)</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the CDN enabled Container's URI</li>
+				<li><span class="field">throws:</span> CDNNotEnabledException CDN functionality not returned during auth</li>
+				<li><span class="field">throws:</span> AuthenticationException if auth token is not valid/expired</li>
+				<li><span class="field">throws:</span> InvalidResponseException unexpected response</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			make_public
+		</span>
+					([<span class="var-type">int</span>&nbsp;<span class="var-name">$ttl</span> = <span class="var-default">86400</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$ttl</span><span class="var-description">: the time in seconds content will be cached in the CDN</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__toString" id="__toString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">__toString</span> (line <span class="line-number">978</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">String representation of Container</p>
+<p class="description"><p>Pretty print the Container instance.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Container details</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			__toString
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 14 Dec 2010 05:19:56 -0600 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
