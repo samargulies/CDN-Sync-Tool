@@ -71,7 +71,18 @@ class Cdn_Aws extends Cdn_Provider {
 							$this->credentials["secret"]
 						);
 					// Kinda flawed since even if we don't have 
-					// permissions to it, we'll get a positive result.							
+					// permissions to it, we'll get a positive result.
+					
+					if ( isset($_POST['create_bucket']) && $_POST["create_bucket"] == "yes" ){
+						$response = $this->s3->create_bucket( $this->credentials["bucket"] , AmazonS3::REGION_US_E1 );
+						
+						if ( (string)$response->status != '200' ){
+							Cst_Debug::addLog("AWS Create bucket response : ".var_export($response,true));
+							return false;
+						}
+					}
+						
+						
 			return $this->s3->if_bucket_exists( (string)$this->credentials["bucket"]);
 		} catch ( Exception $e ){
 			return false;

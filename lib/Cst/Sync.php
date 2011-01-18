@@ -178,8 +178,7 @@ class Cst_Sync {
 			
 			// Debug Info
 			Cst_Debug::addLog("File Sync : ".$file.", Image Smushed : ".$smushedImage.
-							  ", GD Compression : ".$gdCompression.", File Size".filesize($fileLocation).
-							  ", Timestamp : ".time() );
+							  ", GD Compression : ".$gdCompression.", Timestamp : ".time() );
 			
 			$wpdb->query("UPDATE ".CST_TABLE_FILES." SET `smushed` = '".$smushedImage."',
 						 `transferred` = '".$synced."',hash='".hash_file("md5", $fileLocation)."' WHERE filename = '".$file."'");

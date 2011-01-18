@@ -11,7 +11,12 @@ class Cst_Plugin {
 
 	protected $object;
 	
-	
+	/**
+	 * Returns true if WP Super Cache is installed 
+	 * or false if it's not.
+	 * 
+	 * @return Boolean
+	 */
 	
 	public static function checkDependices(){
 		
@@ -36,6 +41,13 @@ class Cst_Plugin {
 		
 	}
 	
+	/**
+	 * Fetches the current active plugins from network wide activated,
+	 * site activated and must use (mu-plugins).
+	 * 
+	 * @return Array
+	 */
+	
 	public static function getActivePlugins(){
 		
 		global $wpdb;
@@ -47,6 +59,12 @@ class Cst_Plugin {
 		
 		return $activePlugins;
 	}
+	
+	/**
+	 * Creates the plugin object. A Cst_Plugin_Admin if we're
+	 * in the admin dashboard. Cst_Plugin_Site if we're not.
+	 * 
+	 */
 	
 	public function __construct(){
 		
@@ -62,7 +80,23 @@ class Cst_Plugin {
 		}
 	
 		$this->object->addHooks();
-	
+		
+		return;
+	}
+	/**
+	 * Writes the plugin debug log to WordPress's debug
+	 * log.
+	 * 
+	 */
+	public function __destruct(){
+		
+		if ( WP_DEBUG ){
+			$log = Cst_Debug::getLog();
+			$log = implode(PHP_EOL,$log);
+			error_log($log);
+		}
+		
+		return;
 	}
 	
 }

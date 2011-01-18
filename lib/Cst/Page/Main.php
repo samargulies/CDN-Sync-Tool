@@ -96,7 +96,7 @@ class Cst_Page_Main extends Cst_Page {
 				$cdn["provider"]   = $_POST["cdn_provider"];
 				$cdn["hostname"]   = $_POST["cdn_hostname"];
 				$cdn["hotlinking"] = $_POST["cdn_hotlinking"];
-				
+				$cdnUrl  = $_POST["cdn_hostname"];
 				if ( $cdn["provider"] == "aws"){
 					$cdn["access"] = $_POST['aws_access'];
 					$cdn["secret"] = $_POST["aws_secret"];
@@ -107,14 +107,17 @@ class Cst_Page_Main extends Cst_Page {
 					$cdn["container"] = $_POST["cf_container"];	
 				}
 				// 
-				if ( $cdn["hotlinking"] == "yes" && empty($errorArray) ){
+				if ( ($cdn["hotlinking"] == "yes" || isset($_POST['create_bucket']) ) && empty($errorArray) ){
 					try {
 						require_once CST_DIR.'/lib/Cdn/Provider.php';
 						
 						$objCdn = Cdn_Provider::getProvider($cdn["provider"]);
 						$objCdn->setAccessCredentials($cdn);
 						$objCdn->login();	
-						$objCdn->antiHotlinking();
+						
+						if ( $cdn["hotlinking"] == "yes" ){
+							$objCdn->antiHotlinking();
+						}
 						
 					} catch(Exception $e){
 						$errorArray[] = $e->getMessage();

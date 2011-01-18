@@ -11,8 +11,36 @@ require_once CST_DIR.'/lib/closurecompiler.php';
 	 */
 
 class Cst_JsCss {
+	
+	public static function getTemplateName(){
+		
+		if ( is_single() ){
+			$name = "single";
+		} elseif ( is_home() ){
+			$name = "home";
+		} elseif ( is_category() ){
+			$name = "category";
+		} elseif ( is_page() ){
+			$name = "page";
+		} elseif ( is_search() ){
+			$name = "search";
+		} elseif ( is_home() || is_front_page() ){
+			$name = "index";
+		} elseif ( is_404() ){
+			$name = "404";
+		} elseif ( is_archive() ){
+			$name = "archive";
+		} elseif ( is_attachment() ){
+			$name = "attachment";
+		}
+		
+		return $name;
+	}
+	
 
 	public static function doCombine( $content , $fileType ){
+		
+		global $wpdb;
 		
 		Cst_Debug::addLog("Starting consolidation");
 		
@@ -20,8 +48,8 @@ class Cst_JsCss {
 			preg_match_all('~<script.*(type="["\']text/javascript["\'].*)?src=["\'](.*)["\'].*(type=["\']text/javascript["\'].*)?></script>~iU',$content,$matches);
 			$files = $matches[2];
 		} else {
-			preg_match_all('~<link.*rel=["\']stylesheet["\'].*href=["\'](.*)["\'].*/>~iU',$content,$matches);
-			$files = $matches[1];
+			preg_match_all('~<link(.*rel=["\']stylesheet["\'])?.*href=["\'](.*)["\'](.*rel=["\']stylesheet["\'])?.*/>~iU',$content,$matches);
+			$files = $matches[2];
 		}
 			
 	
@@ -30,17 +58,18 @@ class Cst_JsCss {
 		$filesConfig = get_option("cst_files");	
 		$cdn = get_option("cst_cdn");
 		
-		Cst_Debug::addLog("Files found are : ".print_r($files,true));
+	//	Cst_Debug::addLog("Files found are : ".var_export($files,true));
 		foreach ( $files as $i => $file ){
 			
 			$urlRegex = "~^".get_bloginfo("url")."/(.*)(\?ver=.*)?$~isU";
 			
 			if ( !preg_match($urlRegex, $file,$match) && $filesConfig["external"] == "yes" ){
-				// TODO check if include external files in enabled.
-			
+				
+				// TODO check if include external files in enabled.			
 				$filesContent .= file_get_contents($file);
 				
 			} else {
+				
 				$fileLocation = ABSPATH.str_ireplace(get_bloginfo("url"), '', $match[1]);
 				if ( !is_readable($fileLocation) ){
 					Cst_Debug::addLog("File '".$fileLocation."' doesn't exist");
@@ -60,12 +89,14 @@ class Cst_JsCss {
 					$dirLocation = dirname($match[1]);
 					$rawContent = preg_replace("~url\([\'\"]?(.*)[\'\"]?\)~isU", "url('/".$dirLocation."/$1')", $rawContent);
 				}
+				$templateName = self::getTemplateName();
+				
+				$wpdb->query($wpdb->prepare("INSERT INTO `".CST_TABLE_JSCSS."` (filename,template,type) VALUES (%s,%s,%s)",array($file,$templateName,$fileType)));
 				
 				$filesContent .= $rawContent;
 				$filesHashes .= hash("md5",$fileLocation);	
 				
 			}
-			
 			
 			$content = str_replace($matches[0][$i], "" , $content);
 		}

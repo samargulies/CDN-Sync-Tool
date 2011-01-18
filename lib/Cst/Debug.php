@@ -16,25 +16,7 @@ class Cst_Debug {
 	 * @var array
 	 */
 	private static $debugLog = array();
-	/**
-	 * The error messages - not the ones from incorrect usage but ones from broken code.
-	 * @var array
-	 */
-	private static $messages = array();
-	
-	/**
-	 * Adds a message to the message array if
-	 * WP_DEBUG is defined.
-	 * 
-	 * @param string $message
-	 */
-	public static function addMessage($message){
-		if ( defined("WP_DEBUG") ){
-			self::$messages[] = time()." ".$message;
-		}
-		return true;
-	}
-	
+		
 	/**
 	 * Adds a message to the log array if
 	 * WP_DEBUG is defined.
@@ -53,13 +35,6 @@ class Cst_Debug {
 	 */
 	public static function getLog(){
 		return self::$debugLog;
-	}
-	
-	/**
-	 * Returns an array.
-	 */
-	public static function getMessages(){
-		return self::$messages;
 	}
 	
 }
