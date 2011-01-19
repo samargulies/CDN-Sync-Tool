@@ -74,12 +74,14 @@ class Cdn_Aws extends Cdn_Provider {
 					// permissions to it, we'll get a positive result.
 					
 					if ( isset($_POST['create_bucket']) && $_POST["create_bucket"] == "yes" ){
+						
 						$response = $this->s3->create_bucket( $this->credentials["bucket"] , AmazonS3::REGION_US_E1 );
 						
 						if ( (string)$response->status != '200' ){
 							Cst_Debug::addLog("AWS Create bucket response : ".var_export($response,true));
 							return false;
 						}
+						
 					}
 						
 						
@@ -121,8 +123,8 @@ class Cdn_Aws extends Cdn_Provider {
 			} 
 			// Compress and add encoding
 			$fileContents = file_get_contents($fileLocation);			
-			$fileLocation = tempnam("/tmp", "gzfile");
-			$fileResource = gzopen($fileLocation,'w9');				
+			$newLocation = tempnam("/tmp", "gzfile");
+			$fileResource = gzopen($newLocation,'w9');				
 			gzwrite($fileResource,$fileContents);
 			gzclose($fileResource);
 			
@@ -132,12 +134,18 @@ class Cdn_Aws extends Cdn_Provider {
 		$acl =  ( $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
 		$uploadFile= trim($uploadFile, "/");
 		$fileOptions = array(
-					'fileUpload' => $fileLocation,
+					'fileUpload' => $newLocation,
 					'acl' => $acl,
 					'contentType' => $fileType,
 					'headers' => $headers
 					);
 		
+		$this->s3->create_object(
+						$this->credentials["bucket"],
+						$uploadFile."gz",
+						$fileOptions);
+						
+		unset($fileOptions["headers"]);		
 		$this->s3->create_object(
 						$this->credentials["bucket"],
 						$uploadFile,
