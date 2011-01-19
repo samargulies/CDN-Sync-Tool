@@ -142,10 +142,11 @@ class Cdn_Aws extends Cdn_Provider {
 		
 		$this->s3->create_object(
 						$this->credentials["bucket"],
-						$uploadFile."gz",
+						$uploadFile.".gz",
 						$fileOptions);
 						
-		unset($fileOptions["headers"]);		
+		unset($fileOptions["headers"]);	
+		$fileOptions['fileUpload'] = $fileLocation;	
 		$this->s3->create_object(
 						$this->credentials["bucket"],
 						$uploadFile,

@@ -161,7 +161,11 @@ class Cst_JsCss {
 				Cst_Sync::process($newFile, false);	
 			}
 		}
-		
+		/*
+		if ( substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') ){
+			$newFile .= ".gz";
+		}
+		*/
 		if ( $fileType == "js" ){
 			$content .= '<script type="text/javascript" src="'.get_bloginfo("url").'/'.$newFile.'"></script>';
 		} else {			

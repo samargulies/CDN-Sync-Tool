@@ -110,6 +110,8 @@ It currently doesn't have this functionality via the API however it is getting l
 = 0.9 =
 
 * Removed custom output buffering and started using wpsupercache_buffer filter.
+* Fixed upgrade error
+* Fixed reseting theme files sync'd
 
 = 0.8 = 
 
