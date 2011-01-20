@@ -169,10 +169,10 @@ class Cst_JsCss {
 		
 		
 		if ( $fileType == "js" ){
-			$replace = '<script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'"></script></body>';
+			$replace = '<script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'.gz"></script></body>';
 			$content = str_ireplace("</body>", $replace, $content);
 		} else {			
-			$replace = '<link rel="stylesheet" href="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'" type="text/css" />'.PHP_EOL.'</head>';
+			$replace = '<link rel="stylesheet" href="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'.gz" type="text/css" />'.PHP_EOL.'</head>';
 			$content = str_ireplace("</head>", $replace, $content);
 		}
 		

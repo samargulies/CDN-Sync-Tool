@@ -102,7 +102,7 @@ class Cdn_Aws extends Cdn_Provider {
 		
 		$uploadDir = wp_upload_dir();
 		$finfo = function_exists('finfo_open') ? finfo_open(FILEINFO_MIME_TYPE) : false;
-		$headers = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 30)) . ' GMT');	
+		$headers = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 352 * 10)) . ' GMT');	
 		if ( $media == true){
 			$directory = ( (function_exists('is_multisite') && is_multisite()) && $blog_id != 1 ) ? 'files/' : 'wp-content/uploads/';
 			$uploadFile = $directory.$file;
@@ -111,16 +111,11 @@ class Cdn_Aws extends Cdn_Provider {
 			$fileLocation = ABSPATH.$file;
 			$uploadFile = $file;			
 		}
-		$acl =  ( $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
-		$uploadFile= trim($uploadFile, "/");
-		$fileOptions = array(
-					'acl' => $acl,
-					'headers' => $headers
-					);
+		
 		if ( !preg_match("~\.(css|js)$~isU",$file,$match) ){	
 			$fileType = ($finfo != false) ? finfo_file($finfo,$fileLocation) : mime_content_type($fileLocation);
 		} else {
-			
+			// TODO DRY this properly
 			if (strtolower($match[1]) == "css"){
 				$fileType = "text/css";
 			} else {
@@ -128,26 +123,25 @@ class Cdn_Aws extends Cdn_Provider {
 			} 
 			// Compress and add encoding
 			$fileContents = file_get_contents($fileLocation);			
-			$newLocation = tempnam("/tmp", "gzfile");
-			$fileResource = gzopen($newLocation,'w9');				
+			$fileLocation = tempnam("/tmp", "gzfile");
+			$fileResource = gzopen($fileLocation,'w9');				
 			gzwrite($fileResource,$fileContents);
 			gzclose($fileResource);
 			
+			$uploadFile .= ".gz";
 			$headers['Content-Encoding'] = 'gzip';
 			
-			$fileOptions['fileUpload'] = $newLocation;	
-			$fileOptions['contentType'] = $fileType;
-			$this->s3->create_object(
-						$this->credentials["bucket"],
-						$uploadFile.".gz",
-						$fileOptions);
 		}
 		
-		
-				
-		$fileOptions['contentType'] = $fileType;		
-		unset($fileOptions["headers"]);	
-		$fileOptions['fileUpload'] = $fileLocation;	
+		$acl =  ( $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
+		$uploadFile= trim($uploadFile, "/");
+		$fileOptions = array(
+					'acl' => $acl,
+					'headers' => $headers,
+					'contentType' => $fileType,
+					'fileUpload' => $fileLocation
+					);
+					
 		$this->s3->create_object(
 						$this->credentials["bucket"],
 						$uploadFile,
