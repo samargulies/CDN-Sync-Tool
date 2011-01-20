@@ -111,7 +111,12 @@ class Cdn_Aws extends Cdn_Provider {
 			$fileLocation = ABSPATH.$file;
 			$uploadFile = $file;			
 		}
-
+		$acl =  ( $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
+		$uploadFile= trim($uploadFile, "/");
+		$fileOptions = array(
+					'acl' => $acl,
+					'headers' => $headers
+					);
 		if ( !preg_match("~\.(css|js)$~isU",$file,$match) ){	
 			$fileType = ($finfo != false) ? finfo_file($finfo,$fileLocation) : mime_content_type($fileLocation);
 		} else {
@@ -130,21 +135,17 @@ class Cdn_Aws extends Cdn_Provider {
 			
 			$headers['Content-Encoding'] = 'gzip';
 			
-		}
-		$acl =  ( $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
-		$uploadFile= trim($uploadFile, "/");
-		$fileOptions = array(
-					'fileUpload' => $newLocation,
-					'acl' => $acl,
-					'contentType' => $fileType,
-					'headers' => $headers
-					);
-		
-		$this->s3->create_object(
+			$fileOptions['fileUpload'] = $newLocation;	
+			$fileOptions['contentType'] = $fileType;
+			$this->s3->create_object(
 						$this->credentials["bucket"],
 						$uploadFile.".gz",
 						$fileOptions);
-						
+		}
+		
+		
+				
+		$fileOptions['contentType'] = $fileType;		
 		unset($fileOptions["headers"]);	
 		$fileOptions['fileUpload'] = $fileLocation;	
 		$this->s3->create_object(

@@ -70,8 +70,7 @@ class Cst_JsCss {
 			
 			
 		}
-			
-	
+
 		$filesContent = "";
 		$filesHashes = "";
 		$filesConfig = get_option("cst_files");	
@@ -82,15 +81,18 @@ class Cst_JsCss {
 			
 			$urlRegex = "~^".get_option("ossdl_off_cdn_url")."/(.*\.(css|js))(\?ver=.*)?$~isU";
 			
-			if ( !preg_match($urlRegex, $file,$match) && $filesConfig["external"] == "yes" ){
+			if ( (!preg_match($urlRegex, $file,$match) || isset($match[1]) )
+				 && $filesConfig["external"] == "yes"){
 				
 				// TODO check if include external files in enabled.			
 				$filesContent .= file_get_contents($file);
 				
 			} else {
 				Cst_Debug::addLog("Match file is : ".$match[1]);
+				
 				$fileLocation = ABSPATH.str_ireplace(get_option("ossdl_off_cdn_url").'/', '', $match[1]);
 				Cst_Debug::addLog("File location : ". $fileLocation );
+				
 				if ( !is_readable($fileLocation) ){
 					Cst_Debug::addLog("File '".$fileLocation."' doesn't exist");
 					// Ignore this non existant file.
@@ -107,7 +109,9 @@ class Cst_JsCss {
 				
 				if ( $fileType == "css" ){
 					$dirLocation = dirname($match[1]);
-					$rawContent = preg_replace("~url\([\'\"]?(.*)[\'\"]?\)~isU", "url('/".$dirLocation."/$1')", $rawContent);
+					$rawContent = preg_replace("~url\([\'\"](.*)[\'\"]\)~isU", "url('".get_option("ossdl_off_cdn_url")."/".$dirLocation."/$1')", $rawContent);
+					$rawContent = preg_replace("~url\((.*)\)~isU", "url('".get_option("ossdl_off_cdn_url")."/".$dirLocation."/$1')", $rawContent);
+				
 				}
 				$templateName = self::getTemplateName();
 				
@@ -146,7 +150,7 @@ class Cst_JsCss {
 											array( "output_format" => ClosureCompiler::FORMAT_TEXT,
 												   "output_info" => ClosureCompiler::INFO_CODE,
 												   "compilation_level" => $level ) );											
-		
+					// 
 					$filesContent = $closureCompiler->compiledCode;
 				
 			}
@@ -154,6 +158,7 @@ class Cst_JsCss {
 			$fp = fopen(ABSPATH.$newFile, "w+");
 			fwrite($fp, $filesContent);
 			fclose($fp);
+			
 			if ( is_array($cdn) && isset($cdn["provider"]) && !empty($cdn["provider"]) ){
 				
 				Cst_Debug::addLog("Uploading consolidated file");
@@ -161,15 +166,13 @@ class Cst_JsCss {
 				Cst_Sync::process($newFile, false);	
 			}
 		}
-		/*
-		if ( substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') ){
-			$newFile .= ".gz";
-		}
-		*/
+		
+		
 		if ( $fileType == "js" ){
-			$content .= '<script type="text/javascript" src="'.get_bloginfo("url").'/'.$newFile.'"></script>';
+			$replace = '<script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'"></script></body>';
+			$content = str_ireplace("</body>", $replace, $content);
 		} else {			
-			$replace = '<link rel="stylesheet" href="'.get_bloginfo("url").'/'.$newFile.'" type="text/css" />'.PHP_EOL.'</head>';
+			$replace = '<link rel="stylesheet" href="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'" type="text/css" />'.PHP_EOL.'</head>';
 			$content = str_ireplace("</head>", $replace, $content);
 		}
 		

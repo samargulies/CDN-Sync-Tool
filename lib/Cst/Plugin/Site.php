@@ -21,6 +21,8 @@ class Cst_Plugin_Site {
 		
 		Cst_Debug::addLog("Action hooked for main site actions");
 		
+		add_filter('wpsupercache_output', array($this, "changeGzip") );
+			
 		return add_filter('wpsupercache_buffer', array($this, 'handleBuffer') ) &&
 			   add_action('wp_footer', array($this, "showFooter"));
 		
@@ -43,6 +45,24 @@ class Cst_Plugin_Site {
 		}
 	
 	}
+	
+	public function changeGzip($buffer){
+		
+		$cdn = get_option("cst_cdn");
+		$cdnUrl = get_option("ossdl_off_cdn_url");
+		$filesConfig = get_option("cst_files");			
+		$buffer .= "<!-- CST -->";
+		print "<!-- CST -->";
+		if ( !substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') && $cdn["provider"] != 'aws' ){
+			return $buffer;
+		}
+		
+		if ( preg_match("~(".$cdnUrl."/".$filesConfig['directory']."/[a-z0-9A-Z]{32}.[css|js])~",$buffer,$match) ){
+			$buffer = str_replace($match[1],$match[1]."gz");
+		}
+		
+		return $buffer;
+	} 
 	
 	/**
 	 * 

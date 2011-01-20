@@ -83,21 +83,6 @@ class Cst_Plugin {
 		
 		return;
 	}
-	/**
-	 * Writes the plugin debug log to WordPress's debug
-	 * log.
-	 * 
-	 */
-	public function __destruct(){
-		
-		if ( WP_DEBUG ){
-			$log = Cst_Debug::getLog();
-			$log = implode(PHP_EOL,$log);
-			error_log($log);
-		}
-		
-		return;
-	}
 	
 }
 

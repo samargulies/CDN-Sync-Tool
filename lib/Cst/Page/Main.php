@@ -22,6 +22,28 @@ class Cst_Page_Main extends Cst_Page {
 		require_once CST_DIR.'/pages/main/sync.html';
 	}
 	
+	protected function _doAuthCheck(){
+		
+		$response = array();	
+	
+		try {
+			if ( isset($_GET["type"]) ){
+				
+				$provider = Cdn_Provider::getProvider($_GET["type"]);
+				$provider->setAccessCredentials($_GET);
+				$response["valid"] = $provider->login();
+				
+			} else {
+				$response["valid"] = false;
+			}
+		}
+		catch ( Exception $e ){
+			$response["valid"] = false;
+		}
+		print json_encode($response);
+		exit;
+	}
+	
 	public function display(){
 	
 		
