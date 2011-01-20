@@ -2,7 +2,7 @@
 Contributors: Fubra
 Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme files,speed,faster,accelerator,Page Load,
 Tested up to: 3.1-RC2
-Stable tag: 0.8-real
+Stable tag: 0.9
 Requires At Least: 3.0
 
 Syncs static files to a content delivery network (CDN) such as Amazon S3/CloudFront and CloudFiles. To be used with WP-Supercache.
