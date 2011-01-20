@@ -112,6 +112,8 @@ It currently doesn't have this functionality via the API however it is getting l
 * Removed custom output buffering and started using wpsupercache_buffer filter.
 * Fixed upgrade error
 * Fixed reseting theme files sync'd
+* Fixed CSS rewritting error.
+* Fixed api detail validation JavaScript error.
 
 = 0.8 = 
 

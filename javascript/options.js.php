@@ -29,7 +29,7 @@ jQuery(document).ready( function(){
 		ajaxUrl += typeData;
 		if ( typeData == "aws" ){
 			var accessCode = $('input[name="aws_access"]').val(); 
-			var secretCode = $('input[name="aws_secret"]').val();
+			var secretCode = encodeURIComponent($('input[name="aws_secret"]').val());
 			var bucket = $('input[name="aws_bucket"]').val();
 			ajaxUrl += '&access='+accessCode+'&secret='+secretCode+'&bucket='+bucket;
 		} else if ( typeData == "cf" ){			
