@@ -48,12 +48,12 @@ class Cst_JsCss {
 			preg_match_all('~<script.*(type="["\']text/javascript["\'].*)?src=["\'](.*)["\'].*(type=["\']text/javascript["\'].*)?></script>~iU',$content,$matches);
 			$files = $matches[2];
 		} else {
-			preg_match_all('~<link.*href=["\'](.*)["\'].*rel=["\']stylesheet["\'].*/>~iUs',$content,$matchesOne);
-			preg_match_all('~<link.*rel=["\']stylesheet["\'].*href=["\'](.*)["\'].*/>~iUs',$content,$matchesTwo);
+			preg_match_all('~<link.*(?!rel\=["\'].*["\']).*href=["\'](.*)["\'].*rel=["\']stylesheet["\'].*/>~iU',$content,$matchesOne);
+			preg_match_all('~<link.*rel=["\']stylesheet["\'].*href=["\'](.*)["\'].*(?!rel\=["\'].*["\']).*/>~iU',$content,$matchesTwo);
 			$files = array();
 			$matches = array(0 => array());
 			if ( isset($matchesOne[1]) ){
-				foreach( $matchesOnes[1] as $key => $match ){
+				foreach( $matchesOne[1] as $key => $match ){
 					Cst_Debug::addLog($key.':'.$match);
 				}				
 				$matches[0] = array_merge($matches[0],$matchesOne[0]);
@@ -81,9 +81,11 @@ class Cst_JsCss {
 			
 			$urlRegex = "~^".get_option("ossdl_off_cdn_url")."/(.*\.(css|js))(\?ver=.*)?$~isU";
 			
-			if ( (!preg_match($urlRegex, $file,$match) || isset($match[1]) )
-				 && $filesConfig["external"] == "yes"){
-				
+			if ( !preg_match($urlRegex,$file,$match) || !isset($match[1])  ){
+				if ($filesConfig["external"] == "no"){
+					Cst_Debug::addLog("File '".$file."' is external while external is not to be combined");
+					continue;
+				}
 				// TODO check if include external files in enabled.			
 				$filesContent .= file_get_contents($file);
 				
@@ -102,16 +104,29 @@ class Cst_JsCss {
 				
 				if ( in_array($file, explode("\n",$filesConfig["exclude_js"])) || 
 					 in_array($file, explode("\n",$filesConfig["exclude_css"])) ){
+						Cst_Debug::addLog("File '".$fileLocation."' is in exclude list");
 					 	continue;
 				}
 				
+				Cst_Debug::addLog("Remove '".$matches[0][$i]."'");
+				$content = str_replace($matches[0][$i], "" , $content);
 				$rawContent = file_get_contents($fileLocation);
 				
 				if ( $fileType == "css" ){
 					$dirLocation = dirname($match[1]);
-					$rawContent = preg_replace("~url\([\'\"](.*)[\'\"]\)~isU", "url('".get_option("ossdl_off_cdn_url")."/".$dirLocation."/$1')", $rawContent);
-					$rawContent = preg_replace("~url\((.*)\)~isU", "url('".get_option("ossdl_off_cdn_url")."/".$dirLocation."/$1')", $rawContent);
-				
+					$urlMatches = array();
+					preg_match_all("~url\([\'\"](.*)[\'\"]\)~isU", $rawContent,$urlMatches[0]);
+					preg_match_all("~url\((.*)\)~isU", $rawContent,$urlMatches[1]);
+					foreach ( $urlMatches as $singleUrlMatches ){
+						for ( $urlCount = 0; $urlCount < sizeof($singleUrlMatches[0]); $urlCount++ ){
+							Cst_Debug::addLog("Quote ".$urlCount." : ".$singleUrlMatches[0][$urlCount].",url : ".$singleUrlMatches[1][$urlCount]);
+							if ( preg_match("~^http[s]?://~i",$singleUrlMatches[1][$urlCount]) ){
+								continue;
+							}
+							$newUrl = get_option("ossdl_off_cdn_url").'/'.$dirLocation.'/'.$singleUrlMatches[1][$i];
+							$rawContent = str_replace($singleUrlMatches[0][$i], "url(".$newUrl.")", $rawContent);						
+						}
+					}
 				}
 				$templateName = self::getTemplateName();
 				
@@ -121,8 +136,6 @@ class Cst_JsCss {
 				$filesHashes .= hash("md5",$fileLocation);	
 				
 			}
-			
-			$content = str_replace($matches[0][$i], "" , $content);
 		}
 		
 		Cst_Debug::addLog("consolidated content collected");
@@ -159,8 +172,7 @@ class Cst_JsCss {
 			fwrite($fp, $filesContent);
 			fclose($fp);
 			
-			if ( is_array($cdn) && isset($cdn["provider"]) && !empty($cdn["provider"]) ){
-				
+			if ( is_array($cdn) && isset($cdn["provider"]) && !empty($cdn["provider"]) ){				
 				Cst_Debug::addLog("Uploading consolidated file");
 				require_once CST_DIR.'/lib/Cst/Sync.php';
 				Cst_Sync::process($newFile, false);	
@@ -169,10 +181,10 @@ class Cst_JsCss {
 		
 		
 		if ( $fileType == "js" ){
-			$replace = '<script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'.gz"></script></body>';
+			$replace = '<script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'"></script></body>';
 			$content = str_ireplace("</body>", $replace, $content);
 		} else {			
-			$replace = '<link rel="stylesheet" href="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'.gz" type="text/css" />'.PHP_EOL.'</head>';
+			$replace = '<link rel="stylesheet" href="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'" type="text/css" />'.PHP_EOL.'</head>';
 			$content = str_ireplace("</head>", $replace, $content);
 		}
 		

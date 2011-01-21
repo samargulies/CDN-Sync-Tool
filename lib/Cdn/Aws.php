@@ -128,7 +128,6 @@ class Cdn_Aws extends Cdn_Provider {
 			gzwrite($fileResource,$fileContents);
 			gzclose($fileResource);
 			
-			$uploadFile .= ".gz";
 			$headers['Content-Encoding'] = 'gzip';
 			
 		}

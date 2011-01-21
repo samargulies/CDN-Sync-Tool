@@ -107,6 +107,11 @@ It currently doesn't have this functionality via the API however it is getting l
 
 == CHANGELOG ==
 
+= 0.10 =
+
+* Fixed bug that added .gz to files where they wasn't a compressed version
+* Fixed yet another CSS rewriting issue.
+
 = 0.9 =
 
 * Removed custom output buffering and started using wpsupercache_buffer filter.
