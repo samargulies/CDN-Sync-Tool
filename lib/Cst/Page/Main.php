@@ -10,6 +10,21 @@
 
 class Cst_Page_Main extends Cst_Page {
 
+	
+	protected function _wipeJsCss(){
+		$files  = get_option("cst_files");
+		$fileCache = array_merge( glob(ABSPATH.$files['directory'] .'/*.js'), glob(ABSPATH.$files['directory'] . '/*.css') );
+			
+		foreach ( $fileCache as $file ){
+			unlink($file);
+		}
+		?>
+		<div class="updated">The JavaScript and CSS file cache has been wiped.</div>
+		<?php 
+		return;
+		
+	}
+	
 	protected function _showSync(){
 		$getVars = "";
 		foreach ( array("directory","theme","media","wpinclude","wpplugin","force","cstcssjs") as $var	 ){
@@ -22,28 +37,6 @@ class Cst_Page_Main extends Cst_Page {
 		require_once CST_DIR.'/pages/main/sync.html';
 	}
 	
-	protected function _doAuthCheck(){
-		
-		$response = array();	
-	
-		try {
-			if ( isset($_GET["type"]) ){
-				
-				$provider = Cdn_Provider::getProvider($_GET["type"]);
-				$provider->setAccessCredentials($_GET);
-				$response["valid"] = $provider->login();
-				
-			} else {
-				$response["valid"] = false;
-			}
-		}
-		catch ( Exception $e ){
-			$response["valid"] = false;
-		}
-		print json_encode($response);
-		exit;
-	}
-	
 	public function display(){
 	
 		
@@ -51,14 +44,11 @@ class Cst_Page_Main extends Cst_Page {
 			$this->_showSync();
 			return;
 		}
-
-		if ( isset($_GET["subpage"]) && $_POST["subpage"] == "js" ){
-			$this->_doAuthCheck();
-			
-			return;
+		if ( isset($_POST["wipe_js"]) && $_POST["wipe_js"] == "yes" ){
+			$this->_wipeJsCss();
 		}
 		
-		if ( !empty($_POST) ){
+		if ( !empty($_POST) && !isset($_POST['wipe_js']) ){
 			$errorArray = array();
 					
 			if ( $_POST['cdn_provider'] == "aws" ){		
