@@ -115,15 +115,16 @@ class Cdn_Aws extends Cdn_Provider {
 			} else {
 				$fileType = "text/javascript";
 			} 
-			// Compress and add encoding
-			$fileContents = file_get_contents($fileLocation);			
-			$fileLocation = tempnam("/tmp", "gzfile");
-			$fileResource = gzopen($fileLocation,'w9');				
-			gzwrite($fileResource,$fileContents);
-			gzclose($fileResource);
-			
-			$headers['Content-Encoding'] = 'gzip';
-			
+			if ( $this->credentials["compression"] == "yes" ){
+				// Compress and add encoding
+				$fileContents = file_get_contents($fileLocation);			
+				$fileLocation = tempnam("/tmp", "gzfile");
+				$fileResource = gzopen($fileLocation,'w9');				
+				gzwrite($fileResource,$fileContents);
+				gzclose($fileResource);
+				
+				$headers['Content-Encoding'] = 'gzip';
+			}
 		}
 		
 		$acl =  ( $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
@@ -156,8 +157,11 @@ class Cdn_Aws extends Cdn_Provider {
 		if ( !isset($details["secret"]) || empty($details["secret"]) ){
 			throw new Exception("secret key required");
 		}
-		
+	
 		if ( !isset($details["bucket"]) || empty($details["bucket"]) ){
+			throw new Exception("bucket required");
+		}
+		if ( !isset($details["compression"]) || empty($details["compression"]) ){
 			throw new Exception("bucket required");
 		}
 		

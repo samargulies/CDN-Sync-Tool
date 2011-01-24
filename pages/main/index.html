@@ -97,6 +97,18 @@ $disabled = "";
 												<td colspan="2">This is where you want the files uploaded to. You can create/edit buckets <a href="http://console.amazon.com" target="_blank">here</a>.</td>
 											</tr>
 											<tr class="aws_details">
+												<th scope="row">GZIP Compression</th>
+												<td>
+													<input type="radio" name="aws_compression" value="yes" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws") && (!isset($cdn["compression"]) || $cdn['compression'] == "yes")){?> checked="yes"<?php } ?> id="aws_comression_yes" />
+													<label for="aws_compression_yes">Yes</label>
+													<input type="radio" name="aws_compression" value="no" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws") && isset($cdn["compression"]) && $cdn['compression'] == "no"){?> checked="yes"<?php } ?> id="aws_comression_no" />
+													<label for="aws_compression_no">No</label>
+												</td>
+											</tr>
+											<tr class="aws_details">
+												<td colspan="2">This is where you want the files uploaded to. You can create/edit buckets <a href="http://console.amazon.com" target="_blank">here</a>.</td>
+											</tr>
+											<tr class="aws_details">
 												<th scope="row">Create Bucket</th>
 												<td>
 													<input type="checkbox" name="create_bucket" value="yes" <?php echo $disabled; ?> /> Create a new bucket.

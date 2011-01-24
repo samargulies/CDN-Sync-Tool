@@ -113,6 +113,7 @@ It currently doesn't have this functionality via the API however it is getting l
 * Fixed yet another CSS rewriting issue.
 * Added ability to wipe JavaScript and CSS file cache.
 * Added ability to use FTP to sync files.
+* Added ability to toogle GZIP Compression on AWS S3.
 
 = 0.9 =
 

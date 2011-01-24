@@ -62,9 +62,13 @@ class Cst_Page_Main extends Cst_Page {
 				if ( !isset($_POST["aws_secret"]) || empty($_POST["aws_secret"]) ) {
 					$errorArray[] = "AWS secret code is required";
 				}
-				
+			
 				if ( !isset($_POST["aws_bucket"]) || empty($_POST["aws_bucket"]) ){
 					$errorArray[] = "S3 Bucket name is required";
+				}
+				aws_bucket
+				if ( !isset($_POST["aws_compression"]) || empty($_POST["aws_compression"]) ){
+					$errorArray[] = "GZIP compression is response required";
 				}
 			} elseif ( $_POST['cdn_provider'] == "cf" ){
 				//***********************************
@@ -135,9 +139,10 @@ class Cst_Page_Main extends Cst_Page {
 				$cdn["hotlinking"] = $_POST["cdn_hotlinking"];
 				$cdnUrl  = $_POST["cdn_hostname"];
 				if ( $cdn["provider"] == "aws"){
-					$cdn["access"] = $_POST['aws_access'];
-					$cdn["secret"] = $_POST["aws_secret"];
-					$cdn["bucket"] = $_POST["aws_bucket"];
+					$cdn["access"]      = $_POST['aws_access'];
+					$cdn["secret"]      = $_POST["aws_secret"];
+					$cdn["bucket"]      = $_POST["aws_bucket"];
+					$cdn["compression"] = $_POST["aws_compression"];
 				} elseif ( $cdn["provider"] == "cf" ){
 					$cdn["username"]  = $_POST["cf_username"];
 					$cdn["apikey"]    = $_POST["cf_apikey"];
