@@ -181,8 +181,15 @@ class Cst_JsCss {
 		
 		
 		if ( $fileType == "js" ){
-			$replace = '<script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'"></script></body>';
-			$content = str_ireplace("</body>", $replace, $content);
+			
+			if ($filesConfig['location'] == "body"){		
+				$replace = '<script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'"></script></body>';		
+				$content = str_ireplace("~</body>~iU", $replace, $content);
+			} else {			
+				$replace = '<head><script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'"></script>';
+				$content = preg_replace("~<head.*>~iU", $replace, $content);
+			}
+			
 		} else {			
 			$replace = '<link rel="stylesheet" href="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'" type="text/css" />'.PHP_EOL.'</head>';
 			$content = str_ireplace("</head>", $replace, $content);

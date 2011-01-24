@@ -124,6 +124,10 @@ class Cst_Page_Main extends Cst_Page {
 				$errorArray[] = "Minify is required";	
 			} 
 			
+			if ( !isset($_POST["js_location"]) || empty($_POST["js_location"]) ){
+				$errorArray[] = "JS Location is required";	
+			} 
+			
 			if ( !isset($_POST["smush"]) || empty($_POST["smush"]) ){
 				$errorArray[] = "Smush files is required";	
 			} elseif ( $_POST["smush"] != 'yes' && $_POST["smush"] != 'no' ){
@@ -182,6 +186,7 @@ class Cst_Page_Main extends Cst_Page {
 			$files["exclude_js"] = $_POST["exclude_js"];
 			$files["exclude_css"] = $_POST["exclude_css"];
 			$files["minify_engine"] = $_POST["minify_engine"];
+			$files["location"] = $_POST["js_location"];
 			if ( $_POST["minify_engine"] == "google" ){
 				$files["minify_level"] = $_POST["google_level"];		
 			}

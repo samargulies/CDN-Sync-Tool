@@ -107,6 +107,9 @@ It currently doesn't have this functionality via the API however it is getting l
 
 == CHANGELOG ==
 
+= 0.11 =
+* Added ability to move JavaScript file location
+
 = 0.10 =
 
 * Fixed bug that added .gz to files where they wasn't a compressed version

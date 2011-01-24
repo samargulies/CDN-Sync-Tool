@@ -257,6 +257,18 @@ $disabled = "";
 											<tr class="even">
 												<td colspan="2">List of Javascript files that aren't to be to be combined into the single file and to be left alone. One per line.</td>
 											</tr>
+											<tr>
+												<th scope="row">JavaScript Location</th>
+												<td>
+													<input type="radio" name="js_location" value="head" id="js_location_head" <?php if ((!isset($files) || !is_array($files) ) || (!isset($files["location"]) || $files["location"] == "head")){ ?>checked="checked"<?php } ?> />
+													<label for="js_location_head">Head</label>
+													<input type="radio" name="js_location" value="body" id="js_location_body" <?php if ((isset($files) && is_array($files) ) && (isset($files["location"]) && $files["location"] == "head" )){ ?>checked="checked"<?php } ?> /> 
+													<label for="js_location_body">Body</label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">Note if you're unsure use Head as using Body will put the JavaScript file as the last item to load and may break functionality of inline JavaScript from plugins..</td>
+											</tr>
 										</table>
 										
 										<input type="submit" <?php echo $disabled; ?> class="button-primary" value="Save" />
