@@ -88,6 +88,5 @@ function cst_upgrade($oldVersion){
 	return true;
 }
 
-	register_activation_hook( __FILE__, "cst_install" );
+register_activation_hook( __FILE__, "cst_install" );
 $objCstPlugin = new Cst_Plugin();
-

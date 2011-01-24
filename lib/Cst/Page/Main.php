@@ -83,6 +83,31 @@ class Cst_Page_Main extends Cst_Page {
 					$errorArray[] = "CloudFiles Container is required";
 				}
 				
+			} elseif ( $_POST['cdn_provider'] == "ftp" ){
+				//************************************
+				// FTP Data
+				//************************************
+
+				if ( !isset($_POST["ftp_username"]) || empty($_POST["ftp_username"]) ){
+					$errorArray[] = "FTP Username is required";
+				}
+				
+				if ( !isset($_POST["ftp_password"]) || empty($_POST["ftp_password"]) ){
+					$errorArray[] = "FTP Password is required";
+				}
+				
+				if ( !isset($_POST["ftp_server"]) || empty($_POST["ftp_server"]) ){
+					$errorArray[] = "FTP Server is required";					
+				}
+				
+				if ( !isset($_POST["ftp_port"]) || !ctype_digit($_POST["ftp_port"]) ){
+					$errorArray[] = "FTP Port is required";
+				}
+				
+				if ( !isset($_POST["ftp_directory"]) || empty($_POST["ftp_directory"]) ){
+					$errorArray[] = "FTP Directory is required";
+				}
+				
 			}
 					
 			if ( !isset($_POST["combine"]) || empty($_POST["combine"]) ){
@@ -117,7 +142,14 @@ class Cst_Page_Main extends Cst_Page {
 					$cdn["username"]  = $_POST["cf_username"];
 					$cdn["apikey"]    = $_POST["cf_apikey"];
 					$cdn["container"] = $_POST["cf_container"];	
+				} elseif ( $cdn["provider"] == "ftp" ){
+					$cdn["username"]  = $_POST["ftp_username"];
+					$cdn["password"]  = $_POST["ftp_password"];
+					$cdn["server"]    = $_POST["ftp_server"];
+					$cdn["port"]      = $_POST["ftp_port"];
+					$cdn["directory"] = $_POST["ftp_directory"];	
 				}
+				
 				// 
 				if ( ($cdn["hotlinking"] == "yes" || isset($_POST['create_bucket']) ) && empty($errorArray) ){
 					try {

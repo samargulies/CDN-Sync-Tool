@@ -51,7 +51,7 @@ jQuery(document).ready( function(){
 	
 	});
 	var cdnSelected = $('#cdn option:selected').val();
-	 $.each(["aws","cf"],function(index, value){
+	 $.each(["aws","cf","ftp"],function(index, value){
 	 	if ( cdnSelected != value) {
         	$('.'+value+'_details').hide();
         }

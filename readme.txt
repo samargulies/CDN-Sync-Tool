@@ -112,6 +112,7 @@ It currently doesn't have this functionality via the API however it is getting l
 * Fixed bug that added .gz to files where they wasn't a compressed version
 * Fixed yet another CSS rewriting issue.
 * Added ability to wipe JavaScript and CSS file cache.
+* Added ability to use FTP to sync files.
 
 = 0.9 =
 

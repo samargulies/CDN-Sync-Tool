@@ -43,6 +43,7 @@ $disabled = "";
 														<option value="" <?php if ( (!isset($cdn) || !is_array($cdn) ) || (!isset($cdn["provider"]) || empty($cdn["provider"]) ) ){ ?> selected="selected"<?php } ?>>N/A</option>
 														<option value="aws" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws")){ ?> selected="selected"<?php } ?>>Amazon S3/CloudFront</option>
 														<option value="cf" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "cf")){ ?> selected="selected"<?php } ?>>Cloudfiles</option>
+														<option value="ftp" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "ftp")){ ?> selected="selected"<?php } ?>>FTP</option>
 													</select>
 												</td>
 											</tr>
@@ -101,30 +102,67 @@ $disabled = "";
 													<input type="checkbox" name="create_bucket" value="yes" <?php echo $disabled; ?> /> Create a new bucket.
 												</td>
 											</tr>
-											<tr class="cf_details even">
+											<tr class="cf_details">
 												<th scope="row">Username</th>
 												<td><input type="text" name="cf_username" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "cf") && isset($cdn["username"])){ echo $cdn["username"]; } ?>" /></td>
 											</tr>
-											<tr class="cf_details even">
+											<tr class="cf_details">
 												<td colspan="2">Username for your CloudFiles account.</td>
 											</tr>
-											<tr class="cf_details">
+											<tr class="cf_details even">
 												<th scope="row">API Key</th>
 												<td><input type="text" name="cf_apikey" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "cf") && isset($cdn["apikey"])){ echo $cdn["apikey"]; } ?>" /></td>
 											</tr>
-											<tr class="cf_details">
+											<tr class="cf_details even">
 												<td colspan="2">API key for your CloudFiles account.</td>
 											</tr>	
-											<tr class="cf_details even">
+											<tr class="cf_details">
 												<th scope="row">Container</th>
 												<td><input type="text" name="cf_container" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "cf") && isset($cdn["container"])){ echo $cdn["container"]; } ?>" /></td>
 											</tr>
-											<tr class="cf_details even">
+											<tr class="cf_details">
 												<td colspan="2">Username for your CloudFiles account.</td>
 											</tr>
+											<tr class="ftp_details">
+												<th scope="row">Username</th>
+												<td><input type="text" name="ftp_username" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "ftp") && isset($cdn["username"])){ echo $cdn["username"]; } ?>" /></td>
+											</tr>
+											<tr class="ftp_details">
+												<td colspan="2">Username for the FTP server.</td>
+											</tr>
+											<tr class="ftp_details even">
+												<th scope="row">Password</th>
+												<td><input type="text" name="ftp_password" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "ftp") && isset($cdn["password"])){ echo $cdn["password"]; } ?>" /></td>
+											</tr>
+											<tr class="ftp_details even">
+												<td colspan="2">Password for the Password server.</td>
+											</tr>
+											<tr class="ftp_details">
+												<th scope="row">Server</th>
+												<td><input type="text" name="ftp_server" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "ftp") && isset($cdn["server"])){ echo $cdn["server"]; } ?>" /></td>
+											</tr>
+											<tr class="ftp_details">
+												<td colspan="2">The hostname for the FTP Server.</td>
+											</tr>
+											<tr class="ftp_details even">
+												<th scope="row">Port</th>
+												<td><input type="text" name="ftp_port" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "ftp") && isset($cdn["port"])){ echo $cdn["port"]; } ?>" />
+											</td>
+											<tr class="ftp_details even">
+												<td colspan="2">Port number of the FTP server.</td>
+											</tr>
+											<tr class="ftp_details">
+												<th scope="row">Directory</th>
+												<td><input type="text" name="ftp_directory" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "ftp") && isset($cdn["directory"])){ echo $cdn["directory"]; } ?>" /></td>
+											</tr>
+											<tr class="ftp_details">
+												<td colspan="2">The directory the FTP files are to be uploaded to. Put asbolute path, example "<em>/home/cdn-sync/public_html</em>".</td>
+											</tr>
 										</table>
+										
 										<a href="#" class="button-secondary" id="check-details">Check Details</a>
 										<input type="submit" class="button-primary" value="Save" <?php echo $disabled; ?> />
+									
 									</div> 
 									
 								</div>

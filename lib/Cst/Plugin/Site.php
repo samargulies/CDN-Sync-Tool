@@ -69,7 +69,11 @@ class Cst_Plugin_Site {
 	 * Enter description here ...
 	 */
 	public function handleBuffer($buffer){
-		
+			
+			$files = get_option("cst_files");
+			if ($files["combine"] !== "yes"){
+				return $buffer;
+			}
 			require_once CST_DIR.'/lib/Cst/JsCss.php';
 			$buffer = Cst_JsCss::doCombine($buffer,"js");
 			$buffer = Cst_JsCss::doCombine($buffer,"css");

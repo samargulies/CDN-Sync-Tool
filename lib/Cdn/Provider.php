@@ -101,6 +101,29 @@ abstract class Cdn_Provider {
 	 * @since 0.4
 	 */
 	abstract public function antiHotlinking();
-
 	
+	/**
+	 * Simple DRY method to work out the file upload location and the file
+	 * 
+	 * <code>
+	 * list($fileLocation,$uploadFile) = $this->_getLocationInfo($file);
+	 * </code>
+	 * 
+	 * @param string $file
+	 * @since 0.10
+	 */
+	protected function _getLocationInfo($file, $media){
+		
+		if ( $media == true){
+			$uploadDir = wp_upload_dir();
+			$directory = ( (function_exists('is_multisite') && is_multisite()) && $blog_id != 1 ) ? 'files/' : 'wp-content/uploads/';
+			$uploadFile = $directory.$file;
+			$fileLocation = $uploadDir["basedir"]."/".$file;
+		} else {
+			$fileLocation = ABSPATH.$file;
+			$uploadFile = $file;			
+		}
+		
+		return array($fileLocation,$uploadFile);
+	}
 }
