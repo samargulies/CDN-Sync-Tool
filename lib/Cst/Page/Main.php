@@ -66,7 +66,7 @@ class Cst_Page_Main extends Cst_Page {
 				if ( !isset($_POST["aws_bucket"]) || empty($_POST["aws_bucket"]) ){
 					$errorArray[] = "S3 Bucket name is required";
 				}
-				aws_bucket
+				
 				if ( !isset($_POST["aws_compression"]) || empty($_POST["aws_compression"]) ){
 					$errorArray[] = "GZIP compression is response required";
 				}

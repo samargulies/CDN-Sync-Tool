@@ -101,7 +101,7 @@ $disabled = "";
 												<td>
 													<input type="radio" name="aws_compression" value="yes" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws") && (!isset($cdn["compression"]) || $cdn['compression'] == "yes")){?> checked="yes"<?php } ?> id="aws_comression_yes" />
 													<label for="aws_compression_yes">Yes</label>
-													<input type="radio" name="aws_compression" value="no" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws") && isset($cdn["compression"]) && $cdn['compression'] == "no"){?> checked="yes"<?php } ?> id="aws_comression_no" />
+													<input type="radio" name="aws_compression" value="no" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws") && (isset($cdn["compression"]) && $cdn['compression'] == "no")){?> checked="yes"<?php } ?> id="aws_comression_no" />
 													<label for="aws_compression_no">No</label>
 												</td>
 											</tr>
