@@ -19,13 +19,57 @@ class Cst_Plugin_Site {
 	
 	public function addHooks(){
 		
-		Cst_Debug::addLog("Action hooked for main site actions");
+		Cst_Debug::addLog("Action hooked for main site actions");		
 		
-		add_filter('wpsupercache_output', array($this, "changeGzip") );
-			
-		return add_filter('wpsupercache_buffer', array($this, 'handleBuffer') ) &&
+		return add_action("wp_loaded", array($this, "startObCache") ,9999) &&
+			   add_action("wp_footer", array($this, "stopObCache") ,9999) &&
 			   add_action('wp_footer', array($this, "showFooter"));
 		
+	}
+	
+	/**
+	 * Start output buffering
+	 * 
+	 * @since 0.1
+	 */
+	
+	public function startObCache(){
+		
+		 Cst_Debug::addLog("Starting output buffering cache");
+		 ob_start( array($this, "callbackObCache") );
+		
+	}
+	
+	/**
+	 * Handles the combining of the Javascript 
+	 * and CSS files.
+	 * 
+	 * @param string $buffer
+	 * @since 0.1
+	 */
+	public function callbackObCache($buffer){
+		
+		$files = get_option("cst_files");
+		$buffer = scossdl_off_filter($buffer);
+		if ( isset($files["combine"]) && $files["combine"] == "yes" ){
+			require_once CST_DIR.'/lib/Cst/JsCss.php';
+			$buffer = Cst_JsCss::doCombine($buffer,"js");
+			$buffer = Cst_JsCss::doCombine($buffer,"css");
+		}	
+		return $buffer;
+	}
+	
+	/**
+	 * Stops the caching and flushes 
+	 * the content.
+	 * 
+	 * @since 0.1
+	 */
+	public function stopObCache(){
+		
+		ob_end_flush();
+		Cst_Debug::addLog("Output buffering stopped");
+		return true;
 	}
 	
 	/**
@@ -45,24 +89,6 @@ class Cst_Plugin_Site {
 		}
 	
 	}
-	
-	public function changeGzip($buffer){
-		
-		$cdn = get_option("cst_cdn");
-		$cdnUrl = get_option("ossdl_off_cdn_url");
-		$filesConfig = get_option("cst_files");			
-		$buffer .= "<!-- CST -->";
-		print "<!-- CST -->";
-		if ( !substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') && $cdn["provider"] != 'aws' ){
-			return $buffer;
-		}
-		
-		if ( preg_match("~(".$cdnUrl."/".$filesConfig['directory']."/[a-z0-9A-Z]{32}.[css|js])~",$buffer,$match) ){
-			$buffer = str_replace($match[1],$match[1]."gz");
-		}
-		
-		return $buffer;
-	} 
 	
 	/**
 	 * 

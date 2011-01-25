@@ -15,7 +15,8 @@ class Cst_Sync {
 	public static function getFiles(){
 		
 		if ( isset($_GET["theme"]) && $_GET["theme"] = "yes" ) {
-			self::$_files[0] = self::getDirectoryFiles( array(get_template_directory()),true ) 	;
+			self::$_files[0] = self::getDirectoryFiles( array(get_template_directory(),get_stylesheet_directory()),true ) 	;
+			
 		}
 		
 		if ( isset($_GET["media"]) && $_GET["media"] == "yes" ){

@@ -31,7 +31,7 @@ class Cst_Image {
 					
 		require_once CST_DIR."/lib/smushit.php";
 		
-		if ( !preg_match("~\.(jpe?g|png)$~isU",$file) || !is_writable($file) ){
+		if ( !preg_match("~\.(jpe?g|png|gif)$~isU",$file) || !is_writable($file) ){
 			Cst_Debug::addLog("Invalid filetype sent to Smush.IT Compression '".$filename."'");
 			return;
 		}

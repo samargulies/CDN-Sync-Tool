@@ -48,8 +48,8 @@ class Cst_JsCss {
 			preg_match_all('~<script.*(type="["\']text/javascript["\'].*)?src=["\'](.*)["\'].*(type=["\']text/javascript["\'].*)?></script>~iU',$content,$matches);
 			$files = $matches[2];
 		} else {
-			preg_match_all('~<link.*(?!rel\=["\'].*["\']).*href=["\'](.*)["\'].*rel=["\']stylesheet["\'].*/>~iU',$content,$matchesOne);
-			preg_match_all('~<link.*rel=["\']stylesheet["\'].*href=["\'](.*)["\'].*(?!rel\=["\'].*["\']).*/>~iU',$content,$matchesTwo);
+			preg_match_all('~<link.*rel=[""\']stylesheet["\'].*href=["\'](.*)["\'].*(?!rel\=["\'].*["\']).*(/?>|></link>)~iU',$content,$matchesOne);
+			preg_match_all('~<link.*(?!rel\=["\'].*["\']).*href=["\'](.*)["\'].*rel=[""\']stylesheet["\'].*(/?>|></link>)~iU',$content,$matchesTwo);
 			$files = array();
 			$matches = array(0 => array());
 			if ( isset($matchesOne[1]) ){
@@ -76,23 +76,31 @@ class Cst_JsCss {
 		$filesConfig = get_option("cst_files");	
 		$cdn = get_option("cst_cdn");
 		
-	//	Cst_Debug::addLog("Files found are : ".var_export($files,true));
-		foreach ( $files as $i => $file ){
+		
+		for ( $i = 0; $i < sizeof($files); $i++){
+			$file = $files[$i];
 			
 			$urlRegex = "~^".get_option("ossdl_off_cdn_url")."/(.*\.(css|js))(\?ver=.*)?$~isU";
 			
-			if ( !preg_match($urlRegex,$file,$match) || !isset($match[1])  ){
+			if ( (!preg_match($urlRegex,$file,$match) || !isset($match[1]) ) && (preg_match("~^https?://~isU",$file )) ){
+				
 				if ($filesConfig["external"] == "no"){
 					Cst_Debug::addLog("File '".$file."' is external while external is not to be combined");
 					continue;
 				}
-				// TODO check if include external files in enabled.			
+					
 				$filesContent .= file_get_contents($file);
 				
 			} else {
-				Cst_Debug::addLog("Match file is : ".$match[1]);
 				
-				$fileLocation = ABSPATH.str_ireplace(get_option("ossdl_off_cdn_url").'/', '', $match[1]);
+				if ( isset($match[1]) ){
+					Cst_Debug::addLog("Match file is : ".$currentFile);
+					
+					$fileLocation = ABSPATH.str_ireplace(get_option("ossdl_off_cdn_url").'/', '', $match[1]);
+				} else {
+					$fileLocation = $file;
+				}
+				
 				Cst_Debug::addLog("File location : ". $fileLocation );
 				
 				if ( !is_readable($fileLocation) ){
@@ -113,19 +121,52 @@ class Cst_JsCss {
 				$rawContent = file_get_contents($fileLocation);
 				
 				if ( $fileType == "css" ){
-					$dirLocation = dirname($match[1]);
+					
+					$dirLocation = str_ireplace(ABSPATH, '' , dirname($fileLocation));
 					$urlMatches = array();
-					preg_match_all("~url\([\'\'\"](.*)[\'\'\"]\)~isU", $rawContent,$urlMatches[0]);
-					preg_match_all("~url\((.*)\)~isU", $rawContent,$urlMatches[1]);
+					
+					preg_match_all("~(@import )?url\((.*)\)~isU", $rawContent,$urlMatches[0]);
+
 					foreach ( $urlMatches as $singleUrlMatches ){
 						for ( $urlCount = 0; $urlCount < sizeof($singleUrlMatches[0]); $urlCount++ ){
-							Cst_Debug::addLog("Quote ".$urlCount." : ".$singleUrlMatches[0][$urlCount].",url : ".$singleUrlMatches[1][$urlCount]);
-							if ( preg_match("~^http[s]?://|data:~i",$singleUrlMatches[1][$urlCount]) ){
+							if ( preg_match("~^@import~isU",$singleUrlMatches[0][$urlCount]) ){
+								Cst_Debug::addLog("IMPORT ".$singleUrlMatches[0][$urlCount]);
+								
+								if ( preg_match("~^https?://~isU",$singleUrlMatches[2][$urlCount])){
+									if ($filesConfig["external"] == "no"){
+										Cst_Debug::addLog('HERE');
+										continue;
+									} else {
+										$subFile =  $singleUrlMatches[1][$urlCount];
+									}
+								} else {
+									Cst_Debug::addLog($singleUrlMatches[2][$urlCount]);
+									$subFile = realpath($dirLocation.'/'.trim($singleUrlMatches[2][$urlCount],'"\''));
+								}
+								
+								$rawContent = str_replace($singleUrlMatches[0][$urlCount],"",$rawContent);
+								
+								if ( in_array($subFile, $files) ){
+									continue;
+								}
+								
+								$files[] = $subFile;		
+
+								Cst_Debug::addLog('Sub file "'.$subFile.'" added ');
+								Cst_Debug::addLog('Last file in $files is "'.$files[sizeof($files)-1].'"');
+								$files[] = $file;
+								Cst_Debug::addLog('Last file in $files is "'.$files[sizeof($files)-1].'"');	 
+								
+								continue 2;
+							}
+							
+							Cst_Debug::addLog("Quote ".$urlCount." : ".$singleUrlMatches[0][$urlCount].",url : ".$singleUrlMatches[2][$urlCount]);
+							if ( preg_match("~^http[s]?://|data:~i",$singleUrlMatches[2][$urlCount]) ){
 								continue;
 							}
-							$newUrl = get_option("ossdl_off_cdn_url").'/'.$dirLocation.'/'.trim($singleUrlMatches[1][$urlCount],"'\"");
+							$newUrl = get_option("ossdl_off_cdn_url").'/'.$dirLocation.'/'.trim($singleUrlMatches[2][$urlCount],"'\"");
 							Cst_Debug::addLog("URL : ".$newUrl);
-							$rawContent = str_replace($singleUrlMatches[0][$urlCount], "url(".$newUrl.")", $rawContent);						
+							$rawContent = str_replace($singleUrlMatches[0][$urlCount], "url('".$newUrl."')", $rawContent);						
 						}
 					}
 				}

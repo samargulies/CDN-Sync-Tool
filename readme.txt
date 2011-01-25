@@ -110,7 +110,10 @@ It currently doesn't have this functionality via the API however it is getting l
 
 = 0.11 =
 * Added ability to move JavaScript file location
+* Added gif to smushit.
 * Fixed CSS image rewrite
+* Fixed child theme file issues
+* Fixed CSS @import issue.
 
 = 0.10 =
 
