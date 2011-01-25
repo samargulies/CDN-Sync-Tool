@@ -115,16 +115,17 @@ class Cst_JsCss {
 				if ( $fileType == "css" ){
 					$dirLocation = dirname($match[1]);
 					$urlMatches = array();
-					preg_match_all("~url\([\'\"](.*)[\'\"]\)~isU", $rawContent,$urlMatches[0]);
+					preg_match_all("~url\([\'\'\"](.*)[\'\'\"]\)~isU", $rawContent,$urlMatches[0]);
 					preg_match_all("~url\((.*)\)~isU", $rawContent,$urlMatches[1]);
 					foreach ( $urlMatches as $singleUrlMatches ){
 						for ( $urlCount = 0; $urlCount < sizeof($singleUrlMatches[0]); $urlCount++ ){
 							Cst_Debug::addLog("Quote ".$urlCount." : ".$singleUrlMatches[0][$urlCount].",url : ".$singleUrlMatches[1][$urlCount]);
-							if ( preg_match("~^http[s]?://~i",$singleUrlMatches[1][$urlCount]) ){
+							if ( preg_match("~^http[s]?://|data:~i",$singleUrlMatches[1][$urlCount]) ){
 								continue;
 							}
-							$newUrl = get_option("ossdl_off_cdn_url").'/'.$dirLocation.'/'.$singleUrlMatches[1][$i];
-							$rawContent = str_replace($singleUrlMatches[0][$i], "url(".$newUrl.")", $rawContent);						
+							$newUrl = get_option("ossdl_off_cdn_url").'/'.$dirLocation.'/'.trim($singleUrlMatches[1][$urlCount],"'\"");
+							Cst_Debug::addLog("URL : ".$newUrl);
+							$rawContent = str_replace($singleUrlMatches[0][$urlCount], "url(".$newUrl.")", $rawContent);						
 						}
 					}
 				}

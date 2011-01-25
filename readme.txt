@@ -99,6 +99,7 @@ This is because CloudFiles ACL Referrer doesn't work as expected. So CloudFiles 
 
 It currently doesn't have this functionality via the API however it is getting launched soon, once it's launched it will be added to the plugin.
 
+
 == Installation ==
 
 1. Upload plugin contents to the `/wp-content/plugins/` directory
@@ -109,6 +110,7 @@ It currently doesn't have this functionality via the API however it is getting l
 
 = 0.11 =
 * Added ability to move JavaScript file location
+* Fixed CSS image rewrite
 
 = 0.10 =
 
@@ -148,7 +150,6 @@ It currently doesn't have this functionality via the API however it is getting l
 * Added cst_upgrade function which was called in the activation function
 * Changed CDN hostname in options to solely work with "ossdl_off_cdn_url" option
 * Fixed detail validation javascript/ajax
-
 
 = 0.5 =
 * Added IF NOT EXISTS to table creation
