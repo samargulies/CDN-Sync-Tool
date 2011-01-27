@@ -11,26 +11,27 @@ class Cdn_Ftp extends Cdn_Provider {
 	
 	public function setAccessCredentials($details){
 		
-		if ( isset($details['username']) && !empty($details['username']) ){
-			$this->credentials["username"] = $details["username"];
+		if ( !isset($details['username']) || empty($details['username']) ){
+			throw new Exception("FTP Username is required");
 		}
 		
-		if ( isset($details["password"]) && !empty($details["password"]) ){
-			$this->credentials["password"] = $details["password"];
+		if ( !isset($details["password"]) || empty($details["password"]) ){
+			throw new Exception("FTP Password is required");
 		}
 		
-		if ( isset($details["server"]) && !empty($details["server"]) ){
-			$this->credentials["hostname"] = $details["server"];
+		if ( !isset($details["server"]) || empty($details["server"]) ){
+			throw new Exception("FTP Server is required");
 		}
 		
-		if ( isset($details["port"]) && ctype_digit($details["port"]) ){
-			$this->credentials["port"] = $details["port"];
+		if ( !isset($details["port"]) || !ctype_digit($details["port"]) ){
+			throw new Exception("FTP Port is required");
 		}
 		
-		if ( isset($details["directory"]) && !empty($details["directory"]) ){
-			$this->credentials["directory"] = $details["directory"];
+		if ( !isset($details["directory"]) || empty($details["directory"]) ){
+			throw new Exception("FTP Directory is required");
 		}
 		
+		$this->credentials = $details;
 	}
 	
 	public function login() {
@@ -68,10 +69,11 @@ class Cdn_Ftp extends Cdn_Provider {
 			if ( !is_dir('ftp://'.$this->credentials['username'].':'.$this->credentials["password"].'@'.$this->credentials["hostname"].':'.$this->credentials["port"].'/'.$uploadDir)) {
 				$toCreate[] = basename($uploadDir);
 				$uploadDir = dirname($uploadDir);
+				$carryOn = true;
 			} else {
-				break;	
+				$carryOn = false;	
 			}
-		} while (1);
+		} while ($carryOn === true);
 		
 		krsort($toCreate);
 		$uploadDir = '/'.$uploadDir;

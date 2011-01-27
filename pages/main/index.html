@@ -43,6 +43,7 @@ $disabled = "";
 														<option value="" <?php if ( (!isset($cdn) || !is_array($cdn) ) || (!isset($cdn["provider"]) || empty($cdn["provider"]) ) ){ ?> selected="selected"<?php } ?>>N/A</option>
 														<option value="aws" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws")){ ?> selected="selected"<?php } ?>>Amazon S3/CloudFront</option>
 														<option value="cf" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "cf")){ ?> selected="selected"<?php } ?>>Cloudfiles</option>
+														<option value="origin" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "ftp")){ ?> selected="selected"<?php } ?>>MaxCDN/NetDNA/Origin Pull</option>
 														<option value="ftp" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "ftp")){ ?> selected="selected"<?php } ?>>FTP</option>
 													</select>
 												</td>
@@ -262,7 +263,7 @@ $disabled = "";
 												<td>
 													<input type="radio" name="js_location" value="head" id="js_location_head" <?php if ((!isset($files) || !is_array($files) ) || (!isset($files["location"]) || $files["location"] == "head")){ ?>checked="checked"<?php } ?> />
 													<label for="js_location_head">Head</label>
-													<input type="radio" name="js_location" value="body" id="js_location_body" <?php if ((isset($files) && is_array($files) ) && (isset($files["location"]) && $files["location"] == "head" )){ ?>checked="checked"<?php } ?> /> 
+													<input type="radio" name="js_location" value="body" id="js_location_body" <?php if ((isset($files) && is_array($files) ) && (isset($files["location"]) && $files["location"] == "body" )){ ?>checked="checked"<?php } ?> /> 
 													<label for="js_location_body">Body</label>
 												</td>
 											</tr>

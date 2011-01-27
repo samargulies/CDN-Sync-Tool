@@ -125,46 +125,16 @@ class Cst_JsCss {
 					$dirLocation = str_ireplace(ABSPATH, '' , dirname($fileLocation));
 					$urlMatches = array();
 					
-					preg_match_all("~(@import )?url\((.*)\)~isU", $rawContent,$urlMatches[0]);
+					preg_match_all("~url\((.*)\)~isU", $rawContent,$urlMatches[0]);
 
 					foreach ( $urlMatches as $singleUrlMatches ){
 						for ( $urlCount = 0; $urlCount < sizeof($singleUrlMatches[0]); $urlCount++ ){
-							if ( preg_match("~^@import~isU",$singleUrlMatches[0][$urlCount]) ){
-								Cst_Debug::addLog("IMPORT ".$singleUrlMatches[0][$urlCount]);
-								
-								if ( preg_match("~^https?://~isU",$singleUrlMatches[2][$urlCount])){
-									if ($filesConfig["external"] == "no"){
-										Cst_Debug::addLog('HERE');
-										continue;
-									} else {
-										$subFile =  $singleUrlMatches[1][$urlCount];
-									}
-								} else {
-									Cst_Debug::addLog($singleUrlMatches[2][$urlCount]);
-									$subFile = realpath($dirLocation.'/'.trim($singleUrlMatches[2][$urlCount],'"\''));
-								}
-								
-								$rawContent = str_replace($singleUrlMatches[0][$urlCount],"",$rawContent);
-								
-								if ( in_array($subFile, $files) ){
-									continue;
-								}
-								
-								$files[] = $subFile;		
-
-								Cst_Debug::addLog('Sub file "'.$subFile.'" added ');
-								Cst_Debug::addLog('Last file in $files is "'.$files[sizeof($files)-1].'"');
-								$files[] = $file;
-								Cst_Debug::addLog('Last file in $files is "'.$files[sizeof($files)-1].'"');	 
-								
-								continue 2;
-							}
-							
-							Cst_Debug::addLog("Quote ".$urlCount." : ".$singleUrlMatches[0][$urlCount].",url : ".$singleUrlMatches[2][$urlCount]);
-							if ( preg_match("~^http[s]?://|data:~i",$singleUrlMatches[2][$urlCount]) ){
+														
+							Cst_Debug::addLog("Quote ".$urlCount." : ".$singleUrlMatches[0][$urlCount].",url : ".$singleUrlMatches[1][$urlCount]);
+							if ( preg_match("~^http[s]?://|data:~i",$singleUrlMatches[1][$urlCount]) ){
 								continue;
 							}
-							$newUrl = get_option("ossdl_off_cdn_url").'/'.$dirLocation.'/'.trim($singleUrlMatches[2][$urlCount],"'\"");
+							$newUrl = get_option("ossdl_off_cdn_url").'/'.$dirLocation.'/'.trim($singleUrlMatches[1][$urlCount],"'\"");
 							Cst_Debug::addLog("URL : ".$newUrl);
 							$rawContent = str_replace($singleUrlMatches[0][$urlCount], "url('".$newUrl."')", $rawContent);						
 						}
