@@ -114,6 +114,8 @@ abstract class Cdn_Provider {
 	 */
 	protected function _getLocationInfo($file, $media){
 		
+		global $blog_id;
+		
 		if ( $media == true){
 			$uploadDir = wp_upload_dir();
 			$directory = ( (function_exists('is_multisite') && is_multisite()) && $blog_id != 1 ) ? 'files/' : 'wp-content/uploads/';

@@ -43,7 +43,7 @@ $disabled = "";
 														<option value="" <?php if ( (!isset($cdn) || !is_array($cdn) ) || (!isset($cdn["provider"]) || empty($cdn["provider"]) ) ){ ?> selected="selected"<?php } ?>>N/A</option>
 														<option value="aws" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws")){ ?> selected="selected"<?php } ?>>Amazon S3/CloudFront</option>
 														<option value="cf" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "cf")){ ?> selected="selected"<?php } ?>>Cloudfiles</option>
-														<option value="origin" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "ftp")){ ?> selected="selected"<?php } ?>>MaxCDN/NetDNA/Origin Pull</option>
+														<option value="origin" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "origin")){ ?> selected="selected"<?php } ?>>MaxCDN/NetDNA/Origin Pull</option>
 														<option value="ftp" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "ftp")){ ?> selected="selected"<?php } ?>>FTP</option>
 													</select>
 												</td>
@@ -431,7 +431,7 @@ $disabled = "";
 											
 											<input type="hidden" name="wipe_js" value="yes" />
 											<p>
-												<input type="submit" class="button-primary" value="Sync Files" />
+												<input type="submit" class="button-primary" value="Delete Files" />
 											</p>
 										</form>
 										

@@ -80,7 +80,7 @@ class Cst_JsCss {
 		for ( $i = 0; $i < sizeof($files); $i++){
 			$file = $files[$i];
 			
-			$urlRegex = "~^".get_option("ossdl_off_cdn_url")."/(.*\.(css|js))(\?ver=.*)?$~isU";
+			$urlRegex = "~^".get_option("ossdl_off_cdn_url")."/(.*\.(css|js))(\?.*)?$~isU";
 			
 			if ( (!preg_match($urlRegex,$file,$match) || !isset($match[1]) ) && (preg_match("~^https?://~isU",$file )) ){
 				
@@ -148,6 +148,10 @@ class Cst_JsCss {
 				$filesHashes .= hash("md5",$fileLocation);	
 				
 			}
+		}
+		
+		if ( empty($filesContent) ){
+			return $content;
 		}
 		
 		Cst_Debug::addLog("consolidated content collected");

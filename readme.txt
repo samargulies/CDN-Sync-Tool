@@ -1,27 +1,23 @@
 === CDN Sync Tool ===
 Contributors: Fubra
-Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme files,speed,faster,accelerator,Page Load,
-Tested up to: 3.1-RC2
-Stable tag: 0.10
+Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme,MaxCDN,Origin Pull,Origin,Pull,files,speed,faster,accelerator,Page Load, zoom
+Tested up to: 3.1-RC3
+Stable tag: 1.0
 Requires At Least: 3.0
 
-Syncs static files to a content delivery network (CDN) such as Amazon S3/CloudFront and CloudFiles. To be used with WP-Supercache.
-
+Syncs static files to a content delivery network (CDN) such as Amazon S3 / CloudFront,MaxCDN and CloudFiles. To be used with WP-Supercache.
+ 
 == Description ==
-
-**BETA RELEASE**
 
 Front end optimization plugin to be used with WP-Supercache.
 
-Uploads/syncs your static files to a Content Deilvery Network (CDN) such as Amazon S3/CloudFront and CloudFiles from your media library, theme directory, WordPress's wp-include directory and plugin directories aswell as new media library uploads.
+Uploads/syncs your static files to a Content Deilvery Network (CDN) with push CDNs such as Amazon S3 / CloudFront and CloudFiles aswell as Origin Pull CDNs such as MaxCDN / NetDNA. You can choose files from your media library, theme directory, WordPress's wp-include directory and plugin directories aswell as new media library uploads.
 
 Plugin runs images thought smushit.com to losslessy compress images, aswell as GD compression of images.
 
 There is also concatenation of all Javascript and CSS files in the header and footer to one file each to reduce HTTP requests. Also moves the javascript file to the footer so the browser doesn't hold up the page load doing it. Leverages Google's Closure Compiler to remove whitespace, do simple and advanced optimizations to reduce file size.
 
-This plugin requires WP Super Cache to be installed. These plugins will handle the rewriting of the inclusion of static files to ensure all static files will load from your CDN.
-
-**BETA RELEASE**
+This plugin requires WP Super Cache to be installed. As it will handle the rewriting of the inclusion of static files to ensure all static files will load from your CDN.
 
 Developed by <a href="http://www.catn.com">PHP Hosting Experts CatN</a>
 
@@ -33,7 +29,7 @@ Because a speed affects your SEO and your sales. People aren't paitence creature
 
 = Why does uploading files take so long with this installed? =
 
-The reason for thpharma hacke increased time when uploading files is caused by using smushit which can take a 1+ seconds per image, GD compression and uploading to your CDN also increase the time spent handling the file. Since uploading new media happens only once per image the increase in time cause in the admin backend is saved on the front end pagson fe load.  
+The reason for the increased time when uploading files is caused by using smushit which can take a 1+ seconds per image, GD compression and uploading to your CDN also increase the time spent handling the file. Since uploading new media happens only once per image the increase in time cause in the admin backend is saved on the front end page load.  
 
 = Do you pre compress css and Javascript files before uploading to S3? =
 
@@ -51,9 +47,9 @@ The problem with these other plugins is that they don't upload the files to a CD
 
 No the files are uploaded to the Content Deilvery Network (CDN) only once and they are then cached. If the CSS/Javascript files content changes then there will be a new file created and uploaded to the CDN. Using a different filename to avoid CDN edge caching conflicts.
 
-= Why do I need to have WP Super Cache or W3 Total Cache installed? =
+= Why do I need to have WP Super Cache installed? =
 
-You need to have one of these installed as we use their url changer functionality and they will help imrpove your site's speed.
+You need to have this installed as we use their url changer functionality and they will help imrpove your site's speed.
 
 = Why is there a custom directory sync? Doesn't the plugin sync everything I need by default? =
 
@@ -65,7 +61,7 @@ The page load improvements of a Content Deilvery Network (CDN) can vary however 
 
 = Is there anything special I need to do to have my new uploads sync to my Amazon S3? =
 
-No with the plugin enabled and the Content Deilvery Network (CDN) assigned as Amazon S3/Cloudfront the uploads will happen automatically aswell as other optimizations such compression.
+No with the plugin enabled and the Content Deilvery Network (CDN) assigned as Amazon S3 /Cloudfront the uploads will happen automatically aswell as other optimizations such compression.
 
 = Is there anything special I need to do to have my new uploads sync to my CloudFiles Container? =
 
@@ -95,10 +91,9 @@ This is because CloudFront isn't currently able to do referrer checks and allow 
 
 This is because CloudFiles ACL Referrer doesn't work as expected. So CloudFiles at this time is unable to do anti-hotlinking at this time.
 
-= Why can't I invalidate files on CloudFiles? =
+= What is the difference between Origin Pull and Amazon S3/CloudFront and CloudFiles =
 
-It currently doesn't have this functionality via the API however it is getting launched soon, once it's launched it will be added to the plugin.
-
+The difference is that with Origin Pull the files are pulled from your web host when the file is first requested. Origin Pull providers like MaxCDN generally respect your .htaccess rules/HTTP headers, which mean it will send the same headers as your server sends. Meaning you can change headers more easily and quickly than you would at Amazon S3/CloudFront.
 
 == Installation ==
 
@@ -108,13 +103,14 @@ It currently doesn't have this functionality via the API however it is getting l
 
 == CHANGELOG ==
 
-= 0.11 =
+= 1.0 =
 * Added ability to move JavaScript file location
 * Added gif to smushit.
 * Added MaxCDN/Origin Pull support.
 * Fixed CSS image rewrite
 * Fixed child theme file issues
 * Fixed issue with the options javascript location form.
+* Fixed creating empty JS files in Concatenion issue.
 
 = 0.10 =
 

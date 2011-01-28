@@ -28,7 +28,7 @@ class Cdn_Origin extends Cdn_Provider {
 	}
 	
 	
-	public function uploadFile($file, $media){
+	public function uploadFile($file, $media = true){
 		
 		return true;
 		

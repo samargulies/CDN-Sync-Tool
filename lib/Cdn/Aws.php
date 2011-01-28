@@ -98,7 +98,6 @@ class Cdn_Aws extends Cdn_Provider {
 	 */
 	public function uploadFile( $file , $media = true ){
 		
-		global $blog_id;
 		
 		$uploadDir = wp_upload_dir();
 		$finfo = function_exists('finfo_open') ? finfo_open(FILEINFO_MIME_TYPE) : false;
