@@ -109,13 +109,14 @@ class Cst_Plugin_Admin {
 		
 				$file = str_replace(ABSPATH,"",$file);	
 				$count = $wpdb->get_var(
-								$wpdb->prepare("SELECT * FROM ".CST_TABLE_FILES." WHERE filename = %s AND transferred = 'yes'", 
+								$wpdb->prepare("SELECT COUNT(*) FROM ".CST_TABLE_FILES." WHERE filename = %s AND transferred = 'yes'", 
 											array($file))						
 								);
 								
 				print "Syncing [".++$i."/".$total."] ".$file;		
 				ob_flush();
 				flush();				
+				
 				if ( $count && !$forceOverwrite  ){
 					print " skipped, already synced".PHP_EOL."<br />";
 					Cst_Debug::addLog("File '".$file."' has already been synced so has been skipped");
@@ -140,6 +141,8 @@ class Cst_Plugin_Admin {
 		}
 		Cst_Debug::addLog("File sync complete.");
 		update_option("cst_theme",false);		
+		wp_clear_scheduled_hook('cst_cron_hourly');
+		wp_schedule_event(time(), 'hourly', 'cst_cron_hourly'); 
 		
 		// This is to popup and show in an overlay iframe. 
 		// So we don't want the rest of the dashboard to load. 

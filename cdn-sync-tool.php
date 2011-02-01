@@ -30,6 +30,7 @@ Version: 1.0
 
 require_once 'etc/constants.php';
 require_once CST_DIR.'/lib/Cst/Debug.php';
+require_once CST_DIR.'/lib/Cst/Sync.php';
 require_once CST_DIR.'/lib/Cst/Plugin.php';
 
 function cst_install(){
@@ -86,6 +87,22 @@ function cst_upgrade($oldVersion){
 		$wpdb->query("ALTER TABLE  `".CST_TABLE_JSCSS."` ADD  `type` VARCHAR( 255 ) NOT NULL");
 	}
 	return true;
+}
+
+function cst_cron_hourly(){
+	
+	global $wpdb;
+	
+	Cst_Debug::addLog('Hourly cron has run');		
+
+	$fileHashes = $wpdb->get_results( "SELECT * FROM `".CST_TABLE_FILES."` GROUP BY filename",ARRAY_A );
+		
+	foreach( $fileHashes as $file ){
+		if ( $file['hash'] != hash_file('md5',$file['file_location']) ){
+			Cst_Sync::process($file['filename'],$file['media']);
+		}
+	}
+	
 }
 
 register_activation_hook( __FILE__, "cst_install" );

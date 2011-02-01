@@ -1,9 +1,10 @@
 <?php
 require_once CST_DIR.'/lib/Cst/Image.php';
+require_once CST_DIR.'/lib/Cdn/Provider.php';
 
 	/**
-	 * 
-	 * Enter description here ...
+	 * The class to handle teh syncing of the 
+	 * files to the CDN.
 	 * @author Iain Cambridge
 	 *
 	 */
@@ -143,12 +144,6 @@ class Cst_Sync {
 		$uploadCdn = ( isset($cdn["provider"]) && !empty($cdn["provider"]) ) ? true : false;
 		$smushImages = ( isset($images["smush"]) && $images["smush"] == "yes" ) ? true : false;
 		$compressImages = ( isset($images["compress"]) && $images["compress"] == "yes" ) ? true : false;
-		
-		$synced = "no";
-		$smushedImage = "no";
-		$gdCompression = "no";
-	
-		require_once CST_DIR."/lib/Cdn/Provider.php";
 	
 		if ( $media === true ){
 			$uploadDir = wp_upload_dir();
@@ -156,7 +151,12 @@ class Cst_Sync {
 		} else {		
 			$fileLocation = ABSPATH.$file;
 		}
+		$synced = "no";
+		$smushedImage = "no";
+		$gdCompression = "no";
 	
+		require_once CST_DIR."/lib/Cdn/Provider.php";
+		
 		try {				
 			
 			if ( $compressImages ){
@@ -181,7 +181,8 @@ class Cst_Sync {
 			Cst_Debug::addLog("File Sync : ".$file.", Image Smushed : ".$smushedImage.
 							  ", GD Compression : ".$gdCompression.", Timestamp : ".time() );
 			
-			$wpdb->query("UPDATE ".CST_TABLE_FILES." SET `smushed` = '".$smushedImage."',
+			$wpdb->query("UPDATE ".CST_TABLE_FILES." SET `smushed` = '".$smushedImage."',#
+						 `file_location`='".$fileLocation."',`media`='".$media."',
 						 `transferred` = '".$synced."',hash='".hash_file("md5", $fileLocation)."' WHERE filename = '".$file."'");
 			
 		} catch ( Exception $e ){

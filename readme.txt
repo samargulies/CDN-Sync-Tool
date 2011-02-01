@@ -103,6 +103,12 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.1 =
+
+* Fixed text for CloudFiles container hint.
+* Fixed skipping on non skipped files
+* Fixed not knowing that container name is invalid.
+
 = 1.0 =
 * Added ability to move JavaScript file location
 * Added gif to smushit.

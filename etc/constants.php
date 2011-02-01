@@ -10,6 +10,6 @@ define( "CST_PAGE_CONTACT", "cst-contact" );
 define( "CST_PAGE_CATN" , "cst-catn" );
 define( "CST_PAGE_HELP" , "cst-help" );
 
-define( "CST_VERSION" , "1.0"  );
+define( "CST_VERSION" , "1.1"  );
 define( "CST_DIR", dirname(dirname(__FILE__)) );
 define( "CST_CONTACT_EMAIL", "iain.cambridge@fubra.com" );
