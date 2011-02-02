@@ -6,7 +6,7 @@ Plugin URI: http://catn.com/
 Description: Syncs static files to a CDN
 Author: Fubra Limited
 Author URI: http://www.catn.com
-Version: 1.1
+Version: 1.2
 */
 
 /*
@@ -50,12 +50,15 @@ function cst_install(){
 		}	
 		
 		$wpdb->query("CREATE TABLE IF NOT EXISTS ".CST_TABLE_FILES." (
-						`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-						`filename` INT NOT NULL ,
-						`smushed` INT NOT NULL ,
-						`hash` VARCHAR( 32 ) NULL,
-						`transferred` INT NOT NULL ,
-					 	`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+					  `id` int(11) NOT NULL AUTO_INCREMENT,
+					  `filename` varchar(255) NOT NULL,
+					  `smushed` varchar(11) NOT NULL,
+					  `transferred` varchar(11) NOT NULL,
+					  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+					  `hash` varchar(32) DEFAULT NULL,
+					  `file_location` varchar(255) DEFAULT NULL,
+					   `media` int(11) DEFAULT NULL,
+						  PRIMARY KEY (`id`)
 						) ENGINE = MYISAM ;");
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `".CST_TABLE_JSCSS."` (
 							`id` INT NOT NULL ,
@@ -74,7 +77,7 @@ function cst_upgrade($oldVersion){
 	global $wpdb;
 	
 	if ( $oldVersion <= "0.8" ){
-		$wpdb->query("ALTER TABLE `wp_cst_files` ADD `hash` VARCHAR( 32 ) NULL");
+		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `hash` VARCHAR( 32 ) NULL");
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `".CST_TABLE_JSCSS."` ( 
 									`id` int(11) NOT NULL,
 									`filename` varchar(255) NOT NULL,
@@ -83,9 +86,16 @@ function cst_upgrade($oldVersion){
 									`type` varchar(3) NOT NULL
 								) ENGINE = MYISAM ;
 										");
-	} elseif ( $oldVersion == "0.9" ){
+	} 
+	if ( $oldVersion == "0.9" ){
 		$wpdb->query("ALTER TABLE  `".CST_TABLE_JSCSS."` ADD  `type` VARCHAR( 255 ) NOT NULL");
+	} 
+	
+	if ( $oldVersion <= "1.1" ){
+		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `media` INT(1) NULL");
+		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `file_location` varchar(255) DEFAULT NULL,");
 	}
+	
 	return true;
 }
 
