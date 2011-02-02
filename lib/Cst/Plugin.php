@@ -73,7 +73,9 @@ class Cst_Plugin {
 			require_once CST_DIR.'/lib/Cst/Plugin/Admin.php';
 			$this->object = new Cst_Plugin_Admin();
 			Cst_Debug::addLog("Admin object created");
+			
 		} else {
+			
 			require_once CST_DIR.'/lib/Cst/Plugin/Site.php';
 			$this->object = new Cst_Plugin_Site();
 			Cst_Debug::addLog("Main site object created");

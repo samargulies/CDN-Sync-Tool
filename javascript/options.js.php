@@ -31,7 +31,7 @@ jQuery(document).ready( function(){
 			var accessCode = $('input[name="aws_access"]').val(); 
 			var secretCode = encodeURIComponent($('input[name="aws_secret"]').val());
 			var bucket = $('input[name="aws_bucket"]').val();
-			ajaxUrl += '&access='+accessCode+'&secret='+secretCode+'&bucket='+bucket;
+			ajaxUrl += '&access='+accessCode+'&secret='+secretCode+'&bucket_name='+bucket;
 		} else if ( typeData == "cf" ){			
 			var username = $('input[name="cf_username"]').val(); 
 			var apiKey = $('input[name="cf_apikey"]').val();

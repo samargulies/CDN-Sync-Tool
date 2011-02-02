@@ -40,8 +40,8 @@ class Cst_Plugin_Admin {
 	public function preAdminHead(){
 	
 		if ( isset($_GET['removetheme']) && $_GET["removetheme"] == "yes"){
-			Cst_Debug::addLog("Removed theme header message");
-			update_option("cst_theme",false);
+			 Cst_Debug::addLog("Removed theme header message");
+			 update_option("cst_theme",false);
 		}
 		
 		if ( isset($_GET['removedependency']) && $_GET["removedependency"] == "yes"){

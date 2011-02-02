@@ -84,8 +84,7 @@ class Cdn_Aws extends Cdn_Provider {
 						
 					}
 						
-						
-			return $this->s3->if_bucket_exists( (string)$this->credentials["bucket"]);
+			return true;
 		} catch ( Exception $e ){
 			return false;
 		}
@@ -114,7 +113,7 @@ class Cdn_Aws extends Cdn_Provider {
 			} else {
 				$fileType = "text/javascript";
 			} 
-			if ( $this->credentials["compression"] == "yes" ){
+			if ( isset($this->credentials["compression"]) && $this->credentials["compression"] == "yes" ){
 				// Compress and add encoding
 				$fileContents = file_get_contents($fileLocation);			
 				$fileLocation = tempnam("/tmp", "gzfile");
@@ -150,18 +149,15 @@ class Cdn_Aws extends Cdn_Provider {
 	public function setAccessCredentials( $details ){
 
 		if ( !isset($details["access"]) || empty($details["access"]) ){
-			throw new Exception("access key required");
+			throw new Exception("access key credential required");
 		} 
 
 		if ( !isset($details["secret"]) || empty($details["secret"]) ){
-			throw new Exception("secret key required");
+			throw new Exception("secret key credential required");
 		}
-	
-		if ( !isset($details["bucket"]) || empty($details["bucket"]) ){
-			throw new Exception("bucket required");
-		}
-		if ( !isset($details["compression"]) || empty($details["compression"]) ){
-			throw new Exception("bucket required");
+		
+		if ( !isset($details["bucket_name"]) || empty($details["bucket_name"]) ){
+			throw new Exception("bucket credential required ");
 		}
 		
 		$this->credentials = $details;

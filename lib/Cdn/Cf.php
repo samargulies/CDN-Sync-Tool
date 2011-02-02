@@ -44,7 +44,7 @@ class Cdn_Cf extends Cdn_Provider {
 							$this->credentials["apikey"]
 						);
 						
-			//$auth->ssl_use_cabundle(); // if breaks try removing.
+			$auth->ssl_use_cabundle(); // if breaks try removing.
 			
 			if ( $auth->authenticate() ) {
 				$this->cloudfiles = new CF_Connection($auth);
