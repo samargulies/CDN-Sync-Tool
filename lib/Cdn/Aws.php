@@ -75,7 +75,7 @@ class Cdn_Aws extends Cdn_Provider {
 					
 					if ( isset($_POST['create_bucket']) && $_POST["create_bucket"] == "yes" ){
 						
-						$response = $this->s3->create_bucket( $this->credentials["bucket"] , AmazonS3::REGION_US_E1 );
+						$response = $this->s3->create_bucket( $this->credentials["bucket_name"] , AmazonS3::REGION_US_E1 );
 						
 						if ( (string)$response->status != '200' ){
 							Cst_Debug::addLog("AWS Create bucket response : ".var_export($response,true));
@@ -135,7 +135,7 @@ class Cdn_Aws extends Cdn_Provider {
 					);
 					
 		$this->s3->create_object(
-						$this->credentials["bucket"],
+						$this->credentials["bucket_name"],
 						$uploadFile,
 						$fileOptions);
 		
