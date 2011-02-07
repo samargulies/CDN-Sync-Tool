@@ -103,6 +103,12 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.4 =
+
+* Moved JavaScript from <head> to </head> for the head option.
+* Fixed </link> tag remaining.
+* Fixed </body> javascript not appearing.
+
 = 1.2 = 
 * Fixed SQL table not being updated.
 

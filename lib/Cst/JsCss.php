@@ -48,8 +48,8 @@ class Cst_JsCss {
 			preg_match_all('~<script.*(type="["\']text/javascript["\'].*)?src=["\'](.*)["\'].*(type=["\']text/javascript["\'].*)?></script>~iU',$content,$matches);
 			$files = $matches[2];
 		} else {
-			preg_match_all('~<link.*rel=[""\']stylesheet["\'].*href=["\'](.*)["\'].*(?!rel\=["\'].*["\']).*(/?>|></link>)~iU',$content,$matchesOne);
-			preg_match_all('~<link.*(?!rel\=["\'].*["\']).*href=["\'](.*)["\'].*rel=[""\']stylesheet["\'].*(/?>|></link>)~iU',$content,$matchesTwo);
+			preg_match_all('~<link.*rel=[""\']stylesheet["\'].*href=["\'](.*)["\'].*(?!rel\=["\'].*["\']).*(/>|></link>)~iU',$content,$matchesOne);
+			preg_match_all('~<link.*(?!rel\=["\'].*["\']).*href=["\'](.*)["\'].*rel=[""\']stylesheet["\'].*(/>|></link>)~iU',$content,$matchesTwo);
 			$files = array();
 			$matches = array(0 => array());
 			if ( isset($matchesOne[1]) ){
@@ -83,7 +83,7 @@ class Cst_JsCss {
 			$urlRegex = "~^".get_option("ossdl_off_cdn_url")."/(.*\.(css|js))(\?.*)?$~isU";
 			
 			if ( (!preg_match($urlRegex,$file,$match) || !isset($match[1]) ) && (preg_match("~^https?://~isU",$file )) ){
-				
+				http://cdn.catn.com
 				if ($filesConfig["external"] == "no"){
 					Cst_Debug::addLog("File '".$file."' is external while external is not to be combined");
 					continue;
@@ -200,15 +200,15 @@ class Cst_JsCss {
 			
 			if ($filesConfig['location'] == "body"){		
 				$replace = '<script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'"></script></body>';		
-				$content = str_ireplace("~</body>~iU", $replace, $content);
+				$content = preg_replace("~</body>~iU", $replace, $content);
 			} else {			
 				$replace = '<head><script type="text/javascript" src="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'"></script>';
 				$content = preg_replace("~<head.*>~iU", $replace, $content);
 			}
 			
 		} else {			
-			$replace = '<link rel="stylesheet" href="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'" type="text/css" />'.PHP_EOL.'</head>';
-			$content = str_ireplace("</head>", $replace, $content);
+			$replace = '<head><link rel="stylesheet" href="'.get_option("ossdl_off_cdn_url").'/'.$newFile.'" type="text/css" />';
+			$content = preg_replace("~<head.*>~iU", $replace, $content);
 		}
 		
 		return $content;
