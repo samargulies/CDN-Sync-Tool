@@ -83,7 +83,7 @@ class Cst_JsCss {
 			$urlRegex = "~^".get_option("ossdl_off_cdn_url")."/(.*\.(css|js))(\?.*)?$~isU";
 			
 			if ( (!preg_match($urlRegex,$file,$match) || !isset($match[1]) ) && (preg_match("~^https?://~isU",$file )) ){
-				http://cdn.catn.com
+			
 				if ($filesConfig["external"] == "no"){
 					Cst_Debug::addLog("File '".$file."' is external while external is not to be combined");
 					continue;
