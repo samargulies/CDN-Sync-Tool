@@ -42,6 +42,17 @@ class Cst_Plugin {
 	}
 	
 	/**
+	 * Getter function to allow tests 
+	 * access to the Plugin Object.
+	 * 
+	 * @since 1.3
+	 */
+	
+	public function getObject(){
+		return $this->object;
+	}
+	
+	/**
 	 * Fetches the current active plugins from network wide activated,
 	 * site activated and must use (mu-plugins).
 	 * 

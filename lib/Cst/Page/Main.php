@@ -37,7 +37,7 @@ class Cst_Page_Main extends Cst_Page {
 		require_once CST_DIR.'/pages/main/sync.html';
 	}
 	
-	public function display(){
+	public function display($test = false){
 	
 		
 		if ( isset($_POST["showsync"]) && $_POST["showsync"] == "yes" ){
@@ -48,8 +48,9 @@ class Cst_Page_Main extends Cst_Page {
 			$this->_wipeJsCss();
 		}
 		
+		$errorArray = array();
+		
 		if ( !empty($_POST) && !isset($_POST['wipe_js']) ){
-			$errorArray = array();
 					
 			if ( $_POST['cdn_provider'] == "aws" ){		
 				//*********************************
@@ -70,6 +71,7 @@ class Cst_Page_Main extends Cst_Page {
 				if ( !isset($_POST["aws_compression"]) || empty($_POST["aws_compression"]) ){
 					$errorArray[] = "GZIP compression is response required";
 				}
+				
 			} elseif ( $_POST['cdn_provider'] == "cf" ){
 				//***********************************
 				// Cloudfiles Data
@@ -134,14 +136,14 @@ class Cst_Page_Main extends Cst_Page {
 				$errorArray[] = "Smush files isn't a valid reponse";
 			}
 			
-			$cdn = array();
-				
+			$cdnUrl  = (!empty($_POST["cdn_hostname"])) ? $_POST["cdn_hostname"] : '';
+			$cdn = array();		
+			
 			if ( isset($_POST["cdn_provider"]) && !empty($_POST["cdn_provider"]) ){	
-						
+				
 				$cdn["provider"]   = $_POST["cdn_provider"];
-				$cdn["hostname"]   = $_POST["cdn_hostname"];
 				$cdn["hotlinking"] = $_POST["cdn_hotlinking"];
-				$cdnUrl  = $_POST["cdn_hostname"];
+				$cdn["hostname"]   = $cdnUrl;
 				if ( $cdn["provider"] == "aws"){
 					$cdn["access"]      = $_POST['aws_access'];
 					$cdn["secret"]      = $_POST["aws_secret"];
@@ -198,7 +200,7 @@ class Cst_Page_Main extends Cst_Page {
 			
 			if ( empty($errorArray) ){
 				
-				update_option("ossdl_off_cdn_url",$cdn["hostname"]);							
+				update_option("ossdl_off_cdn_url",$cdnUrl);							
 				update_option("cst_files",$files);
 				update_option("cst_images",$images);
 				update_option("cst_cdn",$cdn);
@@ -208,7 +210,6 @@ class Cst_Page_Main extends Cst_Page {
 			} else {
 				Cst_Debug::addLog("Form submission failed with ".print_r($errorArray,true));
 			}
-			
 		} else {
 		
 			$files  = get_option("cst_files");
@@ -220,6 +221,9 @@ class Cst_Page_Main extends Cst_Page {
 		}
 		
 		require_once CST_DIR."/pages/main/index.html";
+		
+		return compact(	$errorArray, $files, $images, $cdn, $general, $cdnUrl );
+		
 	}
 	
 }

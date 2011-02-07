@@ -21,6 +21,14 @@ class Cdn_Cf extends Cdn_Provider {
 	 */
 	protected $container;
 	
+	/**
+	 * 
+	 * @return CF_Container
+	 */
+	public function getObject(){
+		return $this->container;
+	}
+	
 	public function antiHotlinking(){
 		
 		if ( $this->checkSame("hotlinking") ){
@@ -98,6 +106,7 @@ class Cdn_Cf extends Cdn_Provider {
 		
 		$object->load_from_filename($fileLocation);
 		
+		return $uploadFile;
 	}
 	
 	/**

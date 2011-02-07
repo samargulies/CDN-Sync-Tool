@@ -2,7 +2,7 @@
 
 class Cst_Page_Contact extends Cst_Page {
 	
-	public function display(){
+	public function display($test = false){
 			
 		global $wp_version;
 		

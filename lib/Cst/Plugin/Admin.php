@@ -141,8 +141,6 @@ class Cst_Plugin_Admin {
 		}
 		Cst_Debug::addLog("File sync complete.");
 		update_option("cst_theme",false);		
-		wp_clear_scheduled_hook('cst_cron_hourly');
-		wp_schedule_event(time(), 'hourly', 'cst_cron_hourly'); 
 		
 		// This is to popup and show in an overlay iframe. 
 		// So we don't want the rest of the dashboard to load. 
@@ -177,21 +175,23 @@ class Cst_Plugin_Admin {
 	 */
 	
 	public function addCssAndJs(){
+		
 		Cst_Debug::addLog("Enqueuing the CSS and JS for the admin section.");
 		// TODO remove pointless ones.
-		   // CSS files
-		   wp_enqueue_style("dashboard");
-		   wp_enqueue_style("thickbox");
-		   wp_enqueue_style("global");
-		   wp_enqueue_style("wp-admin");
-		   wp_enqueue_style("cst-admin", WP_CONTENT_URL."/plugins/".plugin_basename(CST_DIR)."/css/admin.css");
-		   // JavaScript Files
-		   wp_enqueue_script("postbox");
-		   wp_enqueue_script("dashboard");
-		   wp_enqueue_script("thickbox");
-		   wp_enqueue_script("media-upload");
-		   wp_enqueue_script("jquery");
-		   wp_enqueue_script("cst-admin", WP_CONTENT_URL."/plugins/".plugin_basename(CST_DIR). "/javascript/options.js.php");
+		// CSS files
+		wp_enqueue_style("dashboard");
+		wp_enqueue_style("thickbox");
+		wp_enqueue_style("global");
+		wp_enqueue_style("wp-admin");
+		wp_enqueue_style("cst-admin", WP_CONTENT_URL."/plugins/".plugin_basename(CST_DIR)."/css/admin.css");
+		// JavaScript Files
+		wp_enqueue_script("postbox");
+		wp_enqueue_script("dashboard");
+		wp_enqueue_script("thickbox");
+		wp_enqueue_script("media-upload");
+		wp_enqueue_script("jquery");
+		wp_enqueue_script("cst-admin", WP_CONTENT_URL."/plugins/".plugin_basename(CST_DIR). "/javascript/options.js.php");
+		
 		return true;
 	}
 	

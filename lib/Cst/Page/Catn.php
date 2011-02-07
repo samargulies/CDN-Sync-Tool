@@ -2,8 +2,8 @@
 
 class Cst_Page_Catn extends Cst_Page {
 	
-	public function display(){
-		require_once CST_DIR.'/pages/misc/catn.html';
+	public function display($test = false){
+		require CST_DIR.'/pages/misc/catn.html';
 	}
 	
 }

@@ -6,7 +6,7 @@ Plugin URI: http://catn.com/
 Description: Syncs static files to a CDN
 Author: Fubra Limited
 Author URI: http://www.catn.com
-Version: 1.2
+Version: 1.3
 */
 
 /*
@@ -68,7 +68,8 @@ function cst_install(){
 							`type` varchar(3) NOT NULL
 							) ENGINE = MYISAM ;
 									");
-		update_option("cst_theme",true);
+		update_option("cst_theme",true);		
+		wp_schedule_event(time(), 'hourly', 'cst_cron_hourly');
 		Cst_Debug::addLog("CST installed successfully");
 }
 
@@ -87,13 +88,17 @@ function cst_upgrade($oldVersion){
 								) ENGINE = MYISAM ;
 										");
 	} 
-	if ( $oldVersion == "0.9" ){
+	if ( $oldVersion <= "0.9" ){
 		$wpdb->query("ALTER TABLE  `".CST_TABLE_JSCSS."` ADD  `type` VARCHAR( 255 ) NOT NULL");
 	} 
 	
 	if ( $oldVersion <= "1.1" ){
 		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `media` INT(1) NULL");
 		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `file_location` varchar(255) DEFAULT NULL,");
+	}
+	
+	if ( $oldVersion <= "1.2" ){		
+		wp_schedule_event(time(), 'hourly', 'cst_cron_hourly');
 	}
 	
 	return true;

@@ -17,6 +17,9 @@ class Cdn_Aws extends Cdn_Provider {
 	 */
 	protected $s3;
 	
+	public function getObject(){
+		return $this->s3;
+	}
 	
 	public function antiHotlinking(){
 		
@@ -64,30 +67,33 @@ class Cdn_Aws extends Cdn_Provider {
 	public function login() {
 		
 		require_once dirname(dirname(__FILE__)).'/awssdk/sdk.class.php';
-		
-		try {
-			$this->s3 = new AmazonS3(
-							$this->credentials["access"],
-							$this->credentials["secret"]
-						);
-					// Kinda flawed since even if we don't have 
-					// permissions to it, we'll get a positive result.
-					
-					if ( isset($_POST['create_bucket']) && $_POST["create_bucket"] == "yes" ){
+		if ( empty($this->s3) ){
+			try {
+				$this->s3 = new AmazonS3(
+								$this->credentials["access"],
+								$this->credentials["secret"]
+							);
+						// Kinda flawed since even if we don't have 
+						// permissions to it, we'll get a positive result.
 						
-						$response = $this->s3->create_bucket( $this->credentials["bucket_name"] , AmazonS3::REGION_US_E1 );
-						
-						if ( (string)$response->status != '200' ){
-							Cst_Debug::addLog("AWS Create bucket response : ".var_export($response,true));
-							return false;
+						if ( isset($_POST['create_bucket']) && $_POST["create_bucket"] == "yes" ){
+							
+							$response = $this->s3->create_bucket( $this->credentials["bucket_name"] , AmazonS3::REGION_US_E1 );
+							
+							if ( (string)$response->status != '200' ){
+								Cst_Debug::addLog("AWS Create bucket response : ".var_export($response,true));
+								return false;
+							}
+							
 						}
-						
-					}
-						
-			return true;
-		} catch ( Exception $e ){
-			return false;
-		}
+							
+				return true;
+			} catch ( Exception $e ){
+				return false;
+			}
+		} 
+		
+		return true;
 		
 	}	
 	
@@ -103,7 +109,7 @@ class Cdn_Aws extends Cdn_Provider {
 		$headers = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 352 * 10)) . ' GMT');	
 			
 		list($fileLocation,$uploadFile) = $this->_getLocationInfo($file,$media);
-		
+				
 		if ( !preg_match("~\.(css|js)$~isU",$file,$match) ){	
 			$fileType = ($finfo != false) ? finfo_file($finfo,$fileLocation) : mime_content_type($fileLocation);
 		} else {
@@ -113,7 +119,9 @@ class Cdn_Aws extends Cdn_Provider {
 			} else {
 				$fileType = "text/javascript";
 			} 
-			if ( isset($this->credentials["compression"]) && $this->credentials["compression"] == "yes" ){
+			
+			if ( isset($this->credentials["compression"]) 
+			  && $this->credentials["compression"] == "yes" ){
 				// Compress and add encoding
 				$fileContents = file_get_contents($fileLocation);			
 				$fileLocation = tempnam("/tmp", "gzfile");
@@ -123,9 +131,10 @@ class Cdn_Aws extends Cdn_Provider {
 				
 				$headers['Content-Encoding'] = 'gzip';
 			}
+			
 		}
 		
-		$acl =  ( $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
+		$acl =  ( !isset($this->credentials["hotlinking"]) || $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
 		$uploadFile= trim($uploadFile, "/");
 		$fileOptions = array(
 					'acl' => $acl,
@@ -133,11 +142,12 @@ class Cdn_Aws extends Cdn_Provider {
 					'contentType' => $fileType,
 					'fileUpload' => $fileLocation
 					);
-					
 		$this->s3->create_object(
 						$this->credentials["bucket_name"],
 						$uploadFile,
 						$fileOptions);
+		
+		return $uploadFile;
 		
 	}
 	

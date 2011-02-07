@@ -32,17 +32,17 @@ abstract class Cdn_Provider {
 	 */
 	public static function getProvider($providerName){
 		
-		if ( empty(self::$provider) ){
+		if ( empty(self::$provider[$providerName]) ){
 			if ( is_readable( LIB_DIR.'/Cdn/'.ucfirst($providerName).'.php' ) ){
 				require_once ( LIB_DIR.'/Cdn/'.ucfirst($providerName).'.php' );
 				$className = "Cdn_".ucfirst($providerName);
-				self::$provider = new $className();			
+				self::$provider[$providerName] = new $className();			
 			} else {
 				throw new Exception("Invalid provider");
 			}			
 		} 
 
-		return self::$provider;
+		return self::$provider[$providerName];
 	}
 	
 	/**
