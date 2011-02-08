@@ -157,15 +157,22 @@ class Cst_Sync {
 	
 		require_once CST_DIR."/lib/Cdn/Provider.php";
 		
+		$fileArray = array(
+						'location' => $fileLocation, 
+						'uri' => $fileLocation, 
+						'overwrite' => $images['overwrite'],
+						'compression_level' => intval($images['compression_level'])
+					);
+					
 		try {				
 			
 			if ( $compressImages ){
 				$gdCompression = "yes";
-				Cst_Image::gdCompression($fileLocation);
+				$fileArray = Cst_Image::gdCompression($fileArray);
 			}
 			
 			if ( $smushImages ){
-				Cst_Image::smushIt($fileLocation);
+				$fileArray = Cst_Image::smushIt($fileArray);
 				$smushedImage = "yes";
 			}		
 			
@@ -173,7 +180,7 @@ class Cst_Sync {
 				$objCdn = Cdn_Provider::getProvider($cdn["provider"]);
 				$objCdn->setAccessCredentials($cdn);
 				$objCdn->login();	
-				$objCdn->uploadFile($file,$media);
+				$objCdn->uploadFile($fileArray,$media);
 				$synced = "yes";
 			}
 			

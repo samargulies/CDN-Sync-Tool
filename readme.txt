@@ -103,6 +103,11 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.5 = 
+
+* Added toogable compression level on GD compression
+* Added ability to have image compression done on 
+
 = 1.4 =
 
 * Moved JavaScript from <head> to </head> for the head option.

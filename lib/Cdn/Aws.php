@@ -101,16 +101,16 @@ class Cdn_Aws extends Cdn_Provider {
 	 * (non-PHPdoc)
 	 * @see Cdn_Provider::uploadFile()
 	 */
-	public function uploadFile( $file , $media = true ){
+	public function uploadFile( $fileArray , $media = true ){
 		
 		
 		$uploadDir = wp_upload_dir();
 		$finfo = function_exists('finfo_open') ? finfo_open(FILEINFO_MIME_TYPE) : false;
 		$headers = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 352 * 10)) . ' GMT');	
 			
-		list($fileLocation,$uploadFile) = $this->_getLocationInfo($file,$media);
+		list($fileLocation,$uploadFile) = $this->_getLocationInfo($fileArray,$media);
 				
-		if ( !preg_match("~\.(css|js)$~isU",$file,$match) ){	
+		if ( !preg_match("~\.(css|js)$~isU",$fileArray['uri'],$match) ){	
 			$fileType = ($finfo != false) ? finfo_file($finfo,$fileLocation) : mime_content_type($fileLocation);
 		} else {
 			// TODO DRY this properly

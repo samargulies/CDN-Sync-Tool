@@ -192,8 +192,8 @@ $disabled = "";
 											<tr>
 												<th scope="row">Combine files</th>
 												<td>
-													<input <?php echo $disabled; ?> type="radio" name="combine" value="yes" id="combine_yes" <?php if ((isset($files) && is_array($files) ) && (isset($files["combine"]) && $files["combine"] == "yes")){ ?>checked="checked"<?php } ?> /> <label for="combine_yes">Yes</label>
-													<input <?php echo $disabled; ?> type="radio" name="combine" value="no" id="combine_no" <?php if ((!isset($files) || !is_array($files) ) || (!isset($files["combine"]) || $files["combine"] == "no")){ ?>checked="checked"<?php } ?> /> <label for="combine_no">No</label>
+													<input type="radio" name="combine" value="yes" id="combine_yes" <?php if ((isset($files) && is_array($files) ) && (isset($files["combine"]) && $files["combine"] == "yes")){ ?>checked="checked"<?php } ?> /> <label for="combine_yes">Yes</label>
+													<input type="radio" name="combine" value="no" id="combine_no" <?php if ((!isset($files) || !is_array($files) ) || (!isset($files["combine"]) || $files["combine"] == "no")){ ?>checked="checked"<?php } ?> /> <label for="combine_no">No</label>
 												</td>
 											</tr>
 											<tr>
@@ -205,7 +205,6 @@ $disabled = "";
 													<select name="minify_engine" id="minify">
 														<option value="none">None</option>
 														<option value="google">Google Closure Compiler</option>
-														<opiton value="php-minify">PHP-Minify</option>
 													</select>
 												</td>
 											</tr>
@@ -233,11 +232,11 @@ $disabled = "";
 											<tr class="even">
 												<th scope="row">Include external hosted files</th>
 												<td>
-													<input <?php echo $disabled; ?> type="radio" name="external" value="yes" id="external_yes" <?php if ((isset($files) && is_array($files) ) && (isset($files["external"]) && $files["external"] == "yes" )){ ?>checked="checked"<?php } ?>  /> <label for="external_yes">Yes</label>
-													<input <?php echo $disabled; ?> type="radio" name="external" value="no" id="external_no" <?php if ((!isset($files) || !is_array($files) ) || (!isset($files["external"]) || $files["external"] == "no")){ ?>checked="checked"<?php } ?>  /> <label for="external_no">No</label>
+													<input type="radio" name="external" value="yes" id="external_yes" <?php if ((isset($files) && is_array($files) ) && (isset($files["external"]) && $files["external"] == "yes" )){ ?>checked="checked"<?php } ?>  /> <label for="external_yes">Yes</label>
+													<input type="radio" name="external" value="no" id="external_no" <?php if ((!isset($files) || !is_array($files) ) || (!isset($files["external"]) || $files["external"] == "no")){ ?>checked="checked"<?php } ?>  /> <label for="external_no">No</label>
 												</td>
 											</tr>
-											<tr>
+											<tr class="even">
 												<td colspan="2">Include external hosted JavaScript or CSS in the single files or to leave them alone. Generally this is a good idea.</td>
 											</tr>
 											<tr>
@@ -272,7 +271,7 @@ $disabled = "";
 											</tr>
 										</table>
 										
-										<input type="submit" <?php echo $disabled; ?> class="button-primary" value="Save" />
+										<input type="submit" class="button-primary" value="Save" />
 									</div> 
 									
 								</div>
@@ -289,8 +288,8 @@ $disabled = "";
 											<tr>
 												<th scope="row">Smush Images via Smush.It</th>
 												<td>
-													<input <?php echo $disabled; ?> type="radio" name="smush" value="yes" id="smush_yes" <?php if ((isset($files) && is_array($files) ) && (isset($images["smush"]) && $images["smush"] == "yes")){ ?>checked="checked"<?php } ?> /> <label for="smush_yes">Yes</label>
-													<input <?php echo $disabled; ?> type="radio" name="smush" value="no" id="smush_no" <?php if ((!isset($files) || !is_array($files) ) || (!isset($images["smush"]) || $images["smush"] == "no")){ ?>checked="checked"<?php } ?> /> <label for="smush_no">No</label>
+													<input type="radio" name="smush" value="yes" id="smush_yes" <?php if ((isset($images) && is_array($images) ) && (isset($images["smush"]) && $images["smush"] == "yes")){ ?>checked="checked"<?php } ?> /> <label for="smush_yes">Yes</label>
+													<input type="radio" name="smush" value="no" id="smush_no" <?php if ((!isset($images) || !is_array($images) ) || (!isset($images["smush"]) || $images["smush"] == "no")){ ?>checked="checked"<?php } ?> /> <label for="smush_no">No</label>
 												</td>
 											</tr>
 											<tr>
@@ -299,16 +298,39 @@ $disabled = "";
 											<tr class="even">
 												<th scope="row">Compress Images via GD</th>
 												<td>
-													<input <?php echo $disabled; ?> type="radio" name="compress" value="yes" id="compress_yes" <?php if ((isset($files) && is_array($files) ) && (isset($images["compress"]) && $images["compress"] == "yes")){ ?>checked="checked"<?php } ?> /> <label for="compress_yes">Yes</label>
-													<input <?php echo $disabled; ?> type="radio" name="compress" value="no" id="compress_no" <?php if ((!isset($files) || !is_array($files) ) || (!isset($images["compress"]) || $images["compress"] == "no")){ ?>checked="checked"<?php } ?> /> <label for="compress_no">No</label>
+													<input type="radio" name="compress" value="yes" id="compress_yes" <?php if ((isset($images) && is_array($images) ) && (isset($images["compress"]) && $images["compress"] == "yes")){ ?>checked="checked"<?php } ?> /> <label for="compress_yes">Yes</label>
+													<input type="radio" name="compress" value="no" id="compress_no" <?php if ((!isset($images) || !is_array($images) ) || (!isset($images["compress"]) || $images["compress"] == "no")){ ?>checked="checked"<?php } ?> /> <label for="compress_no">No</label>
 												</td>
 											</tr>
 											<tr class="even">
 												<td colspan="2">A lossful compression where GD library is used to compress the image. Will affect the quality of the picture.</td>
 											</tr>
+											<tr>
+												<th scope="row">Overwrite files</th>
+												<td>
+													<input type="radio" name="overwrite" value="yes" id="overwrite_yes" <?php if ((isset($images) && is_array($images) ) && (isset($images["overwrite"]) && $images["overwrite"] == "yes")){ ?>checked="checked"<?php } ?> /> <label for="overwrite_yes">Yes</label>
+													<input type="radio" name="overwrite" value="no" id="overwrite_no" <?php if ((!isset($images) || !is_array($images) ) || (!isset($images["overwrite"]) || $images["overwrite"] == "no")){ ?>checked="checked"<?php } ?> /> <label for="overwrite_no">No</label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">Overwrite files, warning this can result in bad quality images and can't be reversed.</td>
+											</tr>
+											<tr class="even">
+												<th scope="row">GD Compression Level</th>
+												<td>
+													<select name="compression_level">
+														<?php foreach ( range(1,10) as $level ) { ?>
+															<option value="<?php echo $level; ?>" <?php if ( isset($images) && isset($images['compression_level']) && $images['compression_level'] == $level ) { ?> selected="yes"<?php } ?>><?php echo $level; ?></option>
+														<?php } ?>
+													</select>
+												</td>
+											</tr>
+											<tr class="even">
+												<td colspan="2">The level of compression on 1 being the least and 10 being the most.</td>
+											</tr>
 										</table>
 										
-										<input <?php echo $disabled; ?> type="submit" class="button-primary" value="Save" />
+										<input type="submit" class="button-primary" value="Save" />
 									</div> 
 									
 								</div>								
@@ -404,14 +426,14 @@ $disabled = "";
 											<p>Syncs a specficied directory to CDN</p>
 											<p>
 												<label for="directory">Directory</label>
-												<input <?php echo $disabled; ?> type="text" name="directory" id="theme_files" />
+												<input type="text" name="directory" id="theme_files" />
 												
 											</p>
 											<input type="checkbox" name="force" value="yes" id="force" />
 											<label for="override">Don't skip already sync'd</label>
 											<input type="hidden" name="showsync" value="yes" />
 											<p>
-												<input <?php echo $disabled; ?> type="submit" class="button-primary" value="Sync Files" />
+												<input type="submit" class="button-primary" value="Sync Files" />
 											</p>
 										</form>
 										

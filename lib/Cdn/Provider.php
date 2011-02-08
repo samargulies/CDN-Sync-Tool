@@ -116,14 +116,20 @@ abstract class Cdn_Provider {
 		
 		global $blog_id;
 		
+		
 		if ( $media == true){
 			$uploadDir = wp_upload_dir();
 			$directory = ( (function_exists('is_multisite') && is_multisite()) && $blog_id != 1 ) ? 'files/' : 'wp-content/uploads/';
-			$uploadFile = $directory.$file;
-			$fileLocation = $uploadDir["basedir"]."/".$file;
+			$fileLocation = $uploadDir["basedir"]."/".$file['uri'];
 		} else {
-			$fileLocation = ABSPATH.$file;
-			$uploadFile = $file;			
+			$uploadFile = $file['uri'];			
+		}
+		
+	
+		if ( $file['overwrite'] == 'yes' ){			
+			$fileLocation = $file['location'];			
+		} else {
+			$fileLocation = (isset($directory)) ? $directory.$file['location'] : ABSPATH.$file['location'];
 		}
 		
 		return array($fileLocation,$uploadFile);
