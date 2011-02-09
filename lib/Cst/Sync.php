@@ -62,6 +62,7 @@ class Cst_Sync {
 	
 	public static function getDirectoryFiles( array $dirs,  $sync = false){
 		$files = array();
+		$images = get_option("cst_images");
 		do {
 			$newDirs = array();
 			foreach($dirs as $dir){
@@ -79,7 +80,7 @@ class Cst_Sync {
 						$newDirs[] = $entryName;
 					} elseif ( preg_match("~\.(css|js|jpe?g|gif|png)$~isU",$entryName) ){
 						// Is a CSS,JS,Jpeg,Gif,Png file
-						if ( !is_writable($entryName) & $sync === true ){
+						if ( !is_writable($entryName) && $images['overwrite'] == 'yes'  && $sync === true ){
 							print "Error : ".$entryName." is not writable. It must be writable to proceed.<br />";
 							print "Try executing: chmod -R 777 ".$dir;
 							return $files;		

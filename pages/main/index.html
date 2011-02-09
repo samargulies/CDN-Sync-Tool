@@ -176,7 +176,7 @@ $disabled = "";
 										<a href="#" class="button-secondary" id="check-details">Check Details</a>
 										<input type="submit" class="button-primary" value="Save" <?php echo $disabled; ?> />
 									
-									</div> 
+									</div> directory
 									
 								</div>
 								
@@ -204,7 +204,7 @@ $disabled = "";
 												<td>
 													<select name="minify_engine" id="minify">
 														<option value="none">None</option>
-														<option value="google">Google Closure Compiler</option>
+														<option value="google" <?php if ((isset($files) && is_array($files) ) && isset($files['minify_engine']) && $files['minify_engine'] == "google" ) { ?> selected="yes"<?php } ?>>Google Closure Compiler</option>
 													</select>
 												</td>
 											</tr>
@@ -212,9 +212,9 @@ $disabled = "";
 												<th scope="row">Level</th>
 												<td>
 													<select name="google_level">
-														<option value="whitespace">Whitespace Only</option>
-														<option value="simple">Simple Code Optimization</option>
-														<option value="advance">Advance Code Optimization</option>
+														<option value="whitespace" <?php if ((isset($files) && is_array($files) ) && isset($files['minify_level']) && $files['minify_level'] == "whitespace" ) { ?> selected="yes"<?php } ?>>Whitespace Only</option>
+														<option value="simple" <?php if ((isset($files) && is_array($files) ) && isset($files['minify_level']) && $files['minify_level'] == "simple" ) { ?> selected="yes"<?php } ?>>Simple Code Optimization</option>
+														<option value="advance" <?php if ((isset($files) && is_array($files) ) && isset($files['minify_level']) && $files['minify_level'] == "advance" ) { ?> selected="yes"<?php } ?>>Advance Code Optimization</option>
 													</select>
 											</tr>
 											<tr class="even">

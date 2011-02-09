@@ -76,7 +76,10 @@ function cst_install(){
 function cst_upgrade($oldVersion){
 	
 	global $wpdb;
-	
+
+	if ( $oldVersion <= "1.2" ){		
+		wp_schedule_event(time(), 'hourly', 'cst_cron_hourly');
+	}/*
 	if ( $oldVersion <= "0.8" ){
 		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `hash` VARCHAR( 32 ) NULL");
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `".CST_TABLE_JSCSS."` ( 
@@ -84,7 +87,7 @@ function cst_upgrade($oldVersion){
 									`filename` varchar(255) NOT NULL,
 									`template` varchar(255) NOT NULL,
 									`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-									`type` varchar(3) NOT NULL
+									`tAWS_SECRET_KEype` varchar(3) NOT NULL
 								) ENGINE = MYISAM ;
 										");
 	} 
@@ -96,10 +99,7 @@ function cst_upgrade($oldVersion){
 		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `media` INT(1) NULL");
 		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `file_location` varchar(255) DEFAULT NULL,");
 	}
-	
-	if ( $oldVersion <= "1.2" ){		
-		wp_schedule_event(time(), 'hourly', 'cst_cron_hourly');
-	}
+	*/
 	
 	return true;
 }

@@ -103,6 +103,10 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.6 =
+
+* Added fixed Minify settings not appearing saved.
+
 = 1.5 = 
 
 * Added toogable compression level on GD compression
