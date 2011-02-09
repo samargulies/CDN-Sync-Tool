@@ -79,7 +79,8 @@ function cst_upgrade($oldVersion){
 
 	if ( $oldVersion <= "1.2" ){		
 		wp_schedule_event(time(), 'hourly', 'cst_cron_hourly');
-	}/*
+	}
+	
 	if ( $oldVersion <= "0.8" ){
 		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `hash` VARCHAR( 32 ) NULL");
 		$wpdb->query("CREATE TABLE IF NOT EXISTS `".CST_TABLE_JSCSS."` ( 
@@ -99,7 +100,7 @@ function cst_upgrade($oldVersion){
 		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `media` INT(1) NULL");
 		$wpdb->query("ALTER TABLE `".CST_TABLE_FILES."` ADD `file_location` varchar(255) DEFAULT NULL,");
 	}
-	*/
+	
 	
 	return true;
 }
