@@ -106,7 +106,7 @@ class Cst_Page_Main extends Cst_Page {
 					$errorArray[] = "FTP Server is required";					
 				}
 				
-				if ( !isset(_showSync$_POST["ftp_port"]) || !ctype_digit($_POST["ftp_port"]) ){
+				if ( !isset($_POST["ftp_port"]) || !ctype_digit($_POST["ftp_port"]) ){
 					$errorArray[] = "FTP Port is required";
 				}
 				
