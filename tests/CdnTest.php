@@ -16,7 +16,12 @@ class CdnTest extends PHPUnit_Framework_TestCase {
 		
 		$filename = $this->_createTestFile('testAmazonS3FileUploadNoCompression'.time());
 		// todo improve
-		$uploadFile = $objAws->uploadFile( basename($filename), true );
+		$uploadFile = $objAws->uploadFile( array('location' => $filename, 
+		 										 'uri' => basename($filename),
+												 'overwrite' => 'no',
+												 'compression_level' => '1',
+												)									
+										, true );
 				
 		$curl = curl_init( AWS_URL.$uploadFile );
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -39,7 +44,11 @@ class CdnTest extends PHPUnit_Framework_TestCase {
 		
 		$filename = $this->_createTestFile('testAmazonS3FileUploadWithCompression'.time());
 		// todo improve
-		$uploadFile = $objAws->uploadFile( basename($filename), true );
+		$uploadFile = $objAws->uploadFile( array('location' => $filename, 
+		 										 'uri' => basename($filename),
+												 'overwrite' => 'no',
+												 'compression_level' => '1',
+												), true );
 				
 		$curl = curl_init( AWS_URL.$uploadFile );
  		curl_setopt($curl, CURLOPT_ENCODING, 'gzip,deflate'); 
@@ -63,7 +72,11 @@ class CdnTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue( $objCf->login() , "Can't login to CloudFiles" );
 				
 		$filename = $this->_createTestFile('testCloudFilesFileUploadNoCompression'.time());
-		$uploadFile = $objCf->uploadFile( basename($filename) , true );
+		$uploadFile = $objCf->uploadFile( array('location' => $filename, 
+		 										 'uri' => basename($filename),
+												 'overwrite' => 'no',
+												 'compression_level' => '1',
+												) , true );
 				
 		$curl = curl_init( CF_URL.$uploadFile );
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

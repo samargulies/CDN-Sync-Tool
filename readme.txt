@@ -103,6 +103,11 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.7 =
+
+* [10/2/2011 - 9:38] Fixed provider adding extra ABSPATH to file locations
+* [10/2/2011 - 9:45] Updated unit test
+
 = 1.6 =
 
 * Fixed Minify settings not appearing saved.

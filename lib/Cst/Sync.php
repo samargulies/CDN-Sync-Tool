@@ -160,7 +160,7 @@ class Cst_Sync {
 		
 		$fileArray = array(
 						'location' => $fileLocation, 
-						'uri' => $fileLocation, 
+						'uri' => $file, 
 						'overwrite' => $images['overwrite'],
 						'compression_level' => intval($images['compression_level'])
 					);

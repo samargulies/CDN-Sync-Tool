@@ -109,7 +109,8 @@ class Cdn_Aws extends Cdn_Provider {
 		$headers = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 352 * 10)) . ' GMT');	
 			
 		list($fileLocation,$uploadFile) = $this->_getLocationInfo($fileArray,$media);
-				
+
+		
 		if ( !preg_match("~\.(css|js)$~isU",$fileArray['uri'],$match) ){	
 			$fileType = ($finfo != false) ? finfo_file($finfo,$fileLocation) : mime_content_type($fileLocation);
 		} else {
@@ -146,7 +147,7 @@ class Cdn_Aws extends Cdn_Provider {
 						$this->credentials["bucket_name"],
 						$uploadFile,
 						$fileOptions);
-		
+									
 		return $uploadFile;
 		
 	}

@@ -125,13 +125,7 @@ abstract class Cdn_Provider {
 		} else {
 			$uploadFile = $file['uri'];			
 		}
-		
-	
-		if ( $file['overwrite'] == 'yes' ){			
-			$fileLocation = $file['location'];			
-		} else {
-			$fileLocation = (isset($directory)) ? $file['location'] : ABSPATH.$file['location'];
-		}
+		$fileLocation = $file['location'];
 		
 		return array($fileLocation,$uploadFile);
 	}
