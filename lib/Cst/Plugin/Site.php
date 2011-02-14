@@ -80,7 +80,7 @@ class Cst_Plugin_Site {
 	public function showFooter(){
 		
 		Cst_Debug::addLog("Adding footer details");
-		echo "<!--- CDN Sync Tool ".CST_VERSION." Developed by iain.cambridge at fubra.com --->";
+		echo "<!-- CDN Sync Tool ".CST_VERSION." Developed by iain.cambridge at fubra.com -->";
 	
 		$general = get_option('cst_general');
 		

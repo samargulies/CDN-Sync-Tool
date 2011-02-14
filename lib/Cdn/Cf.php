@@ -87,7 +87,7 @@ class Cdn_Cf extends Cdn_Provider {
 		$object = $this->container->create_object($uploadFile);
 		$object->metadata = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 30)) . ' GMT');
 		
-		if ( !preg_match("~\.(css|js)$~isU",$file['uri'],$match) ){	
+		if ( !preg_match("~\.(css|js)$~isU",$fileArray['uri'],$match) ){	
 			$object->content_type = ($finfo != false) ? finfo_file($finfo,$fileLocation) : mime_content_type($fileLocation);
 		} else {
 			

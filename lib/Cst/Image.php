@@ -17,7 +17,7 @@ class Cst_Image {
 		
 		if ( !preg_match("~\.(jpe?g|png)$~isU",$fileArray['uri']) || !is_writable($fileArray['location']) ){
 			Cst_Debug::addLog("Invalid filetype sent to GD Compression '".$fileArray['uri']."'");
-			return;
+			return $fileArray;
 		}
 
 		if ( $fileArray['overwrite'] != 'yes' ){
@@ -51,7 +51,7 @@ class Cst_Image {
 		
 		if ( !preg_match("~\.(jpe?g|png|gif)$~isU",$fileArray['uri']) || !is_writable($fileArray['location']) ){
 			Cst_Debug::addLog("Invalid filetype sent to Smush.IT Compression '".$fileArray['uri']."'");
-			return;
+			return $fileArray;
 		}
 		
 	
@@ -64,7 +64,7 @@ class Cst_Image {
 		$smushit = new SmushIt($fileArray['location']);
 		
 		if ( !$smushit->savings ){
-			return;
+			return $fileArray;
 		}
 		
 		$tempFile = tempnam('/tmp', 'cst');
@@ -84,7 +84,7 @@ class Cst_Image {
 		
 		$fileArray['location'] = $writeLocation;
 		
-		return true;
+		return $fileArray;
 	
 	}
 }

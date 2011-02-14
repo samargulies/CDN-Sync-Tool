@@ -103,6 +103,11 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.8 =
+* [14/2/2011 - 15:00] Fixed Smushit and GD compression turnning boolean/null values instead of the fileArray.
+* [14/2/2011 - 16:20] Added test case to check non images are being sync'd properly.
+* [14/2/2011 - 16:39] Fixed CloudFront mime content type.
+
 = 1.7 =
 
 * [10/2/2011 - 9:38] Fixed provider adding extra ABSPATH to file locations

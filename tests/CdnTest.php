@@ -1,8 +1,53 @@
 <?php
 
+require_once CST_DIR.'/lib/Cdn/Provider.php';
+
 class CdnTest extends PHPUnit_Framework_TestCase {
 	
 	protected $_files = array('aws' => '');
+	
+	
+	public function testCdnFileSyncWithNonImage(){
+		
+		$oldCdnSettings = get_option("cst_cdn");
+		$oldImageSettings = get_option("cst_images");
+		
+		// UPDATE CDN SETTINGS
+		$cdn = array();
+		$cdn["provider"]   = "aws";
+		$cdn["hotlinking"] = "no";
+		$cdn["hostname"]   = "n/a";
+		$cdn["access"]      = AWS_ACCESS;
+		$cdn["secret"]      = AWS_SECRET;
+		$cdn["bucket_name"] = AWS_BUCKET;
+		$cdn["compression"] = "no";
+		update_option("cst_cdn", $cdn);
+		
+		// UPDATE IMAGE SETTINWG
+		$images = array();
+		$images["smush"] = "no";
+		$images["compress"] = "no";
+		$images["overwrite"] = "no";
+		$images["compression_level"] = 0;		
+		update_option("cst_images",$images);
+		
+		$filename = $this->_createTestFile('testSyncProcessWithNonImageWhileSmushItAndGdDisabled'.time());
+		
+		Cst_Sync::process( basename( $filename ),true);
+		
+		$curl = curl_init( AWS_URL.'wp-content/uploads/'.basename( $filename ) );
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		
+		$awsContents = curl_exec($curl);		
+		$localContents = file_get_contents($filename);
+		
+		$this->assertEquals($localContents,$awsContents,"AWS file contents don't match the local content");
+				
+		unlink($filename);
+		update_option("cst_cdn",$oldCdnSettings);
+		update_option("cst_images",$oldImageSettings);
+		
+	}
 	
 	/**
 	 * Test to ensure the Amazon S3 file upload is working.
