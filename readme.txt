@@ -4,6 +4,7 @@ Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files
 Tested up to: 3.1-RC4
 Stable tag: 1.8
 Requires At Least: 3.0
+Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=99WUGVV4HY5ZE&lc=GB&item_name=CATN%20Plugins&item_number=catn&currency_code=GBP&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted 
 
 Syncs static files to a content delivery network (CDN) such as Amazon S3 / CloudFront,MaxCDN and CloudFiles. To be used with WP-Supercache.
  
