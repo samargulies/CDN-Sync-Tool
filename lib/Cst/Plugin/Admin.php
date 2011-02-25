@@ -100,7 +100,7 @@ class Cst_Plugin_Admin {
 		// Find out the number of items in the sub arrays
 		$total = sizeof($fileArrays, COUNT_RECURSIVE) - sizeof($fileArrays);
 		Cst_Debug::addLog("Files have been retrived, total count is ".$total);
-		
+		//
 		$forceOverwrite = ( isset($_GET["force"]) && $_GET["force"] == "yes") ? true : false;
 		Cst_Debug::addLog("The force mode for this sync is ".var_export($forceOverwrite,true));
 		foreach ( $fileArrays as $key => $files ) {
@@ -108,16 +108,15 @@ class Cst_Plugin_Admin {
 			foreach ( $files as $file ){
 		
 				$file = str_replace(ABSPATH,"",$file);	
-				$count = $wpdb->get_var(
+				$count = (int)$wpdb->get_var(
 								$wpdb->prepare("SELECT COUNT(*) FROM ".CST_TABLE_FILES." WHERE filename = %s AND transferred = 'yes'", 
 											array($file))						
-								);
-								
+								);		
 				print "Syncing [".++$i."/".$total."] ".$file;		
 				ob_flush();
 				flush();				
 				
-				if ( $count && !$forceOverwrite  ){
+				if ( $count > 0 && !$forceOverwrite  ){
 					print " skipped, already synced".PHP_EOL."<br />";
 					Cst_Debug::addLog("File '".$file."' has already been synced so has been skipped");
 					ob_flush();

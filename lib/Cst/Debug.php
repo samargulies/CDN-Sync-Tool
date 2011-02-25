@@ -24,7 +24,7 @@ class Cst_Debug {
 	 * @param string $log
 	 */
 	public static function addLog($log){
-		if ( defined("WP_DEBUG") ){
+		if ( defined("WP_DEBUG") && WP_DEBUG == true ){
 			error_log(microtime(true)." ".$log);
 			self::$debugLog[] = microtime(true)." ".$log;
 		}
