@@ -109,11 +109,26 @@ $disabled = "";
 											<tr class="aws_details">
 												<td colspan="2">This is where you want the files uploaded to. You can create/edit buckets <a href="http://console.amazon.com" target="_blank">here</a>.</td>
 											</tr>
-											<tr class="aws_details">
+											<tr class="aws_details even">
 												<th scope="row">Create Bucket</th>
 												<td>
 													<input type="checkbox" name="create_bucket" value="yes" <?php echo $disabled; ?> /> Create a new bucket.
 												</td>
+											</tr>
+											<tr class="aws_details even">
+												<td colspan="2">This is where you want the files uploaded to. You can create/edit buckets <a href="http://console.amazon.com" target="_blank">here</a>.</td>
+											</tr>
+											<tr class="aws_details">
+												<th scope="row">Use reduce redunancy option</th>
+												<td>	
+													<input type="radio" name="aws_reduced" value="yes" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws") && (isset($cdn["reduced"]) && $cdn['reduced'] == "yes")){?> checked="yes"<?php } ?> id="aws_reduced_yes" />
+													<label for="aws_reduced_yes">Yes</label>
+													<input type="radio" name="aws_reduced" value="no" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "aws") && (!isset($cdn["reduced"]) || $cdn['reduced'] == "no")){?> checked="yes"<?php } ?> id="aws_reduced_no" />
+													<label for="aws_reduced_no">No</label>
+												</td>
+											</tr>
+											<tr class="aws_details">
+												<td colspan="2">Reduces costs. <strong><font color="#FF0000">WARNING: MAY RESULT IN RANDOM LOSS OF FILES!</font></strong></td>
 											</tr>
 											<tr class="cf_details">
 												<th scope="row">Username</th>

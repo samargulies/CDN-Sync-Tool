@@ -149,6 +149,7 @@ class Cst_Page_Main extends Cst_Page {
 					$cdn["secret"]      = $_POST["aws_secret"];
 					$cdn["bucket_name"] = $_POST["aws_bucket"];
 					$cdn["compression"] = $_POST["aws_compression"];
+					$cdn["reduced"] = (isset($_POST["aws_reduced"])) ? $_POST["aws_reduced"] : 'no' ;
 				} elseif ( $cdn["provider"] == "cf" ){
 					$cdn["username"]  = $_POST["cf_username"];
 					$cdn["apikey"]    = $_POST["cf_apikey"];

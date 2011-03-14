@@ -107,7 +107,8 @@ class Cdn_Aws extends Cdn_Provider {
 		$uploadDir = wp_upload_dir();
 		$finfo = function_exists('finfo_open') ? finfo_open(FILEINFO_MIME_TYPE) : false;
 		$headers = array('expires' => date('D, j M Y H:i:s', time() + (86400 * 352 * 10)) . ' GMT');	
-			
+		$headers['Cache-Control'] = 'max-age=864000';
+		
 		list($fileLocation,$uploadFile) = $this->_getLocationInfo($fileArray,$media);
 
 		
@@ -135,13 +136,15 @@ class Cdn_Aws extends Cdn_Provider {
 			
 		}
 		
+		
 		$acl =  ( !isset($this->credentials["hotlinking"]) || $this->credentials["hotlinking"] == "no" ) ? AmazonS3::ACL_PUBLIC : AmazonS3::ACL_PRIVATE;
 		$uploadFile= trim($uploadFile, "/");
 		$fileOptions = array(
 					'acl' => $acl,
 					'headers' => $headers,
 					'contentType' => $fileType,
-					'fileUpload' => $fileLocation
+					'fileUpload' => $fileLocation,
+					'storage' => ( $this->credentials['reduced'] == "yes" ) ? AmazonS3::STORAGE_REDUCED : AmazonS3::STORAGE_STANDARD
 					);
 		$this->s3->create_object(
 						$this->credentials["bucket_name"],

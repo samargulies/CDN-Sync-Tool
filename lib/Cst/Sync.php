@@ -135,6 +135,12 @@ class Cst_Sync {
 		return $actualFiles;
 	}
 	
+	/**
+	 * Starts the upload process for the file.
+	 * 
+	 * @param string $file The location of the file. If not from the media library, it should be an absolute path.
+	 * @param boolean $media if true then modifies the file string to add the upload directory before the filename. Otherwise leaves it alone.
+	 */
 	public static function process( $file , $media = false ){
 
 		global $wpdb;

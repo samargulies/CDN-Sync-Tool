@@ -1,10 +1,10 @@
 === CDN Sync Tool ===
-Contributors: Fubra
+Contributors: Fubra,Backie
 Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme,MaxCDN,Origin Pull,Origin,Pull,files,speed,faster,accelerator,Page Load, zoom
-Tested up to: 3.1-RC4
-Stable tag: 1.8
+Tested up to: 3.1
+Stable tag: 1.9
 Requires At Least: 3.0
-Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=99WUGVV4HY5ZE&lc=GB&item_name=CATN%20Plugins&item_number=catn&currency_code=GBP&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted 
+Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=99WUGVV4HY5ZE&lc=GB&item_name=CATN%20Plugins-CDN&item_number=catn-cdn&currency_code=GBP&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted 
 
 Syncs static files to a content delivery network (CDN) such as Amazon S3 / CloudFront,MaxCDN and CloudFiles. To be used with WP-Supercache.
  
@@ -103,6 +103,13 @@ The difference is that with Origin Pull the files are pulled from your web host 
 3. Go CDN Sync Tool and configure
 
 == CHANGELOG ==
+
+= 1.9 =
+
+* [14/03/2011 - 14:18] Removed calls to supposedly private instance variable $wpdb->prefix.
+* [14/03/2011 - 13:58] Added Cache-Control header to AWS uploads. Props Michel Peterson
+* [02/03/2011 - 09:27] Added admin bar menu.
+* [25/02/2011 - 08:03] Fixed debug messages being written to error log when WP_DEBUG != true
 
 = 1.8 =
 * [14/2/2011 - 15:00] Fixed Smushit and GD compression turnning boolean/null values instead of the fileArray.

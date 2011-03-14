@@ -71,6 +71,16 @@ class Cst_Plugin {
 		return $activePlugins;
 	}
 	
+	public function adminBar( $wp_admin_bar ){
+		if ( !current_user_can("manage_options") ) {
+       		return false;
+    	}
+		$wp_admin_bar->add_menu( array( 'title' => 'CDN Sync Tool', 'href' => admin_url('admin.php?page='.CST_PAGE_MAIN), 'id' => CST_PAGE_MAIN) );		
+		$wp_admin_bar->add_menu( array( 'title' => 'CatN', 'href' => admin_url('admin.php?page='.CST_PAGE_CATN), 'id' => CST_PAGE_CATN, 'parent' => CST_PAGE_MAIN) );
+		$wp_admin_bar->add_menu( array( 'title' => 'Contact', 'href' => admin_url('admin.php?page='.CST_PAGE_CONTACT), 'id' => CST_PAGE_CONTACT, 'parent' => CST_PAGE_MAIN) );
+	
+	}
+	
 	/**
 	 * Creates the plugin object. A Cst_Plugin_Admin if we're
 	 * in the admin dashboard. Cst_Plugin_Site if we're not.
@@ -78,7 +88,8 @@ class Cst_Plugin {
 	 */
 	
 	public function __construct(){
-		
+
+		add_action('admin_bar_menu', array($this,"adminBar") ,999);
 		if ( is_admin() ){
 			
 			require_once CST_DIR.'/lib/Cst/Plugin/Admin.php';
