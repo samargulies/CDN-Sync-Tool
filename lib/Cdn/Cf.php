@@ -53,7 +53,7 @@ class Cdn_Cf extends Cdn_Provider {
 							NULL,
 							constant($this->credentials["authurl"])
 						);
-						
+							
 			$auth->ssl_use_cabundle(); // if breaks try removing.
 			
 			if ( $auth->authenticate() ) {
@@ -68,6 +68,8 @@ class Cdn_Cf extends Cdn_Provider {
 			}												
 	
 		} catch ( Exception $e ){
+			Cst_Debug::addLog($e->getMessage());
+			Cst_Debug::addLog(constant($this->credentials["authurl"]));
 			//TODO log these.
 			return false;
 		}
