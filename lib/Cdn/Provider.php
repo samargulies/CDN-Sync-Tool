@@ -116,15 +116,22 @@ abstract class Cdn_Provider {
 		
 		global $blog_id;
 		
+		$cdn = get_option("cst_cdn");
 		
 		if ( $media == true){
 			$uploadDir = wp_upload_dir();
-			$directory = ( (function_exists('is_multisite') && is_multisite()) && $blog_id != 1 ) ? 'files/' : 'wp-content/uploads/';
+			$directory = ((function_exists('is_multisite') && is_multisite() ) && $blog_id != 1 ) ?  'wp-content/blogs.dir/'.$blog_id.'/files/' : 'wp-content/uploads/';
 			$fileLocation = $uploadDir["basedir"]."/".$file['uri'];
 			$uploadFile = $directory.$file['uri'];
 		} else {
 			$uploadFile = $file['uri'];			
 		}
+		
+		if ( $cdn['absolute'] !== "yes" ){
+			// no multisite check since only multisite sites should have it.
+			$uploadFile = str_replace('wp-content/blogs.dir/'.$blog_id.'/', '', $uploadFile);		
+		}
+		 
 		$fileLocation = $file['location'];
 		
 		return array($fileLocation,$uploadFile);

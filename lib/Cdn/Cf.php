@@ -49,7 +49,9 @@ class Cdn_Cf extends Cdn_Provider {
 		try {
 			$auth = new CF_Authentication(
 							$this->credentials["username"],
-							$this->credentials["apikey"]
+							$this->credentials["apikey"],
+							NULL,
+							constant($this->credentials["authurl"])
 						);
 						
 			$auth->ssl_use_cabundle(); // if breaks try removing.

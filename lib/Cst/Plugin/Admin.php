@@ -46,7 +46,7 @@ class Cst_Plugin_Admin {
 		
 		if ( isset($_GET['removedependency']) && $_GET["removedependency"] == "yes"){
 			Cst_Debug::addLog("Removed dependency header message");
-			update_option("cst_dependency",false);
+			update_option("cst_dependency",true);
 		}
 		
 		if ( (!isset($_GET["page"]) || $_GET["page"] != "cst-main")

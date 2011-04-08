@@ -104,6 +104,12 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.10 =
+
+* [15/03/2011 - 17:00] Added ability to uncentralized multisite media files
+* [16/03/2011 - 11:26] Fixed WP Super Cache depency nag not disappearing.
+* [08/04/2011 - 11:16] Added Rackspace CloudFiles UK account support
+
 = 1.9 =
 
 * [14/03/2011 - 14:18] Removed calls to supposedly private instance variable $wpdb->prefix.

@@ -21,9 +21,23 @@ class Cst_Plugin_Site {
 		
 		Cst_Debug::addLog("Action hooked for main site actions");		
 		
+		$cdn = get_option("cst_cdn");
+		
+		if ( $cdn['absolute'] == "yes" ){
+			add_filter("wpsupercache_buffer", array($this,"changeAbsolutePath"));
+		}
+		
 		return add_action("wp_loaded", array($this, "startObCache") ,9999) &&
 			   add_action("wp_footer", array($this, "stopObCache") ,9999) &&
 			   add_action('wp_footer', array($this, "showFooter"));
+		
+	}
+	
+	public function changeAbsolutePath($html){
+		
+		global $blog_id;
+		
+		return preg_replace("~=[\'\"](http://.*/)files/(.*)[\'\"]~isU", "<img src=\"$1/wp-content/blogs.dir/".$blog_id."/files/$2\"",$html);
 		
 	}
 	

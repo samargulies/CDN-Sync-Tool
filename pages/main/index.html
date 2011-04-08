@@ -58,6 +58,18 @@ $disabled = "";
 											<tr class="even">
 												<td colspan="2">The URL of your cdn, so if your cdn files will be at cdn.catn.com you should put in "<em>http://cdn.catn.com</em>"</td>
 											</tr>
+											<tr>
+												<th scope="row">Use absolute path</th>
+												<td>
+													<input type="radio" name="cdn_absolute" value="no" id="absolute_no" <?php if ((!isset($cdn) || !is_array($cdn)) || (!isset($cdn["absolute"]) || $cdn["absolute"] == "no")){ ?> checked="checked" <?php } ?> />
+													<label for="absolute_no">No</label>
+													<input type="radio" name="cdn_absolute" value="yes" id="absolute_yes" <?php if ((isset($cdn) && is_array($cdn)) && (isset($cdn["absolute"]) && $cdn["absolute"] == "yes")){ ?> checked="checked" <?php } ?>  />
+													<label for="absolute_yes">Yes</label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">When uploading to the CDN provider it won't change set the files to /files/ but to the absolute path they have.</td>
+											</tr>
 											<tr class="aws_details">
 												<th scope="row">Anti-Hotlinking</th>
 												<td>
@@ -150,6 +162,17 @@ $disabled = "";
 											</tr>
 											<tr class="cf_details">
 												<td colspan="2">The CloudFiles container name.</td>
+											</tr>
+											<tr class="cf_details">
+												<th scope="row">Account Location</th>
+												<td>
+													<input type="radio" name="cf_authurl" value="UK_AUTHURL" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "cf") && (isset($cdn["authurl"]) && $cdn['authurl'] == "UK_AUTHURL")){?> checked="yes"<?php } ?> id="cf_authurl_uk" />
+													<label for="cf_authurl_uk">UK</label>
+													<input type="radio" name="cf_authurl" value="US_AUTHURL" <?php if ((isset($cdn) && is_array($cdn) ) && (isset($cdn["provider"]) && $cdn["provider"] == "cf") && (!isset($cdn["authurl"]) || $cdn['authurl'] == "US_AUTHURL")){?> checked="yes"<?php } ?> id="cf_authurl_us" />
+													<label for="cf_authurl_us">US</label></td>
+											</tr>
+											<tr class="cf_details">
+												<td colspan="2">The location of your account. If you don't know what this option is just select US if it doesn't work then use the UK.</td>
 											</tr>
 											<tr class="ftp_details">
 												<th scope="row">Username</th>
