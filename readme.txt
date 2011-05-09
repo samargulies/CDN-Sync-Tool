@@ -104,6 +104,10 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.11 = 
+
+* [09/05/2011 - 14:47] Fixed blank white screen on pages when WP Super Cache isn't installed
+
 = 1.10 =
 
 * [15/03/2011 - 17:00] Added ability to uncentralized multisite media files

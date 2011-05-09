@@ -64,7 +64,7 @@ class Cst_Plugin_Site {
 	public function callbackObCache($buffer){
 		
 		$files = get_option("cst_files");
-		$buffer = scossdl_off_filter($buffer);
+		
 		if ( isset($files["combine"]) && $files["combine"] == "yes" ){
 			require_once CST_DIR.'/lib/Cst/JsCss.php';
 			$buffer = Cst_JsCss::doCombine($buffer,"js");
