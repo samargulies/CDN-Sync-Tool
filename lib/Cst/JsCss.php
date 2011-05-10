@@ -39,6 +39,8 @@ class Cst_JsCss {
 	
 
 	public static function doCombine( $content , $fileType ){
+	
+		$oldContent = $content ;
 		
 		global $wpdb;
 				
@@ -48,8 +50,8 @@ class Cst_JsCss {
 			preg_match_all('~<script.*(type="["\']text/javascript["\'].*)?src=["\'](.*)["\'].*(type=["\']text/javascript["\'].*)?></script>~iU',$content,$matches);
 			$files = $matches[2];
 		} else {
-			preg_match_all('~<link.*rel=[""\']stylesheet["\'].*href=["\'](.*)["\'].*(?!rel\=["\'].*["\']).*(/>|></link>)~iU',$content,$matchesOne);
-			preg_match_all('~<link.*(?!rel\=["\'].*["\']).*href=["\'](.*)["\'].*rel=[""\']stylesheet["\'].*(/>|></link>)~iU',$content,$matchesTwo);
+			preg_match_all('~<link.*rel=[""\']stylesheet["\'].*href=["\'](.*)["\'].*(?!rel\=["\'].*["\']).*(/>|</link>)~isU',$content,$matchesOne);
+			preg_match_all('~<link.*(?!rel\=["\'].*["\']).*href=["\'](.*)["\'].*rel=[""\']stylesheet["\'].*(/>|</link>)>~isU',$content,$matchesTwo);
 			$files = array();
 			$matches = array(0 => array());
 			if ( isset($matchesOne[1]) ){
@@ -76,15 +78,16 @@ class Cst_JsCss {
 		$filesConfig = get_option("cst_files");	
 		$cdn = get_option("cst_cdn");
 		
+		Cst_Debug::addLog( "Files Found ".sizeof($files) );
 		
 		for ( $i = 0; $i < sizeof($files); $i++){
 			$file = $files[$i];
 			
-			$urlRegex = "~^".get_option("ossdl_off_cdn_url")."/(.*\.(css|js))(\?.*)?$~isU";
+			$urlRegex = "~^".get_bloginfo("url")."/(.*\.(css|js))(\?.*)?$~isU";
 			
-			if ( (!preg_match($urlRegex,$file,$match) || !isset($match[1]) ) && (preg_match("~^https?://~isU",$file )) ){
+			if ( (!preg_match($urlRegex,$file,$match) && !isset($match[1]) ) && (preg_match("~^https?://~isU",$file )) ){
 			
-				if ($filesConfig["external"] == "no"){
+				if ( $filesConfig["external"] == "no"){
 					Cst_Debug::addLog("File '".$file."' is external while external is not to be combined");
 					continue;
 				}
@@ -94,7 +97,7 @@ class Cst_JsCss {
 			} else {
 				
 				if ( isset($match[1]) ){
-					Cst_Debug::addLog("Match file is : ".$currentFile);
+					Cst_Debug::addLog("Match file is : ".$file);
 					
 					$fileLocation = ABSPATH.str_ireplace(get_option("ossdl_off_cdn_url").'/', '', $match[1]);
 				} else {
@@ -191,7 +194,9 @@ class Cst_JsCss {
 			if ( is_array($cdn) && isset($cdn["provider"]) && !empty($cdn["provider"]) ){				
 				Cst_Debug::addLog("Uploading consolidated file");
 				require_once CST_DIR.'/lib/Cst/Sync.php';
-				Cst_Sync::process($newFile, false);	
+				if (!Cst_Sync::process($newFile, false)){
+					return $oldContent;
+				} 
 			}
 		}
 		

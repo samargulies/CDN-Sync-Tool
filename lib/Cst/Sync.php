@@ -186,7 +186,7 @@ class Cst_Sync {
 			if ( $uploadCdn ){
 				$objCdn = Cdn_Provider::getProvider($cdn["provider"]);
 				$objCdn->setAccessCredentials($cdn);
-				$objCdn->login();	
+				$objCdn->login();
 				$objCdn->uploadFile($fileArray,$media);
 				$synced = "yes";
 			}
@@ -200,9 +200,11 @@ class Cst_Sync {
 						 `transferred` = '".$synced."',hash='".hash_file("md5", $fileLocation)."' WHERE filename = '".$file."'");
 			
 		} catch ( Exception $e ){
-			print $e->getMessage();				
+			print $e->getMessage();
+			if ( is_admin() ){ exit; }
+			else{ return false; }
 		}
-		
+		return true;
 	}
 	
 }

@@ -1,5 +1,5 @@
 === CDN Sync Tool ===
-Contributors: Fubra,Backie
+Contributors: Fubra,Backie, ray.viljoen
 Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme,MaxCDN,Origin Pull,Origin,Pull,files,speed,faster,accelerator,Page Load, zoom
 Tested up to: 3.1
 Stable tag: 1.10
@@ -104,9 +104,11 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
-= 1.11 = 
+= 1.11 =
 
 * [09/05/2011 - 14:47] Fixed blank white screen on pages when WP Super Cache isn't installed
+* [10/05/2011 - 10:16] Fixed invalid cdn details resulting in call to non existant object.
+* [10/05/2011 - 10:16] Fixed rewriting of javascript and css files when cdn error occurs
 
 = 1.10 =
 

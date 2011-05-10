@@ -113,13 +113,11 @@ class Cst_Plugin_Admin {
 											array($file))						
 								);		
 				print "Syncing [".++$i."/".$total."] ".$file;		
-				ob_flush();
 				flush();				
 				
 				if ( $count > 0 && !$forceOverwrite  ){
 					print " skipped, already synced".PHP_EOL."<br />";
 					Cst_Debug::addLog("File '".$file."' has already been synced so has been skipped");
-					ob_flush();
 					flush();
 					continue;
 				}
@@ -134,7 +132,6 @@ class Cst_Plugin_Admin {
 				Cst_Sync::process($file,$media);
 				Cst_Debug::addLog("File '".$file."' has been synced.");
 				print " done".PHP_EOL."<br />";
-				ob_flush();
 				flush();
 			}
 		}

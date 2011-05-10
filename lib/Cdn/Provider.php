@@ -9,6 +9,8 @@ define('LIB_DIR', dirname(dirname(__FILE__)));
 	 */
 
 abstract class Cdn_Provider {
+
+
 	
 	/**
 	 * The login credentials for the CDN requests
@@ -62,6 +64,8 @@ abstract class Cdn_Provider {
 		
 		return false;
 	}
+	
+	
 	
 	/**
 	 * Single interfaction for setting login credentials. Will vary
