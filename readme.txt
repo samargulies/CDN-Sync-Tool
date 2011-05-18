@@ -104,6 +104,11 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.12 =
+
+* [17/05/2011 - 12:34] Added mime_content_type function for when there isn't one
+* [18/05/2011 - 08:34] Fixed time and date for caching purposes to HTTP specs. - Thanks hydn
+
 = 1.11 =
 
 * [09/05/2011 - 14:47] Fixed blank white screen on pages when WP Super Cache isn't installed
