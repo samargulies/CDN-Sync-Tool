@@ -27,7 +27,6 @@ class Cdn_Aws extends Cdn_Provider {
 			return true;
 		}
 
-		// TODO write bucket policy
 		if ( $this->credentials["hotlinking"] == "yes" ){
 			$site = get_bloginfo("url");
 			$policy = '{

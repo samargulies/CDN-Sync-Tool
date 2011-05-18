@@ -15,13 +15,15 @@ class Cst_Image {
 		// and use location as that's what we'll 
 		// be working with.
 		
+		$path = wp_upload_dir();
+		
 		if ( !preg_match("~\.(jpe?g|png)$~isU",$fileArray['uri']) || !is_writable($fileArray['location']) ){
 			Cst_Debug::addLog("Invalid filetype sent to GD Compression '".$fileArray['uri']."'");
 			return $fileArray;
 		}
 
 		if ( $fileArray['overwrite'] != 'yes' ){
-			$writeLocation = tempnam('/tmp/', 'SYNCCOMPRESS');
+			$writeLocation = tempnam($path['basedir'], 'SYNCCOMPRESS');
 		} else {
 			$writeLocation = $fileArray['location'];
 		}
@@ -55,8 +57,9 @@ class Cst_Image {
 		}
 		
 	
+		$path = wp_upload_dir();
 		if ( $fileArray['overwrite'] != 'yes' ){
-			$writeLocation = tempnam('/tmp/', 'SYNCCOMPRESS');
+			$writeLocation = tempnam($path['basedir'], 'SYNCCOMPRESS');
 		} else {
 			$writeLocation = $fileArray['location'];
 		}
@@ -68,7 +71,6 @@ class Cst_Image {
 		}
 		
 		
-		$path = wp_upload_dir();
 		$tempFile = tempnam( $path['basedir'] , 'cst');
 		$fp = fopen($tempFile, "w+");
 		$ch = curl_init($smushit->compressedUrl);
