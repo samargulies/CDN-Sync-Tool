@@ -67,7 +67,9 @@ class Cst_Image {
 			return $fileArray;
 		}
 		
-		$tempFile = tempnam('/tmp', 'cst');
+		
+		$path = wp_upload_dir();
+		$tempFile = tempnam( $path['basedir'] , 'cst');
 		$fp = fopen($tempFile, "w+");
 		$ch = curl_init($smushit->compressedUrl);
 		curl_setopt($ch, CURLOPT_FILE, $fp);

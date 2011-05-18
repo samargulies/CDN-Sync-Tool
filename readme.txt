@@ -108,6 +108,8 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 * [17/05/2011 - 12:34] Added mime_content_type function for when there isn't one
 * [18/05/2011 - 08:34] Fixed time and date for caching purposes to HTTP specs. - Thanks hydn
+* [18/05/2011 - 08:53] increased small cache control to match expires
+* [18/05/2011 - 08:54] Fixed windows incapitablity.
 
 = 1.11 =
 
