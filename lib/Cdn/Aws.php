@@ -102,7 +102,7 @@ class Cdn_Aws extends Cdn_Provider {
 		$uploadDir = wp_upload_dir();
 		$finfo = function_exists('finfo_open') ? finfo_open(FILEINFO_MIME_TYPE) : false;
 		$headers = array('expires' => date('D, d M Y H:i:s', time() + (86400 * 352 * 10)) . ' GMT');
-		$headers['Cache-Control'] = 'max-age='.(86400 * 352 * 10);
+		$headers['Cache-Control'] = 'max-age=31536000';
 
 		list($fileLocation,$uploadFile) = $this->_getLocationInfo($fileArray,$media);
 
