@@ -145,8 +145,6 @@ class Cst_JsCss {
 				}
 				$templateName = self::getTemplateName();
 				
-				$wpdb->query($wpdb->prepare("INSERT INTO `".CST_TABLE_JSCSS."` (filename,template,type) VALUES (%s,%s,%s)",array($file,$templateName,$fileType)));
-				
 				$filesContent .= $rawContent;
 				$filesHashes .= hash("md5",$fileLocation);	
 				
