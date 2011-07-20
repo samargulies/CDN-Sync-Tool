@@ -1,7 +1,7 @@
 <div class="wrap">
 	
 	<div id="icon-tools" class="icon32"></div>
-	<h2>CDN Sync Tool - Options</h2>	
+	<h2>WP Survey And Quiz Tool - Contact</h2>	
 	
 	<?php if ( isset($successMessage) ){ ?>
 		<div class="updated" id="question_added"><?php echo $successMessage; ?></div>
@@ -15,12 +15,13 @@
 		</ul>
 	<?php } ?>
 	
-	<p>Our preferred method of contacting us is though the forums on wordpress.org however if you don't have an account or for some other reason can't or don't want to use that method we have provided a form below that will be emailed to us.</p>
+	<p>The preferred method of contacting us is through <a href="http://wordpress.org/tags/cdn-sync-tool?forum_id=10">the forums</a> on wordpress.org, however if you can't or don't want to use that method please use the form below which will be emailed to us.</p>
 	
-	<p><strong>Please note that using the below form will result in information such as your current wordpress version and plugin version being sent aswell.</strong></p>
+	<p><strong>Please note that using the form below will result in information such as your current WordPress version and plugin version being sent as well.</strong>
 		
-	<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<form method="post" action="<?php echo esc_url($_SERVER["REQUEST_URI"]); ?>">
 		
+		<input type="hidden" name="wpsqt_nonce" value="<?php echo WPSQT_NONCE_CURRENT; ?>" />
 		<table class="form-table">
 			<tr>
 				<th scope="row">Name</th>
@@ -52,6 +53,5 @@
 		
 	</form>
 	
-	<?php require_once CST_DIR.'/pages/misc/image.html'; ?>
 </div>	
-<?php require_once CST_DIR.'/pages/misc/image.html'; ?>
+<?php require_once WPSQT_DIR."/pages/admin/shared/image.php"; ?>
