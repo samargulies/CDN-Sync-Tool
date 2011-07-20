@@ -207,14 +207,14 @@ $disabled = "";
 												<td><input type="text" name="ftp_directory" value="<?php if ((isset($cdn) && is_array($cdn) ) &&(isset($cdn["provider"]) || $cdn["provider"] == "ftp") && isset($cdn["directory"])){ echo $cdn["directory"]; } ?>" /></td>
 											</tr>
 											<tr class="ftp_details">
-												<td colspan="2">The directory the FTP files are to be uploaded to. Put asbolute path, example "<em>/home/cdn-sync/public_html</em>".</td>
+												<td colspan="2">The directory the FTP files are to be uploaded to. Put absolute path, example "<em>/home/cdn-sync/public_html</em>".</td>
 											</tr>
 										</table>
 										
 										<a href="#" class="button-secondary" id="check-details">Check Details</a>
 										<input type="submit" class="button-primary" value="Save" <?php echo $disabled; ?> />
 									
-									</div> directory
+									</div>
 									
 								</div>
 								

@@ -104,6 +104,11 @@ The difference is that with Origin Pull the files are pulled from your web host 
 
 == CHANGELOG ==
 
+= 1.13 =
+
+* [20/07/2011 - 15:38] Grammar and spelling fixes to the contact page
+* [20/07/2011 - 15:39] Removed a useless occurrence of the word 'directory'
+
 = 1.12 =
 
 * [17/05/2011 - 12:34] Added mime_content_type function for when there isn't one
