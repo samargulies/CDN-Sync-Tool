@@ -38,7 +38,6 @@ class Cst_Page_Main extends Cst_Page {
 	}
 	
 	public function display($test = false){
-	
 		
 		if ( isset($_POST["showsync"]) && $_POST["showsync"] == "yes" ){
 			$this->_showSync();
