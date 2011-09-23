@@ -1,5 +1,5 @@
 === CDN Sync Tool ===
-Contributors: Fubra,Backie, ray.viljoen
+Contributors: Fubra,Backie, ray.viljoen,Olliea95
 Tags: CDN,content delivery network, sync, CDN sync, tool, Content, Upload, Files, Media, Optimization,cloudfront,cloud front,amazon s3,s3,cloudfiles,theme,MaxCDN,Origin Pull,Origin,Pull,files,speed,faster,accelerator,Page Load, zoom
 Tested up to: 3.1
 Stable tag: 1.12
@@ -10,13 +10,13 @@ Syncs static files to a content delivery network (CDN) such as Amazon S3 / Cloud
  
 == Description ==
 
-Front end optimization plugin to be used with WP-Supercache.
+Front end optimisation plugin to be used with WP-Supercache.
 
-Uploads/syncs your static files to a Content Deilvery Network (CDN) with push CDNs such as Amazon S3 / CloudFront and CloudFiles aswell as Origin Pull CDNs such as MaxCDN / NetDNA. You can choose files from your media library, theme directory, WordPress's wp-include directory and plugin directories aswell as new media library uploads.
+Uploads/syncs your static files to a Content Delivery Network (CDN) with push CDNs such as Amazon S3 / CloudFront and CloudFiles as well as Origin Pull CDNs such as MaxCDN / NetDNA. You can choose files from your media library, theme directory, WordPress's wp-include directory and plugin directories as well as new media library uploads.
 
-Plugin runs images thought smushit.com to losslessy compress images, aswell as GD compression of images.
+Plugin runs images thought smushit.com to losslessy compress images, as well as GD compression of images.
 
-There is also concatenation of all Javascript and CSS files in the header and footer to one file each to reduce HTTP requests. Also moves the javascript file to the footer so the browser doesn't hold up the page load doing it. Leverages Google's Closure Compiler to remove whitespace, do simple and advanced optimizations to reduce file size.
+There is also concatenation of all Javascript and CSS files in the header and footer to one file each to reduce HTTP requests. Also moves the javascript file to the footer so the browser doesn't hold up the page load doing it. Leverages Google's Closure Compiler to remove whitespace, do simple and advanced optimisations to reduce file size.
 
 This plugin requires WP Super Cache to be installed. As it will handle the rewriting of the inclusion of static files to ensure all static files will load from your CDN.
 
@@ -26,7 +26,7 @@ Developed by <a href="http://www.catn.com">PHP Hosting Experts CatN</a>
 
 = Why should I care about fast loading web page? =
 
-Because a speed affects your SEO and your sales. People aren't paitence creatures, they want stuff as fast as possible. Google has stated that a page loading time makes up part of their page rank. Amazon found that for every 100ms in page loading caused them 1% in sales. Google found when they increased size of results from 10 results to 30 results and increased their page load by 0.5 seconds their traffic dropped by 20%. 
+Because a speed affects your SEO and your sales. People aren't patient creatures, they want stuff as fast as possible. Google has stated that a page loading time makes up part of their page rank. Amazon found that for every 100ms in page loading caused them 1% in sales. Google found when they increased size of results from 10 results to 30 results and increased their page load by 0.5 seconds their traffic dropped by 20%. 
 
 = Why does uploading files take so long with this installed? =
 
@@ -44,13 +44,13 @@ Because some plugins also have images and static files that need to be displayed
 
 The problem with these other plugins is that they don't upload the files to a CDN once they've been created.
 
-= Do you upload concatenated Javascript and CSS files everytime? =
+= Do you upload concatenated Javascript and CSS files every time? =
 
-No the files are uploaded to the Content Deilvery Network (CDN) only once and they are then cached. If the CSS/Javascript files content changes then there will be a new file created and uploaded to the CDN. Using a different filename to avoid CDN edge caching conflicts.
+No the files are uploaded to the Content Delivery Network (CDN) only once and they are then cached. If the CSS/Javascript files content changes then there will be a new file created and uploaded to the CDN. Using a different filename to avoid CDN edge caching conflicts.
 
 = Why do I need to have WP Super Cache installed? =
 
-You need to have this installed as we use their url changer functionality and they will help imrpove your site's speed.
+You need to have this installed as we use their url changer functionality and they will help improve your site's speed.
 
 = Why is there a custom directory sync? Doesn't the plugin sync everything I need by default? =
 
@@ -58,27 +58,27 @@ Well various plugins store images and static files in different places than the 
 
 = What sort of speed improvements can I expect? =
 
-The page load improvements of a Content Deilvery Network (CDN) can vary however it has been seen that by implementing use of a CDN can improve the speed of the site's loading by more than 75%.
+The page load improvements of a Content Delivery Network (CDN) can vary however it has been seen that by implementing use of a CDN can improve the speed of the site's loading by more than 75%.
 
 = Is there anything special I need to do to have my new uploads sync to my Amazon S3? =
 
-No with the plugin enabled and the Content Deilvery Network (CDN) assigned as Amazon S3 /Cloudfront the uploads will happen automatically aswell as other optimizations such compression.
+No with the plugin enabled and the Content Delivery Network (CDN) assigned as Amazon S3 /Cloudfront the uploads will happen automatically as well as other optimisations such compression.
 
 = Is there anything special I need to do to have my new uploads sync to my CloudFiles Container? =
 
-No with the plugin enabled and the Content Deilvery Network (CDN) assigned as CloudFiles the uploads will happen automatically aswell as other optimizations such compression.
+No with the plugin enabled and the Content Delivery Network (CDN) assigned as CloudFiles the uploads will happen automatically as well as other optimisations such compression.
 
 = How long can the sync'ing process take? =
 
-The syncing processing time can vary depending on how mabye media files you have and if you are using SmushIt, for example if you have 100 or so files you can expect it to last a few minutes or so or for 1000+ files you can expect it to last 60+ mins.
+The syncing processing time can vary depending on how maybe media files you have and if you are using SmushIt, for example if you have 100 or so files you can expect it to last a few minutes or so or for 1000+ files you can expect it to last 60+ mins.
 
 = I already have some of the files in a folder synced will the plugin know to skip these? =
 
 Yes, there is a database table which stores the results of a file transfer which means if a file has already been synced and you haven't asked it to force uploads then it will skip the uploading to your CDN.
 
-= Why is Addedthe JavaScript link at the bottom of the page not HEAD? =
+= Why is the JavaScript link at the bottom of the page not HEAD? =
 
-Because while it's in the head some browsers will stop the rendering of the page until it's recevied. Since JavaScript is generally not used in the layout of the page it's prescene isn't mandatory for the page to look good.
+Because while it's in the head some browsers will stop the rendering of the page until it's received. Since JavaScript is generally not used in the layout of the page it's presence isn't mandatory for the page to look good.
 
 = Can I force the plugin to reupload files? =
 

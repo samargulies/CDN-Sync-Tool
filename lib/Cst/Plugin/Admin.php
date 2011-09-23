@@ -99,7 +99,7 @@ class Cst_Plugin_Admin {
 		$i = 0;
 		// Find out the number of items in the sub arrays
 		$total = sizeof($fileArrays, COUNT_RECURSIVE) - sizeof($fileArrays);
-		Cst_Debug::addLog("Files have been retrived, total count is ".$total);
+		Cst_Debug::addLog("Files have been retrieved, total count is ".$total);
 		//
 		$forceOverwrite = ( isset($_GET["force"]) && $_GET["force"] == "yes") ? true : false;
 		Cst_Debug::addLog("The force mode for this sync is ".var_export($forceOverwrite,true));
