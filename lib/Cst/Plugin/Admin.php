@@ -106,7 +106,7 @@ class Cst_Plugin_Admin {
 		foreach ( $fileArrays as $key => $files ) {
 			$media = ($key === 1) ? true : false; 
 			foreach ( $files as $file ){
-		
+        
 				$file = str_replace(ABSPATH,"",$file);	
 				$count = (int)$wpdb->get_var(
 								$wpdb->prepare("SELECT COUNT(*) FROM ".CST_TABLE_FILES." WHERE filename = %s AND transferred = 'yes'", 
@@ -114,6 +114,20 @@ class Cst_Plugin_Admin {
 								);		
 				print "Syncing [".++$i."/".$total."] ".$file;		
 				flush();				
+				
+				if ( $media === true ){
+					$uploadDir = wp_upload_dir();
+					$fileLocation = $uploadDir["basedir"]."/".$file;
+				} else {		
+					$fileLocation = ABSPATH.$file;
+				}
+
+				if( ! file_exists( $fileLocation ) ) {
+					print " skipped, file not found".PHP_EOL."<br />";
+					Cst_Debug::addLog("File '".$file."' not found so has been skipped");
+					flush();
+					continue;
+				}
 				
 				if ( $count > 0 && !$forceOverwrite  ){
 					print " skipped, already synced".PHP_EOL."<br />";
