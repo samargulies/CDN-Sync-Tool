@@ -1182,7 +1182,7 @@ class CF_Http
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, True);
             curl_setopt($ch, CURLOPT_CAINFO, $this->cabundle_path);
         }
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, True);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($ch, CURLOPT_MAXREDIRS, 4);
