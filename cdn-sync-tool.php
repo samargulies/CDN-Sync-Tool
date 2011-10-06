@@ -34,6 +34,9 @@ require_once CST_DIR.'/lib/Cst/Sync.php';
 require_once CST_DIR.'/lib/Cst/Plugin.php';
 
 function cst_install(){
+		if(is_multisite()) {
+			exit('Unfortunately this plugin isn\'t currently compatible with multisite. We apologise');
+		}
 		global $wpdb;	
 		$oldVersion = get_option("cst_version");	
 		update_option("cst_version", CST_VERSION);
@@ -196,3 +199,11 @@ if(!function_exists('mime_content_type')) {
 }
 register_activation_hook( __FILE__, "cst_install" );
 $objCstPlugin = new Cst_Plugin();
+
+function cst_wp_update_attachment_metadata($data) {
+
+    Cst_Plugin_Admin::uploadMedia($data);
+
+    return $data;
+}
+add_filter('wp_update_attachment_metadata', 'cst_wp_update_attachment_metadata');
