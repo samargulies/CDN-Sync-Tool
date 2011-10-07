@@ -32,7 +32,7 @@ class Cst_Plugin_Admin {
 			   add_action("switch_theme", array($this, "switchTheme") ) &&
 			   add_action("admin_init", array($this, "syncFiles")) && 
 			   add_action("admin_init", array($this, "preAdminHead")) && 
-			   add_filter("wp_generate_attachment_metadata", array($this, "uploadMedia" )) && 
+			   add_filter("wp_update_attachment_metadata", array($this, "uploadMedia" )) && 
 			   add_action("admin_head",array($this, "head" ) ) &&
 			   $extraActions;
 	}
@@ -283,21 +283,23 @@ class Cst_Plugin_Admin {
 	 */
 	public function uploadMedia($meta){
 		
-		Cst_Debug::addLog("New upload file '".$meta["file"]."' to be sync'd");
-		
-		Cst_Sync::process($meta["file"],true);
-		
-		if ( isset($meta["sizes"]) && is_array($meta["sizes"])
-			 && !empty($meta["sizes"]) ){
-				foreach ( $meta["sizes"] as $size ){
+		if( !empty($meta["file"]) ) {
+			Cst_Debug::addLog("New upload file '".$meta["file"]."' to be sync'd");
+			
+			Cst_Sync::process($meta["file"],true);
+			
+			if ( isset($meta["sizes"]) && is_array($meta["sizes"])
+				 && !empty($meta["sizes"]) ){
+					foreach ( $meta["sizes"] as $size ){
+						
+						$dirName = dirname($meta["file"])."/";
+			
+						Cst_Debug::addLog("New upload's thumb file '".$size["file"]."' to be sync'd");
+						Cst_Sync::process($dirName.$size["file"],true);
 					
-					$dirName = dirname($meta["file"])."/";
-		
-					Cst_Debug::addLog("New upload's thumb file '".$size["file"]."' to be sync'd");
-					Cst_Sync::process($dirName.$size["file"],true);
-				
-				}	
-		}	
+					}	
+			}	
+		}
 		return $meta;
 	}
 	

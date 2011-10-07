@@ -199,11 +199,3 @@ if(!function_exists('mime_content_type')) {
 }
 register_activation_hook( __FILE__, "cst_install" );
 $objCstPlugin = new Cst_Plugin();
-
-function cst_wp_update_attachment_metadata($data) {
-
-    Cst_Plugin_Admin::uploadMedia($data);
-
-    return $data;
-}
-add_filter('wp_update_attachment_metadata', 'cst_wp_update_attachment_metadata');
