@@ -35,7 +35,7 @@ require_once CST_DIR.'/lib/Cst/Plugin.php';
 
 function cst_install(){
 		if(is_multisite()) {
-			exit('Unfortunately this plugin isn\'t currently compatible with multisite. We apologise');
+			exit('Unfortunately this plugin isn\'t currently compatible with multisite. We apologize');
 		}
 		global $wpdb;	
 		$oldVersion = get_option("cst_version");	
@@ -199,3 +199,21 @@ if(!function_exists('mime_content_type')) {
 }
 register_activation_hook( __FILE__, "cst_install" );
 $objCstPlugin = new Cst_Plugin();
+
+function cst_handle_upload($file) {
+	
+	// images will already sync, so only upload non-image files
+	$rejected_upload_types = array( 'image/jpeg', 'image/png', 'image/gif' );
+	
+	if( ! in_array( $file['type'], $rejected_upload_types ) ) {	
+			// convert the full upload path to a relative path readable by the sync tool	
+			$uploadDir = wp_upload_dir();
+			$basedir = $uploadDir['basedir'] . '/';
+			$relative_file_path = substr( $file['file'], strlen( $basedir ) );
+			
+			Cst_Sync::process($relative_file_path, true);
+	}
+		
+	return $file;
+}
+add_filter('wp_handle_upload', 'cst_handle_upload');
